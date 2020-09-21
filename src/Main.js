@@ -13,7 +13,6 @@ export class Main extends React.Component {
             gameOn: false,
             currentlySearched: [],
             phonemesOnTheBoard: [],
-            numberOfPhonemes: 0,
             score: 0,
             life: 3,
             mistakes: [],
@@ -84,10 +83,15 @@ export class Main extends React.Component {
 
     addPhonemeToList(phonemeInfo) {
         let oldList = this.state.phonemesOnTheBoard.slice();
-        this.setState({
-            phonemesOnTheBoard: oldList.concat([phonemeInfo]),
-            numberOfPhonemes: this.state.numberOfPhonemes + 1
-        })
+        if (oldList.length > 5) {
+            let null_index = oldList.findIndex(x => x === null);
+            oldList[null_index] = phonemeInfo;
+            this.setState({phonemesOnTheBoard: oldList})
+        } else {
+            this.setState({
+                phonemesOnTheBoard: oldList.concat([phonemeInfo])
+            })
+        }
     }
 
     wipeAPhonemeOut(index) {
@@ -132,7 +136,6 @@ export class Main extends React.Component {
         this.setState({
             currentlySearched: [],
             phonemesOnTheBoard: [],
-            numberOfPhonemes: 0,
             score: 0,
             life: 3,
             mistakes: []
@@ -159,7 +162,7 @@ export class Main extends React.Component {
 
     render() {
         return (<div id="main">
-            <Board gameOn={this.state.gameOn} generate_random_question={this.generate_random_question.bind(this)} addPhonemeToList={this.addPhonemeToList.bind(this)} wipeAPhonemeOut={this.wipeAPhonemeOut.bind(this)} numberOfPhonemes={this.state.numberOfPhonemes} checkIfPhonemeCurrent={this.checkIfPhonemeCurrent.bind(this)} increaseScore={this.increaseScore.bind(this)} loseLife={this.loseLife.bind(this)} generate_random_phoneme={this.generate_random_phoneme.bind(this)} />
+            <Board gameOn={this.state.gameOn} generate_random_question={this.generate_random_question.bind(this)} addPhonemeToList={this.addPhonemeToList.bind(this)} wipeAPhonemeOut={this.wipeAPhonemeOut.bind(this)} phonemesOnTheBoard={this.state.phonemesOnTheBoard} checkIfPhonemeCurrent={this.checkIfPhonemeCurrent.bind(this)} increaseScore={this.increaseScore.bind(this)} loseLife={this.loseLife.bind(this)} generate_random_phoneme={this.generate_random_phoneme.bind(this)} />
             <Panel startGame={this.startGame.bind(this)} stopGame={this.stopGame.bind(this)} gameOn={this.state.gameOn} currentlySearched={this.state.currentlySearched} score={this.state.score} life={this.state.life} mistakes={this.state.mistakes} />
             <Modal open={this.state.modalOpen} mistakes={this.state.mistakes} closeModal={this.closeModal.bind(this)} score={this.state.score} />
         </div>)

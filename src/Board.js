@@ -5,8 +5,8 @@ export class Board extends React.Component {
 
     constructor(props) {
         super(props);
-        let grid = Array(20).fill().map(x => Array(30).fill().map(y => Array(3).fill("")))
-        grid[0][0] = ["pacman right", "", ""];
+        let grid = Array(20).fill().map(x => Array(30).fill().map(y => Array(2).fill("")))
+        grid[0][0] = ["pacman right", ""];
         this.state = {
             'grid': grid
         };
@@ -35,8 +35,8 @@ export class Board extends React.Component {
             }
         }
         if (prevProps.gameOn && !this.props.gameOn) {
-            let grid = Array(20).fill().map(x => Array(30).fill().map(y => Array(3).fill("")))
-            grid[0][0] = ["pacman right", "", ""];
+            let grid = Array(20).fill().map(x => Array(30).fill().map(y => Array(2).fill("")))
+            grid[0][0] = ["pacman right", ""];
             this.setState({
                 'grid': grid
             });    
@@ -91,13 +91,15 @@ export class Board extends React.Component {
             }
             this.put_a_phoneme_on_the_board(this.props.generate_random_phoneme("any"));
         }
-        newGrid[oldCoords[0]][oldCoords[1]] = ["", "", ""];
-        newGrid[newCoords[0]][newCoords[1]] = [p_string, "", ""];
+        newGrid[oldCoords[0]][oldCoords[1]] = ["", ""];
+        newGrid[newCoords[0]][newCoords[1]] = [p_string, ""];
         this.setState({ "grid": newGrid });
     }
 
     eatAPhoneme(phoneme) {
-        this.props.wipeAPhonemeOut(phoneme[2]);
+        let ipa = phoneme[1]["ipa"];
+        let index = this.props.phonemesOnTheBoard.findIndex(x => x[1]["ipa"] === ipa);
+        this.props.wipeAPhonemeOut(index);
         if (this.props.checkIfPhonemeCurrent(phoneme[1])) {
             this.props.increaseScore();
             return true;
@@ -120,10 +122,8 @@ export class Board extends React.Component {
             pos = this.generate_random_position();
             pickedSquare = this.state.grid[pos[0]][pos[1]].slice();
         }
-        let index = Number(this.props.numberOfPhonemes);
         pickedSquare[0] = "coin";
         pickedSquare[1] = phoneme;
-        pickedSquare[2] = index;
         let newGrid = this.state.grid.slice()
         newGrid[pos[0]][pos[1]] = pickedSquare;
         this.setState({ "grid": newGrid });
