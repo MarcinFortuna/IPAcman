@@ -19,11 +19,11 @@ export class Board extends React.Component {
     // add event listeners
 
     componentDidMount() {
-        window.addEventListener("keyup", this.handleKeyDown);
+        window.addEventListener("keydown", this.handleKeyDown);
     }
 
     componentWillUnmount() {
-        window.removeEventListener("keyup", this.handleKeyDown);
+        window.removeEventListener("keydown", this.handleKeyDown);
     }
 
     async componentDidUpdate(prevProps, prevState) {
