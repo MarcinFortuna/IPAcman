@@ -100,6 +100,10 @@ body {
   cursor: pointer;
 }
 
+#ipaSampa {
+  line-height: 35px;
+}
+
 .switch {
   position: relative;
   display: inline-block;
