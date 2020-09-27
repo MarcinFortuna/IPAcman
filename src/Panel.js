@@ -11,7 +11,7 @@ export class Panel extends React.Component {
 
     render() {
         return (<div id="panel">
-            <h2 id="logo">IPAcman</h2>
+            <h2 id="logo"><img src={require("./assets/ipacman_logo.png")} alt=""/>  IPAcman</h2>
             <IpaSampa setAlphabet={this.props.setAlphabet} />
             <PaceSelector selectPace={this.props.selectPace} gameOn={this.props.gameOn}/>
             <StartStopButton gameOn={this.props.gameOn} startGame={this.props.startGame} stopGame={this.props.stopGame} />

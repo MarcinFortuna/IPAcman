@@ -70,7 +70,7 @@ body {
 
 #panel {
   margin-left: 0%;
-  width: 20%;
+  width: 374px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 16px;
   background-color: #181819;
@@ -85,6 +85,10 @@ body {
 
 #panel div {
   text-align: center;
+}
+
+#panel h2 img {
+  height: 24px;
 }
 
 #panel button {
