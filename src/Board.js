@@ -48,6 +48,7 @@ export class Board extends React.Component {
             }
         }
         if (prevProps.gameOn && !this.props.gameOn) {
+            if (this.props.pace) this.props.clearAllIntervals();
             let grid = Array(20).fill().map(x => Array(30).fill().map(y => Array(2).fill("")))
             grid[0][0] = ["pacman right", ""];
             this.setState({
