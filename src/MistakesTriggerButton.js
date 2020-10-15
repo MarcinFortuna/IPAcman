@@ -11,7 +11,7 @@ export const MistakesTriggerButton = (props) => {
         </button>
         <Popup open={open} closeOnDocumentClick onClose={closeModal}>
         <div className="modal">
-          <button onClick={closeModal}>
+          <button onClick={closeModal} className="close_button">
             &times;
           </button>
           <Mistakes mistakes={props.mistakes} />

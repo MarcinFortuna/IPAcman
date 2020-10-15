@@ -8,7 +8,7 @@ export const Modal = (props) => {
     return (
     <Popup open={props.open} modal onClose={props.closeModal}>
         <div className="modal">
-            <button onClick={props.closeModal}>
+            <button onClick={props.closeModal} className="close_button">
                 &times;
             </button>
             <h1>GAME OVER</h1>
