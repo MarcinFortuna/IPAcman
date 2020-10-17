@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import { FormContainer } from './FormContainer';
 
-export const SignInSignUpPopup = (props) => {
+export const SignInSignUpPopup = () => {
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
   return (<div>
     <button type="button" className="button" onClick={() => setOpen(o => !o)}>
-      Register
+      Sign In
     </button>
     <Popup open={open} closeOnDocumentClick onClose={closeModal}>
       <div className="modal">

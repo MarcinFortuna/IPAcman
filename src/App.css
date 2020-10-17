@@ -1,4 +1,3 @@
-
 * { 
   box-sizing: border-box;
 }
@@ -17,6 +16,28 @@ body {
   padding: 30px 20px 20px 20px;
   border-radius: 10px;
   background-color: yellow;
+  flex-flow: wrap;
+}
+
+#statusBar {
+  width: 1414px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#statusBar button {
+  background-color: yellow;
+  display: inline-block;
+  color: #181819;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.13);
+  transition: all .2s ease;
+}
+
+.statusBarString {
+  display: block;
 }
 
 #boardDiv td {

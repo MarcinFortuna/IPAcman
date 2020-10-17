@@ -176,7 +176,6 @@ export class Main extends React.Component {
 
     setAlphabet(e) {
         e.persist();
-        
         this.setState({
             useIpa: !e.target.checked
         })
@@ -198,7 +197,7 @@ export class Main extends React.Component {
 
     render() {
         return (<div id="main">
-            <StatusBar />
+            <StatusBar user={this.props.user} />
             <Board gameOn={this.state.gameOn} generate_random_question={this.generate_random_question.bind(this)} addPhonemeToList={this.addPhonemeToList.bind(this)} wipeAPhonemeOut={this.wipeAPhonemeOut.bind(this)} phonemesOnTheBoard={this.state.phonemesOnTheBoard} checkIfPhonemeCurrent={this.checkIfPhonemeCurrent.bind(this)} increaseScore={this.increaseScore.bind(this)} loseLife={this.loseLife.bind(this)} generate_random_phoneme={this.generate_random_phoneme.bind(this)} pace={this.state.pace} setAPhonemeInMotion={this.setAPhonemeInMotion.bind(this)} useIpa={this.state.useIpa} clearAllIntervals={this.clearAllIntervals.bind(this)} />
             <Panel startGame={this.startGame.bind(this)} stopGame={this.stopGame.bind(this)} gameOn={this.state.gameOn} currentlySearched={this.state.currentlySearched} score={this.state.score} life={this.state.life} mistakes={this.state.mistakes} setAlphabet={this.setAlphabet.bind(this)} selectPace={this.selectPace.bind(this)} />
             <Modal open={this.state.modalOpen} mistakes={this.state.mistakes} closeModal={this.closeModal.bind(this)} score={this.state.score} />

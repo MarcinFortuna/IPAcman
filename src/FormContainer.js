@@ -1,8 +1,27 @@
 import React, { useState } from 'react';
+import { signUp, signIn } from './Firebase';
 
 function Form({ option }) {
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const data = new FormData(event.target);
+		let email = data.get("email");
+		let password = data.get("password");
+		if (option === 1) {
+			signIn(email, password);
+		} else if (option === 2) {
+			if (data.get("password") !== data.get("repeat-password")) {
+				alert("Your password does not match the repeated password!");
+				return;
+			} else {
+				signUp(email, password);
+			}
+		}
+	}	
+
 	return (
-		<form className='account-form' onSubmit={(evt) => evt.preventDefault()}>
+		<form className='account-form' onSubmit={handleSubmit}>
 			<div className={'account-form-fields ' + (option === 1 ? 'sign-in' : (option === 2 ? 'sign-up' : 'forgot'))}>
 				<input id='email' name='email' type='email' placeholder='E-mail' required />
 				<input id='password' name='password' type='password' placeholder='Password' required={option === 1 || option === 2 ? true : false} disabled={option === 3 ? true : false} />
