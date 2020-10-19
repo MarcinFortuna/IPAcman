@@ -21,7 +21,7 @@ export const Mistakes = (props) => {
     mistakes.push(mistake);
   }
   let mistake_list_items = mistakes.map(mistake =>
-    <tr>
+    <tr key={mistake}>
       <td>{mistake[0]}</td>
       <td>{mistake[1]}</td>
       <td>{mistake[2]}</td>
