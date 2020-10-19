@@ -15,7 +15,7 @@ function App() {
       console.log("Auth state changed!");
     } else {
       if (currentUser.email) authUser({});
-      console.log(currentUser);
+      // console.log(currentUser);
     }
   });
 

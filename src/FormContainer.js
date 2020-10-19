@@ -15,15 +15,19 @@ function Form({ option }) {
 				alert("Your password does not match the repeated password!");
 				return;
 			} else {
-				signUp(email, password);
+				let name = data.get("username");
+				let affiliation = data.get("affiliation");		
+				signUp(email, password, name, affiliation);
 			}
 		}
-	}	
+	}
 
 	return (
 		<form className='account-form' onSubmit={handleSubmit}>
 			<div className={'account-form-fields ' + (option === 1 ? 'sign-in' : (option === 2 ? 'sign-up' : 'forgot'))}>
 				<input id='email' name='email' type='email' placeholder='E-mail' required />
+				<input id='username' name='username' type='username' placeholder='Name' />
+				<input id='affiliation' name='affiliation' type='affiliation' placeholder='Affiliation' />
 				<input id='password' name='password' type='password' placeholder='Password' required={option === 1 || option === 2 ? true : false} disabled={option === 3 ? true : false} />
 				<input id='repeat-password' name='repeat-password' type='password' placeholder='Repeat password' required={option === 2 ? true : false} disabled={option === 1 || option === 3 ? true : false} />
 			</div>

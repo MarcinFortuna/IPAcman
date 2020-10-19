@@ -15,7 +15,7 @@ function StatusBar(props) {
     return (
         <div id="statusBar">
             <span className="statusBarString">{greeting}</span>
-            {!(props.user && props.user.email) ? <SignInSignUpPopup /> : <span className="statusBarString" onClick={signOut}>Log out</span>}
+            {!(props.user && props.user.email) ? <SignInSignUpPopup /> : <div><button type="button" className="button" onClick={signOut}>Log out</button></div>}
         </div>
     );
 }

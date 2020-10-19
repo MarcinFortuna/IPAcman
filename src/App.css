@@ -390,7 +390,7 @@ label > input[type="radio"] + * {
 }
 
 .account-form-fields.sign-up {
-	max-height: 250px;
+	max-height: 300px;
 }
 
 .account-form-fields.forgot {
