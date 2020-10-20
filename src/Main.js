@@ -5,6 +5,7 @@ import { Panel } from './Panel';
 import { questions } from './RP_questions_API';
 import { phonemes, consonants, vowels } from './RP_segments_API';
 import StatusBar from './StatusBar';
+import { databaseLeaderboard, databaseUsers, database } from './Firebase';
 
 export class Main extends React.Component {
 
@@ -157,7 +158,33 @@ export class Main extends React.Component {
         });
     }
 
+    async sendGameStatsToFirebase() {
+        if (!(this.props.user && this.props.user.email)) {
+            console.log("not logged in");
+            return
+        };
+        let uid = this.props.user.uid;
+        let objectToPush = {};
+        objectToPush.score = this.state.score;
+        objectToPush.uid = this.props.user.uid;
+        objectToPush.pace = this.state.pace;
+        databaseUsers.orderByChild("uid").equalTo(uid).once('value', async (snapshot) => {
+            let userData = snapshot.val();
+            let userDbKey = Object.keys(userData)[0];
+            let username = userData[userDbKey]["name"];
+            objectToPush.username = username;
+            let affiliation = userData[userDbKey]["affiliation"];
+            objectToPush.affiliation = affiliation;
+            let dbUserUrl = database.ref('Users/'+userDbKey+'/attempts/');
+            let newDbEntry = dbUserUrl.push();
+            (await newDbEntry).set(objectToPush);
+            let newLeaderboardEntry = databaseLeaderboard.push();
+            (await newLeaderboardEntry).set(objectToPush);    
+        });
+    }
+
     async stopGame() {
+        await this.sendGameStatsToFirebase();
         this.setState({
             gameOn: false
         })

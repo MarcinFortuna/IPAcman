@@ -6,7 +6,9 @@ import { firebaseConfig } from "./firebase_config";
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
+export const database = firebase.database();
 export const databaseUsers = firebase.database().ref('Users/');
+export const databaseLeaderboard = firebase.database().ref('Leaderboard/');
 
 export const signUp = async (email, password, name, affiliation) => {
   console.log("in the signUp function");
@@ -25,7 +27,8 @@ export const signUp = async (email, password, name, affiliation) => {
       "uid": uid,
       "email": email,
       "affiliation": affiliation,
-      "name": name
+      "name": name,
+      "attempts": [""]
     });
   }
 }
