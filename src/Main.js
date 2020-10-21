@@ -168,6 +168,8 @@ export class Main extends React.Component {
         objectToPush.score = this.state.score;
         objectToPush.uid = this.props.user.uid;
         objectToPush.pace = this.state.pace;
+        objectToPush.mistakes = this.state.mistakes;
+        objectToPush.timestamp = Date.now().toString(); 
         databaseUsers.orderByChild("uid").equalTo(uid).once('value', async (snapshot) => {
             let userData = snapshot.val();
             let userDbKey = Object.keys(userData)[0];
