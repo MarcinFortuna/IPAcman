@@ -55,7 +55,7 @@ export class Leaderboard extends React.Component {
     }
 
     render() {
-        let leaderboard = (this.state.results).map(parsed_result =>
+        let leaderboard = (this.state.results).filter(x => x.score && x.name).map(parsed_result =>
             <tr key={parsed_result}>
                 <td>{parsed_result.name}</td>
                 <td>{parsed_result.affiliation}</td>
