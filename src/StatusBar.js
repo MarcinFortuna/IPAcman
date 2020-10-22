@@ -1,6 +1,7 @@
 import React from 'react';
 import { SignInSignUpPopup } from './SignInSignUpPopup';
 import { signOut } from './Firebase.js'
+import { LeaderboardPopup } from './LeaderboardPopup';
 
 
 function StatusBar(props) {
@@ -15,6 +16,7 @@ function StatusBar(props) {
     return (
         <div id="statusBar">
             <span className="statusBarString">{greeting}</span>
+            <LeaderboardPopup />
             {!(props.user && props.user.email) ? <SignInSignUpPopup /> : <div><button type="button" className="button" onClick={signOut}>Log out</button></div>}
         </div>
     );

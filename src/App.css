@@ -282,16 +282,16 @@ label > input[type="radio"] + * {
   height: 40px;
 }
 
-#mistakes_table {
+#mistakes_table, #leaderboard {
   margin: auto;
 }
 
-#mistakes_table td {
+#mistakes_table td, #leaderboard td {
   border: 1px solid black;
   padding: 5px 20px;
 }
 
-#mistakes_table thead {
+#mistakes_table thead, #leaderboard thead {
   text-align: center;
   font-weight: bold;
 }
