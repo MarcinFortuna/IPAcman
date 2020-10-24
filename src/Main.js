@@ -185,6 +185,7 @@ export class Main extends React.Component {
             let newLeaderboardEntry = databaseLeaderboard.push();
             (await newLeaderboardEntry).set(objectToPush);
         });
+        sessionStorage.removeItem("results");
     }
 
     async stopGame() {
