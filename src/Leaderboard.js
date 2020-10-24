@@ -30,6 +30,7 @@ export class Leaderboard extends React.Component {
             console.log(result);
             let parsed_result = {};
             parsed_result.name = result.username;
+            parsed_result.displayName = result.displayName;
             parsed_result.affiliation = result.affiliation;
             switch (result.pace) {
                 case 0:
@@ -57,7 +58,7 @@ export class Leaderboard extends React.Component {
     render() {
         let leaderboard = (this.state.results).filter(x => x.score && x.name).map(parsed_result =>
             <tr key={parsed_result}>
-                <td>{parsed_result.name}</td>
+                <td>{parsed_result.displayName}</td>
                 <td>{parsed_result.affiliation}</td>
                 <td>{parsed_result.date}</td>
                 <td>{parsed_result.pace}</td>

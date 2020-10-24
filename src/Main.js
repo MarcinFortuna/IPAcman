@@ -169,19 +169,21 @@ export class Main extends React.Component {
         objectToPush.uid = this.props.user.uid;
         objectToPush.pace = this.state.pace;
         objectToPush.mistakes = this.state.mistakes;
-        objectToPush.timestamp = Date.now().toString(); 
+        objectToPush.timestamp = Date.now().toString();
         databaseUsers.orderByChild("uid").equalTo(uid).once('value', async (snapshot) => {
             let userData = snapshot.val();
             let userDbKey = Object.keys(userData)[0];
             let username = userData[userDbKey]["name"];
             objectToPush.username = username;
+            let displayName = userData[userDbKey]["displayName"];
+            objectToPush.displayName = displayName;
             let affiliation = userData[userDbKey]["affiliation"];
             objectToPush.affiliation = affiliation;
-            let dbUserUrl = database.ref('Users/'+userDbKey+'/attempts/');
+            let dbUserUrl = database.ref('Users/' + userDbKey + '/attempts/');
             let newDbEntry = dbUserUrl.push();
             (await newDbEntry).set(objectToPush);
             let newLeaderboardEntry = databaseLeaderboard.push();
-            (await newLeaderboardEntry).set(objectToPush);    
+            (await newLeaderboardEntry).set(objectToPush);
         });
     }
 

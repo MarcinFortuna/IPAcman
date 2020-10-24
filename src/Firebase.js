@@ -10,7 +10,7 @@ export const database = firebase.database();
 export const databaseUsers = firebase.database().ref('Users/');
 export const databaseLeaderboard = firebase.database().ref('Leaderboard/');
 
-export const signUp = async (email, password, name, affiliation) => {
+export const signUp = async (email, password, name, displayName, affiliation) => {
   console.log("in the signUp function");
   let newUser = await firebase.auth().createUserWithEmailAndPassword(email, password).catch(error => {
     let errorCode = error.code;
@@ -28,6 +28,7 @@ export const signUp = async (email, password, name, affiliation) => {
       "email": email,
       "affiliation": affiliation,
       "name": name,
+      "displayName": displayName,
       "attempts": [""]
     });
   }

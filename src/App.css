@@ -127,6 +127,10 @@ body {
   transition: all .2s ease;
 }
 
+.btn-submit-form {
+  margin-top: 10px;
+}
+
 #ipaSampa {
   line-height: 35px;
 }
@@ -386,15 +390,15 @@ label > input[type="radio"] + * {
 }
 
 .account-form-fields.sign-in {
-	max-height: 115px;
+	max-height: 70px;
 }
 
 .account-form-fields.sign-up {
-	max-height: 300px;
+	max-height: 330px;
 }
 
 .account-form-fields.forgot {
-	max-height: 58px;
+	max-height: 40px;
 }
 
 .account-form-fields > input {
@@ -404,7 +408,17 @@ label > input[type="radio"] + * {
 	font-size: 1rem;
 	font-family: Nunito, sans-serif;
 	color: #000;
-	border-radius: 5px;
+  border-radius: 5px;
+  height: 30px;
+}
+
+.account-form-fields > div {
+  display: flex;
+}
+
+.gdpr {
+  font-size: 0.7rem;
+  text-align: left;
 }
 
 .account-form-fields > input::placeholder {
