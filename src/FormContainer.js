@@ -11,6 +11,10 @@ function Form({ option }) {
 		if (option === 1) {
 			signIn(email, password);
 		} else if (option === 2) {
+			if (data.get("password").length < 6) {
+				alert("Your password should have at least 6 characters!");
+				return;
+			}
 			if (data.get("password") !== data.get("repeat-password")) {
 				alert("Your password does not match the repeated password!");
 				return;
