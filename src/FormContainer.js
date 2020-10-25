@@ -36,7 +36,7 @@ function Form({ option }) {
 				<input id='username' name='username' type='username' placeholder='Name' />
 				<input id='displayName' name='displayName' type='displayName' placeholder='Display name (it will be used on the leaderboard only)' required={option === 2 ? true : false} disabled={option === 1 || option === 3 ? true : false}/>
 				<input id='affiliation' name='affiliation' type='affiliation' placeholder='Affiliation' />
-				<div><input type="checkbox" name='gdpr' required={option === 2 ? true : false} disabled={option === 1 || option === 3 ? true : false}/><span class="gdpr">(required) We are collecting your information for the purposes of storing your game results and displaying the best results on the leaderboard. Your personal data will not be used in any other way. By signing up you agree to these conditions and to your data being stored for this purpose. </span></div>
+				<div><input type="checkbox" name='gdpr' required={option === 2 ? true : false} disabled={option === 1 || option === 3 ? true : false}/><span className="gdpr">(required) We are collecting your information for the purposes of storing your game results and displaying the best results on the leaderboard. Your personal data will not be used in any other way. By signing up you agree to these conditions and to your data being stored for this purpose. </span></div>
 			</div>
 			<button className='btn-submit-form' type='submit'>
 				{option === 1 ? 'Sign in' : (option === 2 ? 'Sign up' : 'Reset password')}

@@ -10,7 +10,7 @@ export class Leaderboard extends React.Component {
         }
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         let results = JSON.parse(sessionStorage.getItem("results"));
         if (!results) {
             console.log("Results in session storage not found. Fetching the current leaderboard from Firebase");
