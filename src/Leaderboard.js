@@ -48,8 +48,9 @@ export class Leaderboard extends React.Component {
             }
             parsed_result.score = result.score;
             let datetime = new Date(Math.floor(result.timestamp / 1000) * 1000);
-            let datetime_human = datetime.toLocaleString("pl-PL");
-            parsed_result.datetime = datetime_human;
+            let datetime_human = datetime.toLocaleString("en-GB");
+            let datetime_human_no_seconds = datetime_human.substring(0,datetime_human.length - 3);
+            parsed_result.datetime = datetime_human_no_seconds;
             parsed_results.push(parsed_result);
             parsed_results.sort((a, b) => a.score > b.score ? -1 : 1);
             this.setState({ results: parsed_results });
@@ -57,13 +58,13 @@ export class Leaderboard extends React.Component {
     }
 
     render() {
-        let leaderboard = (this.state.results).filter(x => x.score && x.name).map(parsed_result =>
+        let leaderboard = (this.state.results).filter(x => x.score && x.displayName).filter((x, index) => index <= 9).map(parsed_result =>
             <tr key={parsed_result}>
                 <td>{parsed_result.displayName}</td>
                 <td>{parsed_result.affiliation}</td>
                 <td>{parsed_result.datetime}</td>
                 <td>{parsed_result.pace}</td>
-                <td>{parsed_result.score}</td>
+                <td style={{textAlign:"right"}}>{parsed_result.score}</td>
             </tr>);
         return (
             <div>
