@@ -7,7 +7,7 @@ import { LeaderboardPopup } from './LeaderboardPopup';
 function StatusBar(props) {
     let greeting;
     if (props.user !== undefined && props.user.email) {
-        let name = props.user.name ? props.user.name : props.user.email;
+        let name = props.userOtherData.displayName ? props.userOtherData.displayName : (props.userOtherData.username ? props.userOtherData.usernname : props.user.email);
         greeting = `Hi ${name}! Welcome to IPAcman!`;
     } else {
         greeting = "Hi stranger! Welcome to IPAcman!";

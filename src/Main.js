@@ -20,8 +20,13 @@ export class Main extends React.Component {
             mistakes: [],
             modalOpen: false,
             pace: 0,
-            useIpa: true
+            useIpa: true,
+            user: {}
         }
+    }
+
+    componentDidMount() {
+        if (this.props.uid) this.addUserInfoToState(this.props.uid);
     }
 
     async componentDidUpdate(prevProps, prevState) {
@@ -33,6 +38,30 @@ export class Main extends React.Component {
             await new Promise(r => setTimeout(r, 100));
             this.generate_random_question();
         }
+        if (this.props.user.uid && prevProps.user.uid !== this.props.user.uid) {
+            this.addUserInfoToState(this.props.user.uid);
+        }
+        if (prevProps.user.uid && !this.props.user.uid) {
+            this.setState({user: {}});
+        }
+    }
+
+    addUserInfoToState(uid) {
+        databaseUsers.orderByChild("uid").equalTo(uid).once('value', async (snapshot) => {
+            let userData = snapshot.val();
+            let userDbKey = Object.keys(userData)[0];
+            let username = userData[userDbKey]["name"];
+            let displayName = userData[userDbKey]["displayName"];
+            let affiliation = userData[userDbKey]["affiliation"];
+            this.setState({
+                user: {
+                    username: username,
+                    displayName: displayName,
+                    affiliation: affiliation,
+                    userDbKey: userDbKey
+                }
+            });
+        });
     }
 
     generate_random_question() {
@@ -163,28 +192,20 @@ export class Main extends React.Component {
             console.log("not logged in");
             return
         };
-        let uid = this.props.user.uid;
         let objectToPush = {};
         objectToPush.score = this.state.score;
         objectToPush.uid = this.props.user.uid;
         objectToPush.pace = this.state.pace;
         objectToPush.mistakes = this.state.mistakes;
         objectToPush.timestamp = Date.now().toString();
-        databaseUsers.orderByChild("uid").equalTo(uid).once('value', async (snapshot) => {
-            let userData = snapshot.val();
-            let userDbKey = Object.keys(userData)[0];
-            let username = userData[userDbKey]["name"];
-            objectToPush.username = username;
-            let displayName = userData[userDbKey]["displayName"];
-            objectToPush.displayName = displayName;
-            let affiliation = userData[userDbKey]["affiliation"];
-            objectToPush.affiliation = affiliation;
-            let dbUserUrl = database.ref('Users/' + userDbKey + '/attempts/');
-            let newDbEntry = dbUserUrl.push();
-            (await newDbEntry).set(objectToPush);
-            let newLeaderboardEntry = databaseLeaderboard.push();
-            (await newLeaderboardEntry).set(objectToPush);
-        });
+        objectToPush.username = this.state.user.username;
+        objectToPush.displayName = this.state.user.displayName;
+        objectToPush.affiliation = this.state.user.affiliation;
+        let dbUserUrl = database.ref('Users/' + this.state.user.userDbKey + '/attempts/');
+        let newDbEntry = dbUserUrl.push();
+        (await newDbEntry).set(objectToPush);
+        let newLeaderboardEntry = databaseLeaderboard.push();
+        (await newLeaderboardEntry).set(objectToPush);
         sessionStorage.removeItem("results");
     }
 
@@ -229,7 +250,7 @@ export class Main extends React.Component {
 
     render() {
         return (<div id="main">
-            <StatusBar user={this.props.user} />
+            <StatusBar user={this.props.user} userOtherData={this.state.user} />
             <Board gameOn={this.state.gameOn} generate_random_question={this.generate_random_question.bind(this)} addPhonemeToList={this.addPhonemeToList.bind(this)} wipeAPhonemeOut={this.wipeAPhonemeOut.bind(this)} phonemesOnTheBoard={this.state.phonemesOnTheBoard} checkIfPhonemeCurrent={this.checkIfPhonemeCurrent.bind(this)} increaseScore={this.increaseScore.bind(this)} loseLife={this.loseLife.bind(this)} generate_random_phoneme={this.generate_random_phoneme.bind(this)} pace={this.state.pace} setAPhonemeInMotion={this.setAPhonemeInMotion.bind(this)} useIpa={this.state.useIpa} clearAllIntervals={this.clearAllIntervals.bind(this)} />
             <Panel startGame={this.startGame.bind(this)} stopGame={this.stopGame.bind(this)} gameOn={this.state.gameOn} currentlySearched={this.state.currentlySearched} score={this.state.score} life={this.state.life} mistakes={this.state.mistakes} setAlphabet={this.setAlphabet.bind(this)} selectPace={this.selectPace.bind(this)} />
             <Modal open={this.state.modalOpen} mistakes={this.state.mistakes} closeModal={this.closeModal.bind(this)} score={this.state.score} />

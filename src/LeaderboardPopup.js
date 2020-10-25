@@ -5,7 +5,7 @@ import { Leaderboard } from './Leaderboard';
 export const LeaderboardPopup = () => {
     const [open, setOpen] = useState(false);
     const closeModal = () => setOpen(false);
-    return (<div class="leaderboardButton">
+    return (<div className="leaderboardButton">
       <button type="button" className="button" onClick={() => setOpen(o => !o)}>
         Leaderboard
       </button>
