@@ -22,12 +22,9 @@ export class Leaderboard extends React.Component {
         } else {
             console.log("Leaderboard retrieved from session storage");
         }
-        console.log(results);
         let all_results = Object.values(results);
-        console.log(all_results);
         let parsed_results = []
         all_results.forEach(result => {
-            console.log(result);
             let parsed_result = {};
             parsed_result.name = result.username;
             parsed_result.displayName = result.displayName;
@@ -58,8 +55,8 @@ export class Leaderboard extends React.Component {
     }
 
     render() {
-        let leaderboard = (this.state.results).filter(x => x.score && x.displayName).filter((x, index) => index <= 9).map(parsed_result =>
-            <tr key={parsed_result}>
+        let leaderboard = (this.state.results).filter(x => x.score && x.displayName).filter((x, index) => index <= 9).map((parsed_result, index) =>
+            <tr key={index}>
                 <td>{parsed_result.displayName}</td>
                 <td>{parsed_result.affiliation}</td>
                 <td>{parsed_result.datetime}</td>
