@@ -17,7 +17,7 @@ body {
   border-radius: 10px;
   background-color: yellow;
   flex-flow: wrap;
-  width: 1454px;
+  width: 1455px;
   margin: auto;
 }
 
@@ -44,6 +44,10 @@ body {
 
 .statusBarString {
   display: block;
+}
+
+#boardDiv {
+  width: 1034px;
 }
 
 #boardDiv td {
