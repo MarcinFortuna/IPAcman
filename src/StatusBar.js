@@ -2,7 +2,6 @@ import React from 'react';
 import { SignInSignUpPopup } from './SignInSignUpPopup';
 import { signOut } from './Firebase.js'
 import { LeaderboardPopup } from './LeaderboardPopup';
-import { showPrevResults } from './ShowPrevResults';
 import { ShowPrevResultsPopup } from './ShowPrevResultsPopup';
 
 
