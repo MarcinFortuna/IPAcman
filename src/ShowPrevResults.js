@@ -12,17 +12,25 @@ export class ShowPrevResults extends React.Component {
     }
 
     async componentDidMount() {
-        let dbUserUrl = database.ref('Users/' + this.props.userData.userDbKey + '/attempts/').orderByChild('timestamp');
-        dbUserUrl.once('value', async snapshot => {
-            let attempts = snapshot.val();
+        let attempts = JSON.parse(sessionStorage.getItem("attempts"));
+        if (!attempts) {
+            console.log("Previous attempts in session storage not found. Fetching the current list of previous attempts from Firebase");
+            let dbUserUrl = database.ref('Users/' + this.props.userData.userDbKey + '/attempts/').orderByChild('timestamp');
+            dbUserUrl.once('value', async snapshot => {
+                attempts = snapshot.val();
+                await this.setState({ attempts: attempts });
+                sessionStorage.setItem("attempts", JSON.stringify(attempts));
+                console.log("New list of previous attempts set in session storage");
+            });
+        } else {
             await this.setState({ attempts: attempts });
-        });
+            console.log("A list of previous attempts retrieved from session storage");
+        }
     }
 
     render() {
         let results = [];
         for (let i in this.state.attempts) {
-            console.log(this.state.attempts[i]);
             if (typeof this.state.attempts[i] !== "object") continue;
             let old_result = {};
             let datetime = new Date(Math.floor(this.state.attempts[i].timestamp / 1000) * 1000);
