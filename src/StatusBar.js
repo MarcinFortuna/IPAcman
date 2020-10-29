@@ -12,7 +12,7 @@ function StatusBar(props) {
         let name = props.userOtherData.displayName ? props.userOtherData.displayName : (props.userOtherData.username ? props.userOtherData.usernname : props.user.email);
         greeting = `Hi ${name}! Welcome to IPAcman!`;
     } else {
-        greeting = "Hi stranger! Welcome to IPAcman!";
+        greeting = "Hi stranger! Welcome to IPAcman! Sign in to be able to save your results to the database and view the leaderboard!";
     }
 
     return (
