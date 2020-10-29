@@ -32,6 +32,8 @@ export const signUp = async (email, password, name, displayName, affiliation) =>
       "attempts": [""]
     });
   }
+  sessionStorage.removeItem("results");
+  sessionStorage.removeItem("attempts");
 }
 
 export const signIn = (email, password) => {
@@ -43,6 +45,8 @@ export const signIn = (email, password) => {
     console.log(errorCode);
     console.log(errorMessage);
   });
+  sessionStorage.removeItem("results");
+  sessionStorage.removeItem("attempts");
 }
 
 export const signOut = () => {
@@ -54,4 +58,6 @@ export const signOut = () => {
     console.log(errorCode);
     console.log(errorMessage);
   });
+  sessionStorage.removeItem("results");
+  sessionStorage.removeItem("attempts");
 }
