@@ -10,17 +10,11 @@ export const database = firebase.database();
 export const databaseUsers = firebase.database().ref('Users/');
 export const databaseLeaderboard = firebase.database().ref('Leaderboard/');
 
-export const signUp = async (email, password, name, displayName, affiliation) => {
+export const signUp = (email, password, name, displayName, affiliation) => {
   console.log("in the signUp function");
-  let newUser = await firebase.auth().createUserWithEmailAndPassword(email, password).catch(error => {
-    let errorCode = error.code;
-    let errorMessage = error.message;
-    console.log("Signup failed!");
-    console.log(errorCode);
-    console.log(errorMessage);
-    alert("Signup failed! " + errorMessage);
-  });
-  if (newUser.user.email === email) {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then(async (newUser) => {
+    console.log("Signup successful");
     let uid = newUser.user.uid;
     let newDbEntry = databaseUsers.push();
     (await newDbEntry).set({
@@ -31,7 +25,15 @@ export const signUp = async (email, password, name, displayName, affiliation) =>
       "displayName": displayName,
       "attempts": [""]
     });
-  }
+  })
+  .catch(error => {
+    let errorCode = error.code;
+    let errorMessage = error.message;
+    console.log("Signup failed!");
+    console.log(errorCode);
+    console.log(errorMessage);
+    alert("Signup failed! " + errorMessage);
+  });
   sessionStorage.removeItem("results");
   sessionStorage.removeItem("attempts");
 }
