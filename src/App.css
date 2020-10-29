@@ -304,9 +304,23 @@ label > input[type="radio"] + * {
   font-size: 20px;
 }
 
-#mistakes_table td, #leaderboard td {
+#showPrevResults {
+  font-size: 20px;
+  margin: auto;
+  padding: 30px 0;
+}
+
+.prevResults {
+  overflow-y: scroll;
+}
+
+#mistakes_table td, #leaderboard td, #showPrevResults td {
   border: 1px solid black;
   padding: 5px 20px;
+}
+
+.prevResultsTrHeader {
+  border: none !important;
 }
 
 #mistakes_table thead, #leaderboard thead {

@@ -1,9 +1,0 @@
-# Query: class=
-# ContextLines: 1
-
-1 result - 1 file
-
-src/FormContainer.js:
-  38  				<input id='affiliation' name='affiliation' type='affiliation' placeholder='Affiliation' />
-  39: 				<div><input type="checkbox" name='gdpr' required={option === 2 ? true : false} disabled={option === 1 || option === 3 ? true : false}/><span className="gdpr">(required) We are collecting your information for the purposes of storing your game results and displaying the best results on the leaderboard. Your personal data will not be used in any other way. By signing up you agree to these conditions and to your data being stored for this purpose. </span></div>
-  40  			</div>

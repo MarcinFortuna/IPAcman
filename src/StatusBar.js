@@ -2,6 +2,8 @@ import React from 'react';
 import { SignInSignUpPopup } from './SignInSignUpPopup';
 import { signOut } from './Firebase.js'
 import { LeaderboardPopup } from './LeaderboardPopup';
+import { showPrevResults } from './ShowPrevResults';
+import { ShowPrevResultsPopup } from './ShowPrevResultsPopup';
 
 
 function StatusBar(props) {
@@ -16,7 +18,8 @@ function StatusBar(props) {
     return (
         <div id="statusBar">
             <span className="statusBarString">{greeting}</span>
-            <LeaderboardPopup />
+            {(props.user && props.user.email) ? <LeaderboardPopup /> : <div></div>}
+            {(props.user && props.user.email) ? <ShowPrevResultsPopup userData={props.userOtherData}/> : <div></div>}
             {!(props.user && props.user.email) ? <SignInSignUpPopup /> : <div><button type="button" className="button" onClick={signOut}>Log out</button></div>}
         </div>
     );

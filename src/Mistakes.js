@@ -1,17 +1,16 @@
 import React from 'react';
 import { phonemes } from './RP_segments_API';
 
-export const Mistakes = (props) => {
-  let mistakes_present = props.mistakes.length > 0;
+export const getCorrectAnswers = (mistakes_arr) => {
   let mistakes = [];
-  for (let i = 0; i < props.mistakes.length; i++) {
+  for (let i = 0; i < mistakes_arr.length; i++) {
     let mistake = [];
-    mistake.push(props.mistakes[i][1]["question"]);
-    mistake.push(props.mistakes[i][0]["ipa"]);
+    mistake.push(mistakes_arr[i][1]["question"]);
+    mistake.push(mistakes_arr[i][0]["ipa"]);
     let correct_answers = []
     for (let j = 0; j < phonemes.length; j++) {
       for (let prop in phonemes[j]) {
-        if (props.mistakes[i][1]["classes"].includes(phonemes[j][prop])) {
+        if (mistakes_arr[i][1]["classes"].includes(phonemes[j][prop])) {
           correct_answers.push(phonemes[j]["ipa"]);
         }
       }
@@ -20,6 +19,12 @@ export const Mistakes = (props) => {
     mistake.push(correct_answers);
     mistakes.push(mistake);
   }
+  return mistakes;
+}
+
+export const Mistakes = (props) => {
+  let mistakes_present = props.mistakes.length > 0;
+  let mistakes = getCorrectAnswers(props.mistakes);
   let mistake_list_items = mistakes.map(mistake =>
     <tr key={mistake}>
       <td>{mistake[0]}</td>
