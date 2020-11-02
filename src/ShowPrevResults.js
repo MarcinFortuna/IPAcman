@@ -18,6 +18,7 @@ export class ShowPrevResults extends React.Component {
             let dbUserUrl = database.ref('Users/' + this.props.userData.userDbKey + '/attempts/').orderByChild('timestamp');
             dbUserUrl.once('value', async snapshot => {
                 attempts = snapshot.val();
+                console.log(attempts);
                 await this.setState({ attempts: attempts });
                 sessionStorage.setItem("attempts", JSON.stringify(attempts));
                 console.log("New list of previous attempts set in session storage");
@@ -37,7 +38,8 @@ export class ShowPrevResults extends React.Component {
             let datetime_human = datetime.toLocaleString("en-GB");
             let datetime_human_no_seconds = datetime_human.substring(0, datetime_human.length - 3);
             old_result.datetime = datetime_human_no_seconds;
-            let mistakes_with_results = getCorrectAnswers(this.state.attempts[i]["mistakes"]);
+            let mistakes_with_results = [];
+            if (this.state.attempts[i]["mistakes"]) mistakes_with_results = getCorrectAnswers(this.state.attempts[i]["mistakes"]);
             old_result.results = mistakes_with_results;
             old_result.score = this.state.attempts[i].score;
             results.push(old_result);
