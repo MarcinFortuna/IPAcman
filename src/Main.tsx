@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Board } from './Board';
 import { Modal } from './Modal';
 import { Panel } from './Panel';
@@ -7,7 +7,7 @@ import { phonemes, consonants, vowels } from './RP_segments_API';
 import StatusBar from './StatusBar';
 import { databaseLeaderboard, databaseUsers, database } from './Firebase';
 
-export class Main extends React.Component {
+export class Main extends React.Component<any, any> {
 
     constructor(props) {
         super(props);

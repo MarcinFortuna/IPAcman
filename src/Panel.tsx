@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import StartStopButton from './StartStopButton';
 import CurrentQuestion from './CurrentQuestion';
 import Score from './Score';
