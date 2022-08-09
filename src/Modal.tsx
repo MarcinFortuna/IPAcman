@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import Popup from 'reactjs-popup';
 import { Mistakes } from './Mistakes';

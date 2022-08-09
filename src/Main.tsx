@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import { Board } from './Board';
 import { Modal } from './Modal';

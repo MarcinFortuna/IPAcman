@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import { phonemes } from './RP_segments_API';
 

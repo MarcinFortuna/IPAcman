@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import { SignInSignUpPopup } from './SignInSignUpPopup';
 import { signOut } from './Firebase.ts'
