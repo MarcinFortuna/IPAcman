@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { databaseLeaderboard } from './Firebase';
 
 export class Leaderboard extends React.Component {

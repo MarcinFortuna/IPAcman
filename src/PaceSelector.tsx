@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 
-function PaceSelector(props) {
+const PaceSelector = props => {
     return (
         <div id="paceSelector" onChange={props.selectPace} className={props.gameOn ? 'inactive': 'active'}>
             <span>Pace:  </span><br></br>

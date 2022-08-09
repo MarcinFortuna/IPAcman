@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { database } from './Firebase';
 import { getCorrectAnswers } from './Mistakes';
 

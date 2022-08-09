@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 
-function CurrentQuestion(props) {
+const  CurrentQuestion = (props) => {
     return (
       <div id="questionBox">
           Now I would like to eat...
@@ -8,6 +8,6 @@ function CurrentQuestion(props) {
           Remember that all other<br></br>phonemes poison me!
       </div>
     );
-  }
+}
   
   export default CurrentQuestion;

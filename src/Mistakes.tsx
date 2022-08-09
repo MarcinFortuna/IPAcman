@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { phonemes } from './RP_segments_API';
 
 export const getCorrectAnswers = (mistakes_arr) => {

@@ -8,7 +8,7 @@ import {useState} from "react";
 const App = () => {
   const [currentUser, authUser] = useState({});
 
-  auth.onAuthStateChanged(function (user) {
+  auth.onAuthStateChanged( (user) => {
     if (user) {
       user = auth.currentUser;
       authUser(user);

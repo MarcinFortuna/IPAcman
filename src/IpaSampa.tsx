@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 
-function IpaSampa(props) {
+const IpaSampa = props => {
     return (
         <div id="ipaSampa" onChange={props.setAlphabet}>
             <span>Alphabet:      </span><span>IPA  </span>

@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { SignInSignUpPopup } from './SignInSignUpPopup';
-import { signOut } from './Firebase.js'
+import { signOut } from './Firebase.ts'
 import { LeaderboardPopup } from './LeaderboardPopup';
 import { ShowPrevResultsPopup } from './ShowPrevResultsPopup';
 
 
-function StatusBar(props) {
+const StatusBar = props => {
     let greeting;
     if (props.user !== undefined && props.user.email) {
         let name = props.userOtherData.displayName ? props.userOtherData.displayName : (props.userOtherData.username ? props.userOtherData.usernname : props.user.email);

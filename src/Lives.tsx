@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import Emoji from './Emoji';
 
-function Lives(props) {
+const Lives = props => {
     let output = [];
     if (props.life) {
         for (let i = 0; i < props.life; i++) {

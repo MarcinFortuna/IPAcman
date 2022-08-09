@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 
-function Score(props) {
+const Score = props => {
   return (
     <div id="score">
       Current score:<br></br>

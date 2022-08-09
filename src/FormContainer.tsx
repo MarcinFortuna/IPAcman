@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import * as React from "react";
+import { useState } from "react";
 import { signUp, signIn } from './Firebase';
 
-function Form({ option }) {
+const Form = ({ option }) => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -45,7 +46,7 @@ function Form({ option }) {
 	)
 }
 
-export function FormContainer() {
+export const FormContainer = () => {
 	const [option, setOption] = useState(1)
 
 	return (
