@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-const Emoji = props => (
+interface EmojiProps {
+    label?: string
+    symbol: string
+}
+
+const Emoji = (props: EmojiProps) => (
     <span
         className="emoji"
         role="img"
@@ -8,4 +13,6 @@ const Emoji = props => (
         aria-hidden={props.label ? "false" : "true"}
     >
         {props.symbol}
-    </span>); export default Emoji;
+    </span>);
+
+export default Emoji;

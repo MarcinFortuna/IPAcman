@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
@@ -11,13 +10,13 @@ export const database = firebase.database();
 export const databaseUsers = firebase.database().ref('Users/');
 export const databaseLeaderboard = firebase.database().ref('Leaderboard/');
 
-export const signUp = (email, password, name, displayName, affiliation) => {
+export const signUp = (email: string, password: string, name: string = "", displayName: string, affiliation: string = "") => {
   console.log("in the signUp function");
   firebase.auth().createUserWithEmailAndPassword(email, password)
-  .then(async (newUser) => {
+  .then(async (newUser: firebase.auth.UserCredential) => {
     console.log("Signup successful");
-    let uid = newUser.user.uid;
-    let newDbEntry = databaseUsers.push();
+    let uid: string | undefined = newUser?.user?.uid;
+    let newDbEntry: firebase.database.ThenableReference = databaseUsers.push();
     (await newDbEntry).set({
       "uid": uid,
       "email": email,
@@ -28,7 +27,7 @@ export const signUp = (email, password, name, displayName, affiliation) => {
     });
   })
   .catch(error => {
-    let errorCode = error.code;
+    let errorCode: boolean | null | undefined = error.code;
     let errorMessage = error.message;
     console.log("Signup failed!");
     console.log(errorCode);
@@ -39,10 +38,10 @@ export const signUp = (email, password, name, displayName, affiliation) => {
   sessionStorage.removeItem("attempts");
 }
 
-export const signIn = (email, password) => {
+export const signIn = (email: string, password: string) => {
   console.log("in the signIn function");
   firebase.auth().signInWithEmailAndPassword(email, password).catch(error => {
-    let errorCode = error.code;
+    let errorCode: boolean | null | undefined = error.code;
     let errorMessage = error.message;
     console.log("Signin failed!");
     console.log(errorCode);
@@ -55,7 +54,7 @@ export const signIn = (email, password) => {
 export const signOut = () => {
   console.log("in the signOut function");
   firebase.auth().signOut().catch(error => {
-    let errorCode = error.code;
+    let errorCode: boolean | null | undefined = error.code;
     let errorMessage = error.message;
     console.log("Signout failed!");
     console.log(errorCode);

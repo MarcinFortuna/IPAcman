@@ -1,24 +1,22 @@
-// @ts-nocheck
 import * as React from 'react';
 import './App.css';
-import { Main } from './Main';
-import { auth } from './Firebase';
+import {Main} from './Main';
+import {auth} from './Firebase';
 import {useState} from "react";
-
+import {User} from "firebase";
 
 const App = () => {
-  const [currentUser, authUser] = useState({});
 
-  auth.onAuthStateChanged( (user) => {
+  const [currentUser, setCurrentUser] = useState<User | {email: string}>({email: ""});
+
+  auth.onAuthStateChanged( (user: User | null) => {
     if (user) {
       user = auth.currentUser;
-      authUser(user);
-      console.log(user.email);
+      if (user !== null) setCurrentUser(user);
+      console.log(user?.email);
       console.log("Auth state changed!");
     } else {
-      // @ts-ignore
-      if (currentUser.email) authUser({});
-      // console.log(currentUser);
+      if (currentUser?.email) setCurrentUser({email: ""});
     }
   });
 

@@ -1,8 +1,12 @@
 import * as React from 'react';
 import Emoji from './Emoji';
 
-const Lives = props => {
-    let output = [];
+interface LivesProps {
+    life: number
+}
+
+const Lives = (props: LivesProps) => {
+    let output: string[] = [];
     if (props.life) {
         for (let i = 0; i < props.life; i++) {
             output.push("🧡");

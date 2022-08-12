@@ -1,4 +1,6 @@
-export const questions = [
+import { Question } from "./types/types";
+
+export const questions: Question[] = [
 
     {
         question: "an obstruent",

@@ -4,9 +4,15 @@ import {useState} from 'react';
 import Popup from 'reactjs-popup';
 import { ShowPrevResults } from './ShowPrevResults';
 
-export const ShowPrevResultsPopup = (props) => {
-    const [open, setOpen] = useState(false);
+interface ShowPrevResultsPopupProps {
+    userData: any
+}
+
+export const ShowPrevResultsPopup = (props:ShowPrevResultsPopupProps) => {
+
+    const [open, setOpen] = useState<boolean>(false);
     const closeModal = () => setOpen(false);
+
     return (<div className="showPrevResultsButton">
       <button type="button" className="button" onClick={() => setOpen(o => !o)}>
         Show my previous results

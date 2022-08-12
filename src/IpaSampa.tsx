@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-const IpaSampa = props => {
+interface IpaSampaProps {
+    setAlphabet: (e: React.FormEvent<HTMLDivElement>) => void
+}
+
+const IpaSampa = (props: IpaSampaProps) => {
     return (
         <div id="ipaSampa" onChange={props.setAlphabet}>
             <span>Alphabet:      </span><span>IPA  </span>
