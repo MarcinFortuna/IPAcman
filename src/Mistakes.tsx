@@ -6,7 +6,7 @@ interface MistakesProps {
   mistakes: MistakeType[]
 }
 
-export const getCorrectAnswers = (mistakes_arr: any) => {
+export const getCorrectAnswers = (mistakes_arr: MistakeType[]) => {
   let mistakes: string[][] = [];
 
   for (let i = 0; i < mistakes_arr.length; i++) {
@@ -32,11 +32,10 @@ export const getCorrectAnswers = (mistakes_arr: any) => {
 
 export const Mistakes = (props: MistakesProps) => {
 
-  console.log(props);
-  let mistakes_present = props.mistakes.length > 0;
+  let mistakes_present: boolean = props.mistakes.length > 0;
   let mistakes: string[][] = getCorrectAnswers(props.mistakes);
 
-  let mistake_list_items = mistakes.map((mistake: string[], i: number) =>
+  let mistake_list_items: JSX.Element[] = mistakes.map((mistake: string[], i: number) =>
     <tr key={i}>
       <td>{mistake[0]}</td>
       <td>{mistake[1]}</td>
