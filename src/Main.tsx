@@ -7,6 +7,7 @@ import { questions } from './RP_questions_API';
 import { phonemes, consonants, vowels } from './RP_segments_API';
 import StatusBar from './StatusBar';
 import { databaseLeaderboard, databaseUsers, database } from './Firebase';
+import {MistakeType} from "./types/types";
 
 export class Main extends React.Component<any, any> {
 
@@ -140,9 +141,10 @@ export class Main extends React.Component<any, any> {
         for (let prop in phoneme) {
             phoneme_classes.push(phoneme[prop]);
         }
+
         let result = this.state.currentlySearched.classes.some(x => phoneme_classes.includes(x));
         if (!result) {
-            let mistake = [[phoneme, this.state.currentlySearched]];
+            let mistake: MistakeType[] = [{guessedPhoneme: phoneme, guessedQuestion: this.state.currentlySearched}];
             this.setState({ mistakes: this.state.mistakes.concat(mistake) })
         }
         return result;

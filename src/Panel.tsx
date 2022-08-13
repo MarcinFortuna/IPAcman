@@ -16,7 +16,7 @@ interface PanelProps {
     stopGame: () => void
     score: number
     life: number
-    mistakes: MistakeType
+    mistakes: MistakeType[]
     currentlySearched: Question
 }
 

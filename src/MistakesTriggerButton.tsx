@@ -5,7 +5,7 @@ import Popup from 'reactjs-popup';
 import {MistakeType} from "./types/types";
 
 interface MistakesTriggerButtonProps {
-    mistakes: MistakeType
+    mistakes: MistakeType[]
 }
 
 export const MistakesTriggerButton = (props: MistakesTriggerButtonProps) => {

@@ -8,13 +8,13 @@ interface ModalProps {
     open: boolean
     score: number
     closeModal: (e: MouseEvent | SyntheticEvent<Element, Event> | KeyboardEvent | TouchEvent | undefined) => void
-    mistakes: MistakeType
+    mistakes: MistakeType[]
 }
 
 export const Modal = (props: ModalProps) => {
 
     let old_score: number = props.score;
-    let old_mistakes: MistakeType = props.mistakes;
+    let old_mistakes: MistakeType[] = props.mistakes;
 
     return (
         <Popup open={props.open} modal onClose={props.closeModal}>

@@ -1,38 +1,49 @@
-// @ts-nocheck
 import * as React from 'react';
 import { phonemes } from './RP_segments_API';
+import {MistakeType} from "./types/types";
 
-export const getCorrectAnswers = (mistakes_arr) => {
-  let mistakes = [];
+interface MistakesProps {
+  mistakes: MistakeType[]
+}
+
+export const getCorrectAnswers = (mistakes_arr: any) => {
+  let mistakes: string[][] = [];
+
   for (let i = 0; i < mistakes_arr.length; i++) {
     let mistake = [];
-    mistake.push(mistakes_arr[i][1]["question"]);
-    mistake.push(mistakes_arr[i][0]["ipa"]);
-    let correct_answers = []
+    mistake.push(mistakes_arr[i]["guessedQuestion"]["question"]);
+    mistake.push(mistakes_arr[i]["guessedPhoneme"]["ipa"]);
+    let correct_answers: string[] = []
     for (let j = 0; j < phonemes.length; j++) {
       for (let prop in phonemes[j]) {
-        if (mistakes_arr[i][1]["classes"].includes(phonemes[j][prop])) {
+        // @ts-ignore
+        if (mistakes_arr[i]["guessedQuestion"]["classes"].includes(phonemes[j][prop])) {
           correct_answers.push(phonemes[j]["ipa"]);
         }
       }
     }
-    correct_answers = [...new Set(correct_answers)].sort().join(", ");
-    mistake.push(correct_answers);
+    let correct_answers_str: string = [...new Set(correct_answers)].sort().join(", ");
+    mistake.push(correct_answers_str);
     mistakes.push(mistake);
   }
   return mistakes;
+
 }
 
-export const Mistakes = (props) => {
+export const Mistakes = (props: MistakesProps) => {
+
+  console.log(props);
   let mistakes_present = props.mistakes.length > 0;
-  let mistakes = getCorrectAnswers(props.mistakes);
-  let mistake_list_items = mistakes.map(mistake =>
-    <tr key={mistake}>
+  let mistakes: string[][] = getCorrectAnswers(props.mistakes);
+
+  let mistake_list_items = mistakes.map((mistake: string[], i: number) =>
+    <tr key={i}>
       <td>{mistake[0]}</td>
       <td>{mistake[1]}</td>
       <td>{mistake[2]}</td>
     </tr>
   );
+
   return (
     <div>
       <h2>Your mistakes:</h2>

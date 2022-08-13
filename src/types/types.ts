@@ -31,6 +31,7 @@ export type Question = {
     classes: string[]
 }
 
-export type MistakeType = [
-    VowelPhoneme|ConsonantPhoneme, Question
-]
+export type MistakeType = {
+    guessedPhoneme: VowelPhoneme | ConsonantPhoneme
+    guessedQuestion: Question
+}
