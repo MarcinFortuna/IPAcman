@@ -48,3 +48,12 @@ export type UserData = {
     displayName: string
     affiliation?: string
 }
+
+export type LeaderboardItem = {
+    name: string
+    displayName?: string
+    affiliation?: string
+    pace: string
+    score: number
+    datetime: string
+}
