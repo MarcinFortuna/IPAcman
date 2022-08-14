@@ -41,3 +41,10 @@ export type PreviousResults = {
     results: string[][]
     score: number
 }
+
+export type UserData = {
+    userDbKey?: string
+    username: string
+    displayName: string
+    affiliation?: string
+}

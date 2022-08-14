@@ -2,15 +2,10 @@ import * as React from 'react';
 import {useState, useEffect} from "react";
 import {database} from './Firebase';
 import {getCorrectAnswers} from './Mistakes';
-import {PreviousResults} from "./types/types";
+import {PreviousResults, UserData} from "./types/types";
 
 interface ShowPrevResultsProps {
-    userData: {
-        userDbKey: string
-        username: string
-        displayName: string
-        affiliation?: string
-    }
+    userData: UserData
 }
 
 export const ShowPrevResults = (props: ShowPrevResultsProps) => {
