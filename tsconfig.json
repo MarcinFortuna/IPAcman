@@ -23,7 +23,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "suppressImplicitAnyIndexErrors": true
   },
   "include": [
     "./src/"

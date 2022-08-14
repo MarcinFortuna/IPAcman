@@ -207,6 +207,8 @@ export class Main extends React.Component<any, any> {
         let dbUserUrl = database.ref('Users/' + this.state.user.userDbKey + '/attempts/');
         let newDbEntry = dbUserUrl.push();
         (await newDbEntry).set(objectToPush);
+        console.log(objectToPush);
+        console.log(newDbEntry);
         let newLeaderboardEntry = databaseLeaderboard.push();
         (await newLeaderboardEntry).set(objectToPush);
         sessionStorage.removeItem("results");

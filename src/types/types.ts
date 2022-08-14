@@ -35,3 +35,9 @@ export type MistakeType = {
     guessedPhoneme: VowelPhoneme | ConsonantPhoneme
     guessedQuestion: Question
 }
+
+export type PreviousResults = {
+    datetime: string
+    results: string[][]
+    score: number
+}
