@@ -1,12 +1,15 @@
 // @ts-nocheck
 import * as React from 'react';
 import { Square } from './Square';
+import {BoardGrid} from "./types/types";
 
-export class Board extends React.Component {
+export class Board extends React.Component<any, any> {
 
-    constructor(props) {
+    directions: string[]
+
+    constructor(props: any) {
         super(props);
-        let grid = Array(20).fill().map(x => Array(30).fill().map(y => Array(2).fill("")))
+        let grid: BoardGrid = Array(20).fill().map(x => Array(30).fill().map(y => Array(2).fill("")))
         grid[0][0] = ["pacman right", ""];
         this.state = {
             'grid': grid
@@ -30,7 +33,7 @@ export class Board extends React.Component {
     }
 
     chooseADirectionAtRandom() {
-        let randomNumber = Math.floor(Math.random() * 8);
+        let randomNumber: number = Math.floor(Math.random() * 8);
         return this.directions[randomNumber];
     }
 
@@ -50,7 +53,7 @@ export class Board extends React.Component {
         }
         if (prevProps.gameOn && !this.props.gameOn) {
             if (this.props.pace) this.props.clearAllIntervals();
-            let grid = Array(20).fill().map(x => Array(30).fill().map(y => Array(2).fill("")))
+            let grid: BoardGrid = Array(20).fill().map(x => Array(30).fill().map(y => Array(2).fill("")))
             grid[0][0] = ["pacman right", ""];
             this.setState({
                 'grid': grid

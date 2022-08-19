@@ -26,13 +26,15 @@ export type ConsonantPhoneme = {
     voice: string
 }
 
+export type Phoneme = VowelPhoneme | ConsonantPhoneme
+
 export type Question = {
     question: string
     classes: string[]
 }
 
 export type MistakeType = {
-    guessedPhoneme: VowelPhoneme | ConsonantPhoneme
+    guessedPhoneme: Phoneme
     guessedQuestion: Question
 }
 
@@ -56,4 +58,34 @@ export type LeaderboardItem = {
     pace: string
     score: number
     datetime: string
+}
+
+export type ObjectToPushToFirebase = {
+    score: number,
+    uid: string,
+    pace: number,
+    mistakes: MistakeType[],
+    timestamp: string,
+    username: string,
+    displayName: string,
+    affiliation: string
+}
+
+export type GridElement = [
+    string, Phoneme | string
+]
+
+export type BoardGrid = GridElement[][]
+
+export type MainComponentState = {
+    gameOn: boolean
+    currentlySearched: Question
+    phonemesOnTheBoard: (GridElement | null)[]
+    score: number
+    life: number
+    mistakes: MistakeType[]
+    modalOpen: boolean
+    pace: number
+    useIpa: boolean
+    user: any
 }

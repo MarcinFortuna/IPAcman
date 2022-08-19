@@ -4,7 +4,7 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "checkJs": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "module": "esnext",
     "jsx": "react",
     "target": "es5",

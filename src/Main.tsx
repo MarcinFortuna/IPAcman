@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as React from 'react';
 import { Board } from './Board';
 import { Modal } from './Modal';
@@ -7,15 +6,22 @@ import { questions } from './RP_questions_API';
 import { phonemes, consonants, vowels } from './RP_segments_API';
 import StatusBar from './StatusBar';
 import { databaseLeaderboard, databaseUsers, database } from './Firebase';
-import {MistakeType} from "./types/types";
+import {MistakeType, MainComponentState, Question, Phoneme, GridElement, ObjectToPushToFirebase} from "./types/types";
+import {User} from "firebase";
+
+interface MainProps {
+    user: User | {email: string}
+}
 
 export class Main extends React.Component<any, any> {
 
-    constructor(props) {
+    state: MainComponentState
+
+    constructor(props: MainProps) {
         super(props);
         this.state = {
             gameOn: false,
-            currentlySearched: [],
+            currentlySearched: {question: "", classes: [""]},
             phonemesOnTheBoard: [],
             score: 0,
             life: 3,
@@ -48,7 +54,7 @@ export class Main extends React.Component<any, any> {
         }
     }
 
-    addUserInfoToState(uid) {
+    addUserInfoToState(uid: string) {
         databaseUsers.orderByChild("uid").equalTo(uid).once('value', async (snapshot) => {
             let userData = snapshot.val();
             let userDbKey = Object.keys(userData)[0];
@@ -67,27 +73,28 @@ export class Main extends React.Component<any, any> {
     }
 
     generate_random_question() {
-        let classes_of_phonemes_on_the_board = [];
+        let classes_of_phonemes_on_the_board: string[] = [];
         this.state.phonemesOnTheBoard.forEach(x => {
             if (x) {
+                // @ts-ignore
                 for (let prop in x[1]) {
                     classes_of_phonemes_on_the_board.push(x[1][prop]);
                 }
             }
         });
-        let index = Math.floor(Math.random() * questions.length);
+        let index: number = Math.floor(Math.random() * questions.length);
         while (!classes_of_phonemes_on_the_board.some(
             x => questions[index]["classes"].indexOf(x) > -1
         )) {
             index = Math.floor(Math.random() * questions.length);
         }
-        let currently_searched = questions[index];
+        let currently_searched: Question = questions[index];
         this.setState({ currentlySearched: currently_searched })
     }
 
-    generate_random_phoneme(category) {
-        let random_number;
-        let random_phoneme;
+    generate_random_phoneme(category: string) {
+        let random_number: number;
+        let random_phoneme: Phoneme;
         let get_random_phoneme = (category) => {
             if (category === "C") {
                 random_number = Math.floor(Math.random() * consonants.length);
@@ -105,21 +112,24 @@ export class Main extends React.Component<any, any> {
         // Due to few questions which eliminate diphthongs and many diphthongs in the inventory,
         // there sometimes arises huge surplus of diphthongs on the board.
         // This is why there is an artificial restriction limiting the number of diphthongs to 2 at the same time.
-        let diphthong_count = 0;
+        let diphthong_count: number = 0;
         for (let i = 0; i < this.state.phonemesOnTheBoard.length; i++) {
+            // @ts-ignore
             if (this.state.phonemesOnTheBoard[i] && this.state.phonemesOnTheBoard[i][1].hasOwnProperty("type")) diphthong_count++;
         }
 
+        // @ts-ignore
         while (this.state.phonemesOnTheBoard.some(x => x && x[1]["sampa"] === random_phoneme["sampa"]) || (diphthong_count >= 2 && random_phoneme.hasOwnProperty("type"))) {
             get_random_phoneme(category);
         }
+        // @ts-ignore
         return random_phoneme;
     }
 
-    addPhonemeToList(phonemeInfo) {
-        let oldList = this.state.phonemesOnTheBoard.slice();
+    addPhonemeToList(phonemeInfo: GridElement) {
+        let oldList: (GridElement | null)[] = this.state.phonemesOnTheBoard.slice();
         if (oldList.length > 5) {
-            let null_index = oldList.findIndex(x => x === null);
+            let null_index: number = oldList.findIndex(x => x === null);
             oldList[null_index] = phonemeInfo;
             this.setState({ phonemesOnTheBoard: oldList })
         } else {
@@ -129,20 +139,21 @@ export class Main extends React.Component<any, any> {
         }
     }
 
-    wipeAPhonemeOut(index) {
+    wipeAPhonemeOut(index: number) {
+        // @ts-ignore
         if (this.state.phonemesOnTheBoard[index][2]) clearInterval(this.state.phonemesOnTheBoard[index][2][1]);
-        let oldList = this.state.phonemesOnTheBoard.slice();
+        let oldList: (GridElement | null)[] = this.state.phonemesOnTheBoard.slice();
         oldList[index] = null;
         this.setState({ phonemesOnTheBoard: oldList })
     }
 
-    checkIfPhonemeCurrent(phoneme) {
-        let phoneme_classes = [];
+    checkIfPhonemeCurrent(phoneme: Phoneme) {
+        let phoneme_classes: string[] = [];
         for (let prop in phoneme) {
             phoneme_classes.push(phoneme[prop]);
         }
 
-        let result = this.state.currentlySearched.classes.some(x => phoneme_classes.includes(x));
+        let result: boolean = this.state.currentlySearched.classes.some(x => phoneme_classes.includes(x));
         if (!result) {
             let mistake: MistakeType[] = [{guessedPhoneme: phoneme, guessedQuestion: this.state.currentlySearched}];
             this.setState({ mistakes: this.state.mistakes.concat(mistake) })
@@ -150,13 +161,16 @@ export class Main extends React.Component<any, any> {
         return result;
     }
 
-    setAPhonemeInMotion(sampa, direction, pace, callback_function) {
+    setAPhonemeInMotion(sampa: string, direction: string, pace: number, callback_function: (direction:string, sampa: string) => void) {
+        // @ts-ignore
         let phonemeIndex = this.state.phonemesOnTheBoard.findIndex(x => x[1]["sampa"] === sampa);
+        // @ts-ignore
         if (this.state.phonemesOnTheBoard[phonemeIndex] && this.state.phonemesOnTheBoard[phonemeIndex][2]) clearInterval(this.state.phonemesOnTheBoard[phonemeIndex][2][1]);
-        let newState = this.state.phonemesOnTheBoard.slice();
+        let newState: (GridElement | null)[] = this.state.phonemesOnTheBoard.slice();
         let movementInterval = setInterval(() => {
             callback_function(direction, sampa);
         }, pace);
+        // @ts-ignore
         newState[phonemeIndex][2] = [direction, movementInterval];
         this.setState({ phonemesOnTheBoard: newState })
     }
@@ -195,16 +209,17 @@ export class Main extends React.Component<any, any> {
             console.log("not logged in");
             return
         };
-        let objectToPush = {};
-        objectToPush.score = this.state.score;
-        objectToPush.uid = this.props.user.uid;
-        objectToPush.pace = this.state.pace;
-        objectToPush.mistakes = this.state.mistakes;
-        objectToPush.timestamp = Date.now().toString();
-        objectToPush.username = this.state.user.username;
-        objectToPush.displayName = this.state.user.displayName;
-        objectToPush.affiliation = this.state.user.affiliation;
-        let dbUserUrl = database.ref('Users/' + this.state.user.userDbKey + '/attempts/');
+        let objectToPush: ObjectToPushToFirebase = {
+            score: this.state.score,
+            uid: this.props.user.uid,
+            pace: this.state.pace,
+            mistakes: this.state.mistakes,
+            timestamp: Date.now().toString(),
+            username: this.state.user.username,
+            displayName: this.state.user.displayName,
+            affiliation: this.state.user.affiliation
+        };
+        let dbUserUrl: any = database.ref('Users/' + this.state.user.userDbKey + '/attempts/');
         let newDbEntry = dbUserUrl.push();
         (await newDbEntry).set(objectToPush);
         console.log(objectToPush);
@@ -250,6 +265,7 @@ export class Main extends React.Component<any, any> {
 
     clearAllIntervals() {
         for (let i = 0; i < this.state.phonemesOnTheBoard.length; i++) {
+            // @ts-ignore
             clearInterval(this.state.phonemesOnTheBoard[i][2][1]);
         }
     }

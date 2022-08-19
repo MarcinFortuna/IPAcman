@@ -10,7 +10,7 @@ export const getCorrectAnswers = (mistakes_arr: MistakeType[]) => {
   let mistakes: string[][] = [];
 
   for (let i = 0; i < mistakes_arr.length; i++) {
-    let mistake = [];
+    let mistake: string[] = [];
     mistake.push(mistakes_arr[i]["guessedQuestion"]["question"]);
     mistake.push(mistakes_arr[i]["guessedPhoneme"]["ipa"]);
     let correct_answers: string[] = []
