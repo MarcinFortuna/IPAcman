@@ -37,7 +37,7 @@ export const Leaderboard = () => {
         let resultsFromSessionStorage = JSON.parse(sessionStorage.getItem("results") as string);
         if (!resultsFromSessionStorage) {
             console.log("Results in session storage not found. Fetching the current leaderboard from Firebase");
-            databaseLeaderboard.once('value')
+            databaseLeaderboard.orderByChild('score').limitToLast(10).once('value')
                 .then(snapshot => snapshot.val())
                 .then(async (res) => {
                     await parseResults(res);
