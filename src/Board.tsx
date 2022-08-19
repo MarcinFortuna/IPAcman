@@ -66,10 +66,10 @@ export class Board extends React.Component {
     handleKeyDown(e) {
         if (this.props.gameOn) {
             e.preventDefault();
-            if (e.key === "h" || e.key === "ArrowLeft") this.movePacman("left");
-            if (e.key === "l" || e.key === "ArrowRight") this.movePacman("right");
-            if (e.key === "j" || e.key === "ArrowDown") this.movePacman("down");
-            if (e.key === "k" || e.key === "ArrowUp") this.movePacman("up");
+            if (e.key === "a" || e.key === "h" || e.key === "ArrowLeft") this.movePacman("left");
+            if (e.key === "d" || e.key === "l" || e.key === "ArrowRight") this.movePacman("right");
+            if (e.key === "s" || e.key === "j" || e.key === "ArrowDown") this.movePacman("down");
+            if (e.key === "w" || e.key === "k" || e.key === "ArrowUp") this.movePacman("up");
         }
     }
 
