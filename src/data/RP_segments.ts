@@ -1,4 +1,4 @@
-import { ConsonantPhoneme, VowelPhoneme } from "./types/types";
+import { ConsonantPhoneme, VowelPhoneme } from "../types/types";
 
 export const consonants: ConsonantPhoneme[] = [
 
