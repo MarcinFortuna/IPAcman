@@ -63,22 +63,19 @@ body {
   background-position: center;
   background-size: 30px;
   font-weight: bold;
-}
-
-.right {
   background-image: url("assets/pacman-r.png") !important;
 }
 
 .left {
-  background-image: url("assets/pacman-l.png") !important;
+  transform: rotate(180deg);
 }
 
 .up {
-  background-image: url("assets/pacman-u.png") !important;
+  transform: rotate(-90deg);
 }
 
 .down {
-  background-image: url("assets/pacman-d.png") !important;
+  transform: rotate(90deg);
 }
 
 .pacman.success {

@@ -10,7 +10,7 @@ export const Leaderboard = () => {
     const parseResults = (data: any) => {
 
         let all_results = Object.values(data);
-        let parsed_results: any = [];
+        let parsed_results: LeaderboardItem[] = [];
 
         all_results.forEach((result: any) => {
             let datetime: Date = new Date(Math.floor(result.timestamp / 1000) * 1000);
@@ -34,7 +34,7 @@ export const Leaderboard = () => {
 
     useEffect(() => {
 
-        let resultsFromSessionStorage = JSON.parse(sessionStorage.getItem("results") as string);
+        let resultsFromSessionStorage: string = JSON.parse(sessionStorage.getItem("results") as string);
         if (!resultsFromSessionStorage) {
             console.log("Results in session storage not found. Fetching the current leaderboard from Firebase");
             databaseLeaderboard.orderByChild('score').limitToLast(10).once('value')
