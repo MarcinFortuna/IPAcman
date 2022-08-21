@@ -4,8 +4,8 @@ export type MonophthongPhoneme = {
     length: string
     tenseness: string
     roundedness: string
-    horizontal: string
-    vertical: string
+    height: string
+    backness: string
 }
 
 export type DiphthongPhoneme = {

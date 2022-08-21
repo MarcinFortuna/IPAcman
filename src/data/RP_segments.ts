@@ -225,8 +225,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "I",
         ipa: "ɪ",
-        vertical: "close",
-        horizontal: "front",
+        height: "close",
+        backness: "front",
         length: "short",
         tenseness: "lax",
         roundedness: "unrounded"
@@ -235,8 +235,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "e",
         ipa: "e",
-        vertical: "mid",
-        horizontal: "front",
+        height: "mid",
+        backness: "front",
         length: "short",
         tenseness: "lax",
         roundedness: "unrounded"
@@ -245,8 +245,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "{",
         ipa: "æ",
-        vertical: "open",
-        horizontal: "front",
+        height: "open",
+        backness: "front",
         length: "short",
         tenseness: "lax",
         roundedness: "unrounded"
@@ -255,8 +255,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "V",
         ipa: "ʌ",
-        vertical: "open",
-        horizontal: "central",
+        height: "open",
+        backness: "central",
         length: "short",
         tenseness: "lax",
         roundedness: "unrounded"
@@ -265,8 +265,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "@",
         ipa: "ə",
-        vertical: "mid",
-        horizontal: "central",
+        height: "mid",
+        backness: "central",
         length: "short",
         tenseness: "lax",
         roundedness: "unrounded"
@@ -276,8 +276,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "U",
         ipa: "ʊ",
-        vertical: "close",
-        horizontal: "back",
+        height: "close",
+        backness: "back",
         length: "short",
         tenseness: "lax",
         roundedness: "rounded"
@@ -287,8 +287,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "Q",
         ipa: "ɒ",
-        vertical: "open",
-        horizontal: "back",
+        height: "open",
+        backness: "back",
         length: "short",
         tenseness: "lax",
         roundedness: "rounded"
@@ -298,8 +298,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "i:",
         ipa: "iː",
-        vertical: "close",
-        horizontal: "front",
+        height: "close",
+        backness: "front",
         length: "long",
         tenseness: "tense",
         roundedness: "unrounded"
@@ -309,8 +309,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "3:",
         ipa: "ɜː",
-        vertical: "mid",
-        horizontal: "central",
+        height: "mid",
+        backness: "central",
         length: "long",
         tenseness: "tense",
         roundedness: "unrounded"
@@ -320,8 +320,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "u:",
         ipa: "uː",
-        vertical: "close",
-        horizontal: "back",
+        height: "close",
+        backness: "back",
         length: "long",
         tenseness: "tense",
         roundedness: "rounded"
@@ -331,8 +331,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "O:",
         ipa: "ɔː",
-        vertical: "mid",
-        horizontal: "back",
+        height: "mid",
+        backness: "back",
         length: "long",
         tenseness: "tense",
         roundedness: "rounded"
@@ -342,8 +342,8 @@ export const vowels: VowelPhoneme[] = [
     {
         sampa: "A:",
         ipa: "ɑː",
-        vertical: "open",
-        horizontal: "back",
+        height: "open",
+        backness: "back",
         length: "long",
         tenseness: "tense",
         roundedness: "unrounded"
