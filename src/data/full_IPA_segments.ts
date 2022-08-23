@@ -66,7 +66,60 @@ export const full_consonants_pulmonic = [
         audio: "https://en.wikipedia.org/wiki/File:Voiced_bilabial_fricative.ogg"
     },
 
+    {
+        ipa: "ɱ",
+        sampa: "F",
+        airstream: "pulmonic",
+        place: "labiodental",
+        manner: "nasal",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_labiodental_nasal",
+        audio: "https://en.wikipedia.org/wiki/File:Labiodental_nasal.ogg"
+    },
 
+    {
+        ipa: "ⱱ",
+        sampa: "",
+        airstream: "pulmonic",
+        place: "labiodental",
+        manner: "flap",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_labiodental_flap",
+        audio: "https://en.wikipedia.org/wiki/File:Labiodental_flap.ogg"
+    },
+
+    {
+        ipa: "v",
+        sampa: "v",
+        airstream: "pulmonic",
+        place: "labiodental",
+        manner: "fricative",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_labiodental_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_labio-dental_fricative.ogg"
+    },
+
+    {
+        ipa: "f",
+        sampa: "f",
+        airstream: "pulmonic",
+        place: "labiodental",
+        manner: "fricative",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_labiodental_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_labio-dental_fricative.ogg"
+    },
+
+    {
+        ipa: "ʋ",
+        sampa: "v\\",
+        airstream: "pulmonic",
+        place: "labiodental",
+        manner: "approximant",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_labiodental_approximant",
+        audio: "https://en.wikipedia.org/wiki/File:Labiodental_approximant.ogg"
+    }
 
 ]
 
