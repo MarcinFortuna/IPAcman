@@ -273,6 +273,94 @@ export const full_consonants_pulmonic = [
         voicing: "voiced",
         url: "https://en.wikipedia.org/wiki/Voiced_dental,_alveolar_and_postalveolar_lateral_approximants",
         audio: "https://en.wikipedia.org/wiki/File:Alveolar_lateral_approximant.ogg"
+    },
+
+    {
+        ipa: "ʈ",
+        sampa: "t`",
+        airstream: "pulmonic",
+        place: "retroflex",
+        manner: "plosive",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_retroflex_plosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_retroflex_stop.oga"
+    },
+
+    {
+        ipa: "ɖ",
+        sampa: "d`",
+        airstream: "pulmonic",
+        place: "retroflex",
+        manner: "plosive",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_retroflex_plosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_retroflex_stop.oga"
+    },
+
+    {
+        ipa: "ɳ",
+        sampa: "n`",
+        airstream: "pulmonic",
+        place: "retroflex",
+        manner: "nasal",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_retroflex_nasal",
+        audio: "https://en.wikipedia.org/wiki/File:Retroflex_nasal.ogg"
+    },
+
+    {
+        ipa: "ɽ",
+        sampa: "r`",
+        airstream: "pulmonic",
+        place: "retroflex",
+        manner: "flap",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_retroflex_flap",
+        audio: "https://en.wikipedia.org/wiki/File:Retroflex_flap.ogg"
+    },
+
+    {
+        ipa: "ʂ",
+        sampa: "s`",
+        airstream: "pulmonic",
+        place: "retroflex",
+        manner: "fricative",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_retroflex_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_retroflex_sibilant.ogg"
+    },
+
+    {
+        ipa: "ʐ",
+        sampa: "z`",
+        airstream: "pulmonic",
+        place: "retroflex",
+        manner: "fricative",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_retroflex_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_retroflex_sibilant.ogg"
+    },
+
+    {
+        ipa: "ɻ",
+        sampa: "r\\`",
+        airstream: "pulmonic",
+        place: "retroflex",
+        manner: "approximant",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_retroflex_approximant",
+        audio: "https://en.wikipedia.org/wiki/File:Retroflex_Approximant2.oga"
+    },
+
+    {
+        ipa: "ɭ",
+        sampa: "l`",
+        airstream: "pulmonic",
+        place: "retroflex",
+        manner: "lateral approximant",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_retroflex_lateral_approximant",
+        audio: "https://en.wikipedia.org/wiki/File:Retroflex_lateral_approximant.ogg"
     }
 
 ]
