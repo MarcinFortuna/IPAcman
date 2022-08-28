@@ -361,7 +361,84 @@ export const full_consonants_pulmonic = [
         voicing: "voiced",
         url: "https://en.wikipedia.org/wiki/Voiced_retroflex_lateral_approximant",
         audio: "https://en.wikipedia.org/wiki/File:Retroflex_lateral_approximant.ogg"
-    }
+    },
+
+    {
+        ipa: "c",
+        sampa: "c",
+        airstream: "pulmonic",
+        place: "palatal",
+        manner: "plosive",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_palatal_plosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_palatal_plosive.ogg"
+    },
+
+    {
+        ipa: "ɟ",
+        sampa: "J\\",
+        airstream: "pulmonic",
+        place: "palatal",
+        manner: "plosive",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_palatal_plosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_palatal_plosive.ogg"
+    },
+
+    {
+        ipa: "ɲ",
+        sampa: "J",
+        airstream: "pulmonic",
+        place: "palatal",
+        manner: "nasal",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_palatal_nasal",
+        audio: "https://en.wikipedia.org/wiki/File:Palatal_nasal.ogg"
+    },
+
+    {
+        ipa: "ç",
+        sampa: "C",
+        airstream: "pulmonic",
+        place: "palatal",
+        manner: "fricative",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_palatal_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_palatal_fricative.ogg"
+    },
+
+    {
+        ipa: "ʝ",
+        sampa: "j\\",
+        airstream: "pulmonic",
+        place: "palatal",
+        manner: "fricative",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_palatal_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_palatal_fricative.ogg"
+    },
+
+    {
+        ipa: "j",
+        sampa: "j",
+        airstream: "pulmonic",
+        place: "palatal",
+        manner: "approximant",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_palatal_approximant",
+        audio: "https://en.wikipedia.org/wiki/File:Palatal_approximant.ogg"
+    },
+
+    {
+        ipa: "ʎ",
+        sampa: "L",
+        airstream: "pulmonic",
+        place: "palatal",
+        manner: "lateral approximant",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_palatal_lateral_approximant",
+        audio: "https://en.wikipedia.org/wiki/File:Palatal_lateral_approximant.ogg"
+    },
 
 ]
 
