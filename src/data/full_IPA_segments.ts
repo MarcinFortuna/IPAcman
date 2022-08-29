@@ -440,6 +440,83 @@ export const full_consonants_pulmonic = [
         audio: "https://en.wikipedia.org/wiki/File:Palatal_lateral_approximant.ogg"
     },
 
+    {
+        ipa: "k",
+        sampa: "k",
+        airstream: "pulmonic",
+        place: "velar",
+        manner: "plosive",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_velar_plosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_velar_plosive.ogg"
+    },
+
+    {
+        ipa: "ɡ",
+        sampa: "g",
+        airstream: "pulmonic",
+        place: "velar",
+        manner: "plosive",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_velar_plosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_velar_plosive_02.ogg"
+    },
+
+    {
+        ipa: "ŋ",
+        sampa: "N",
+        airstream: "pulmonic",
+        place: "velar",
+        manner: "nasal",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_velar_nasal",
+        audio: "https://en.wikipedia.org/wiki/File:Velar_nasal.ogg"
+    },
+
+    {
+        ipa: "x",
+        sampa: "x",
+        airstream: "pulmonic",
+        place: "velar",
+        manner: "fricative",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_velar_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_velar_fricative.ogg"
+    },
+
+    {
+        ipa: "ɣ",
+        sampa: "G",
+        airstream: "pulmonic",
+        place: "velar",
+        manner: "fricative",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_velar_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_velar_fricative.ogg"
+    },
+
+    {
+        ipa: "ɰ",
+        sampa: "M\\",
+        airstream: "pulmonic",
+        place: "velar",
+        manner: "approximant",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_velar_approximant",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_velar_approximant.ogg"
+    },
+
+    {
+        ipa: "ʟ",
+        sampa: "L\\",
+        airstream: "pulmonic",
+        place: "velar",
+        manner: "lateral approximant",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_velar_lateral_approximant",
+        audio: "https://en.wikipedia.org/wiki/File:Velar_lateral_approximant.ogg"
+    },
+
 ]
 
 export const full_consonants_non_pulmonic = [
