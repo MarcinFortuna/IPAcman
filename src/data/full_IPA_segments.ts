@@ -517,6 +517,72 @@ export const full_consonants_pulmonic = [
         audio: "https://en.wikipedia.org/wiki/File:Velar_lateral_approximant.ogg"
     },
 
+    {
+        ipa: "q",
+        sampa: "q",
+        airstream: "pulmonic",
+        place: "uvular",
+        manner: "plosive",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_uvular_plosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_uvular_plosive.ogg"
+    },
+
+    {
+        ipa: "ɢ",
+        sampa: "G\\",
+        airstream: "pulmonic",
+        place: "uvular",
+        manner: "plosive",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_uvular_plosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_uvular_stop.oga"
+    },
+
+    {
+        ipa: "ɴ",
+        sampa: "N\\",
+        airstream: "pulmonic",
+        place: "uvular",
+        manner: "nasal",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_uvular_nasal",
+        audio: "https://en.wikipedia.org/wiki/File:Uvular_nasal.ogg"
+    },
+
+    {
+        ipa: "ʀ",
+        sampa: "R\\",
+        airstream: "pulmonic",
+        place: "uvular",
+        manner: "trill",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_uvular_trill",
+        audio: "https://en.wikipedia.org/wiki/File:Uvular_trill.ogg"
+    },
+
+    {
+        ipa: "χ",
+        sampa: "X",
+        airstream: "pulmonic",
+        place: "uvular",
+        manner: "fricative",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_uvular_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_uvular_fricative.ogg"
+    },
+
+    {
+        ipa: "ʁ",
+        sampa: "R",
+        airstream: "pulmonic",
+        place: "uvular",
+        manner: "fricative",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_uvular_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_uvular_fricative.ogg"
+    }
+
 ]
 
 export const full_consonants_non_pulmonic = [
