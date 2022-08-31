@@ -581,6 +581,61 @@ export const full_consonants_pulmonic = [
         voicing: "voiced",
         url: "https://en.wikipedia.org/wiki/Voiced_uvular_fricative",
         audio: "https://en.wikipedia.org/wiki/File:Voiced_uvular_fricative.ogg"
+    },
+
+    {
+        ipa: "ħ",
+        sampa: "X\\",
+        airstream: "pulmonic",
+        place: "pharyngeal",
+        manner: "fricative",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_pharyngeal_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_pharyngeal_fricative.ogg"
+    },
+
+    {
+        ipa: "ʕ",
+        sampa: "?\\",
+        airstream: "pulmonic",
+        place: "pharyngeal",
+        manner: "fricative",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_pharyngeal_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_pharyngeal_fricative.ogg"
+    },
+
+    {
+        ipa: "ʔ",
+        sampa: "?",
+        airstream: "pulmonic",
+        place: "glottal",
+        manner: "plosive",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Glottal_stop",
+        audio: "https://en.wikipedia.org/wiki/File:Glottal_stop.ogg"
+    },
+
+    {
+        ipa: "h",
+        sampa: "h",
+        airstream: "pulmonic",
+        place: "glottal",
+        manner: "fricative",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_glottal_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_glottal_fricative.ogg"
+    },
+
+    {
+        ipa: "ɦ",
+        sampa: "h\\",
+        airstream: "pulmonic",
+        place: "glottal",
+        manner: "fricative",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_glottal_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_glottal_fricative.ogg"
     }
 
 ]
