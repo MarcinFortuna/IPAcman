@@ -651,7 +651,51 @@ export const full_consonants_non_pulmonic = [
         voicing: "voiceless",
         url: "https://en.wikipedia.org/wiki/Bilabial_click",
         audio: "https://en.wikipedia.org/wiki/File:Clic_bilabial_sourd.ogg"
-    }
+    },
+
+    {
+        ipa: "ǀ",
+        sampa: "|\\",
+        airstream: "non-pulmonic",
+        place: "dental",
+        manner: "click",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Dental_click",
+        audio: "https://en.wikipedia.org/wiki/File:Dental_click.ogg"
+    },
+
+    {
+        ipa: "ǃ",
+        sampa: "!\\",
+        airstream: "non-pulmonic",
+        place: "(post)alveolar",
+        manner: "click",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Alveolar_click",
+        audio: "https://en.wikipedia.org/wiki/File:Postalveolar_click.ogg"
+    },
+
+    {
+        ipa: "ǂ",
+        sampa: "=\\",
+        airstream: "non-pulmonic",
+        place: "patatoalveolar",
+        manner: "click",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Palatal_click",
+        audio: "https://en.wikipedia.org/wiki/File:Palatoalveolar_click.ogg"
+    },
+
+    {
+        ipa: "ǁ",
+        sampa: "|\\|\\",
+        airstream: "non-pulmonic",
+        place: "alveolar",
+        manner: "lateral click",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Lateral_click",
+        audio: "https://en.wikipedia.org/wiki/File:Alveolar_lateral_click.ogg"
+    },
 
 ]
 
