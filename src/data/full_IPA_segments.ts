@@ -668,7 +668,7 @@ export const full_consonants_non_pulmonic = [
         ipa: "ǃ",
         sampa: "!\\",
         airstream: "non-pulmonic",
-        place: "(post)alveolar",
+        place: "alveolar",
         manner: "click",
         voicing: "voiceless",
         url: "https://en.wikipedia.org/wiki/Alveolar_click",
@@ -695,6 +695,61 @@ export const full_consonants_non_pulmonic = [
         voicing: "voiceless",
         url: "https://en.wikipedia.org/wiki/Lateral_click",
         audio: "https://en.wikipedia.org/wiki/File:Alveolar_lateral_click.ogg"
+    },
+
+    {
+        ipa: "ɓ",
+        sampa: "b_<",
+        airstream: "non-pulmonic",
+        place: "bilabial",
+        manner: "implosive",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_bilabial_implosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_bilabial_implosive.ogg"
+    },
+
+    {
+        ipa: "ɗ",
+        sampa: "d_<",
+        airstream: "non-pulmonic",
+        place: "alveolar",
+        manner: "implosive",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_alveolar_implosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_alveolar_implosive.ogg"
+    },
+
+    {
+        ipa: "ʄ",
+        sampa: "J\\_<",
+        airstream: "non-pulmonic",
+        place: "palatal",
+        manner: "implosive",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_palatal_implosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_palatal_implosive.ogg"
+    },
+
+    {
+        ipa: "ɠ",
+        sampa: "g_<",
+        airstream: "non-pulmonic",
+        place: "velar",
+        manner: "implosive",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_velar_implosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_velar_implosive.ogg"
+    },
+
+    {
+        ipa: "ʛ",
+        sampa: "G\\_<",
+        airstream: "non-pulmonic",
+        place: "uvular",
+        manner: "implosive",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_uvular_implosive",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_uvular_implosive.ogg"
     },
 
 ]
