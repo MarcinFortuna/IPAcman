@@ -798,6 +798,105 @@ export const full_other_symbols = [
         voicing: "voiceless",
         url: "https://en.wikipedia.org/wiki/Voiceless_labial%E2%80%93velar_fricative",
         audio: "https://en.wikipedia.org/wiki/File:Voiceless_labio-velar_fricative.ogg"
+    },
+
+    {
+        ipa: "w",
+        sampa: "w",
+        airstream: "pulmonic",
+        place: "labial-velar",
+        manner: "approximant",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_labial%E2%80%93velar_approximant",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_labio-velar_approximant.ogg"
+    },
+
+    {
+        ipa: "ɥ",
+        sampa: "H",
+        airstream: "pulmonic",
+        place: "labial-palatal",
+        manner: "approximant",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_labial%E2%80%93palatal_approximant",
+        audio: "https://en.wikipedia.org/wiki/File:LL-Q150_(fra)-WikiLucas00-IPA_%C9%A5.wav"
+    },
+
+    {
+        ipa: "ʜ",
+        sampa: "H\\",
+        airstream: "pulmonic",
+        place: "epiglottal",
+        manner: "fricative",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_epiglottal_trill",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_epiglottal_trill.ogg"
+    },
+
+    {
+        ipa: "ʢ",
+        sampa: "<\\",
+        airstream: "pulmonic",
+        place: "epiglottal",
+        manner: "fricative",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiceless_epiglottal_trill",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_epiglottal_trill.ogg"
+    },
+
+    {
+        ipa: "ʡ",
+        sampa: ">\\",
+        airstream: "pulmonic",
+        place: "epiglottal",
+        manner: "plosive",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Epiglottal_plosive",
+        audio: "https://en.wikipedia.org/wiki/File:Epiglottal_stop.ogg"
+    },
+
+    {
+        ipa: "ɕ",
+        sampa: "s\\",
+        airstream: "pulmonic",
+        place: "alveolo-palatal",
+        manner: "fricative",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Voiceless_alveolo-palatal_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_alveolo-palatal_sibilant.ogg"
+    },
+
+    {
+        ipa: "ʑ",
+        sampa: "z\\",
+        airstream: "pulmonic",
+        place: "alveolo-palatal",
+        manner: "fricative",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_alveolo-palatal_fricative",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_alveolo-palatal_sibilant.ogg"
+    },
+
+    {
+        ipa: "ɺ",
+        sampa: "l\\",
+        airstream: "pulmonic",
+        place: "alveolar",
+        manner: "lateral flap",
+        voicing: "voiced",
+        url: "https://en.wikipedia.org/wiki/Voiced_dental_and_alveolar_lateral_flaps",
+        audio: ""
+    },
+
+    {
+        ipa: "ɧ",
+        sampa: "x\\",
+        airstream: "pulmonic",
+        place: "postalveolo-velar",
+        manner: "fricative",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Sj-sound",
+        audio: "https://en.wikipedia.org/wiki/File:Voiceless_dorso-palatal_velar_fricative.ogg"
     }
 
 ]
