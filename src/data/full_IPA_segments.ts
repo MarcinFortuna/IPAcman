@@ -752,6 +752,39 @@ export const full_consonants_non_pulmonic = [
         audio: "https://en.wikipedia.org/wiki/File:Voiced_uvular_implosive.ogg"
     },
 
+    {
+        ipa: "pʼ",
+        sampa: "p_>",
+        airstream: "non-pulmonic",
+        place: "bilabial",
+        manner: "ejective stop",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Bilabial_ejective_stop",
+        audio: "https://en.wikipedia.org/wiki/File:Bilabial_ejective_plosive.ogg"
+    },
+
+    {
+        ipa: "tʼ",
+        sampa: "t_>",
+        airstream: "non-pulmonic",
+        place: "alveolar",
+        manner: "ejective stop",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Dental_and_alveolar_ejective_stops",
+        audio: "https://en.wikipedia.org/wiki/File:Alveolar_ejective_plosive.ogg"
+    },
+
+    {
+        ipa: "kʼ",
+        sampa: "k_>",
+        airstream: "non-pulmonic",
+        place: "velar",
+        manner: "ejective stop",
+        voicing: "voiceless",
+        url: "https://en.wikipedia.org/wiki/Velar_ejective_stop",
+        audio: "https://en.wikipedia.org/wiki/File:Velar_ejective_plosive.ogg"
+    },
+
 ]
 
 export const full_other_symbols = [
