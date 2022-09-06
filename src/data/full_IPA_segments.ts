@@ -911,6 +911,86 @@ export const full_vowels = [
         roundedness: "unrounded",
         url: "https://en.wikipedia.org/wiki/Close_front_unrounded_vowel",
         audio: "https://en.wikipedia.org/wiki/File:Close_front_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "y",
+        sampa: "y",
+        backness: "front",
+        height: "high",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Close_front_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close_front_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɨ",
+        sampa: "1",
+        backness: "central",
+        height: "high",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Close_central_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close_central_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ʉ",
+        sampa: "}",
+        backness: "central",
+        height: "high",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Close_central_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close_central_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɯ",
+        sampa: "M",
+        backness: "back",
+        height: "high",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Close_back_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close_back_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "u",
+        sampa: "u",
+        backness: "back",
+        height: "high",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Close_back_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close_back_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɪ",
+        sampa: "I",
+        backness: "near-front",
+        height: "near-close",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Near-close_near-front_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Near-close_near-front_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ʏ",
+        sampa: "Y",
+        backness: "near-front",
+        height: "near-close",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Near-close_near-front_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Near-close_near-front_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ʊ",
+        sampa: "U",
+        backness: "near-back",
+        height: "near-close",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Near-close_near-back_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Near-close_near-back_rounded_vowel.ogg"
     }
 
 ]
