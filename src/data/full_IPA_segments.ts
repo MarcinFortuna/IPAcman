@@ -991,7 +991,77 @@ export const full_vowels = [
         roundedness: "rounded",
         url: "https://en.wikipedia.org/wiki/Near-close_near-back_rounded_vowel",
         audio: "https://en.wikipedia.org/wiki/File:Near-close_near-back_rounded_vowel.ogg"
-    }
+    },
+
+    {
+        ipa: "e",
+        sampa: "e",
+        backness: "front",
+        height: "close-mid",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Close-mid_front_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close-mid_front_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ø",
+        sampa: "2",
+        backness: "front",
+        height: "close-mid",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Close-mid_front_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close-mid_front_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɘ",
+        sampa: "@\\",
+        backness: "central",
+        height: "close-mid",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Close-mid_central_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close-mid_central_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɵ",
+        sampa: "8",
+        backness: "central",
+        height: "close-mid",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Close-mid_central_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close-mid_central_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɤ",
+        sampa: "7",
+        backness: "back",
+        height: "close-mid",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Close-mid_back_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close-mid_back_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "o",
+        sampa: "o",
+        backness: "back",
+        height: "close-mid",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Close-mid_back_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Close-mid_back_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ə",
+        sampa: "@",
+        backness: "central",
+        height: "mid",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Mid_central_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Mid-central_vowel.ogg"
+    },
 
 ]
 
