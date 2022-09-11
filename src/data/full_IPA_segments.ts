@@ -1063,6 +1063,126 @@ export const full_vowels = [
         audio: "https://en.wikipedia.org/wiki/File:Mid-central_vowel.ogg"
     },
 
+    {
+        ipa: "ɛ",
+        sampa: "E",
+        backness: "front",
+        height: "open-mid",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Open-mid_front_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Open-mid_front_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "œ",
+        sampa: "9",
+        backness: "front",
+        height: "open-mid",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Open-mid_front_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Open-mid_front_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɜ",
+        sampa: "3",
+        backness: "central",
+        height: "open-mid",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Open-mid_central_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Open-mid_central_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɞ",
+        sampa: "3\\",
+        backness: "central",
+        height: "open-mid",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Open-mid_central_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Open-mid_central_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ʌ",
+        sampa: "V",
+        backness: "back",
+        height: "open-mid",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Open-mid_back_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:PR-open-mid_back_unrounded_vowel2.ogg"
+    },
+
+    {
+        ipa: "ɔ",
+        sampa: "O",
+        backness: "back",
+        height: "open-mid",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Open-mid_back_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:PR-open-mid_back_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "æ",
+        sampa: "{",
+        backness: "front",
+        height: "near-open",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Near-open_front_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Near-open_front_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɐ",
+        sampa: "6",
+        backness: "central",
+        height: "near-open",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Near-open_central_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Near-open_central_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "a",
+        sampa: "a",
+        backness: "front",
+        height: "open",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Open_front_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:PR-open_front_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɶ",
+        sampa: "&",
+        backness: "front",
+        height: "open",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Open_front_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Open_front_rounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɑ",
+        sampa: "A",
+        backness: "back",
+        height: "open",
+        roundedness: "unrounded",
+        url: "https://en.wikipedia.org/wiki/Open_back_unrounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:Open_back_unrounded_vowel.ogg"
+    },
+
+    {
+        ipa: "ɒ",
+        sampa: "Q",
+        backness: "back",
+        height: "open",
+        roundedness: "rounded",
+        url: "https://en.wikipedia.org/wiki/Open_back_rounded_vowel",
+        audio: "https://en.wikipedia.org/wiki/File:PR-open_back_rounded_vowel.ogg"
+    }
+
 ]
 
 export const full_diacritics = [
