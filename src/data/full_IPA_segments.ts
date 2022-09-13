@@ -1192,8 +1192,91 @@ export const full_diacritics = [
         sampa: "◌_0",
         value: "voiceless (diacritic)",
         url: "https://en.wikipedia.org/wiki/Voicelessness"
-    }
+    },
 
+    {
+        ipa: "◌̬",
+        sampa: "◌_v",
+        value: "voiced (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Voice_(phonetics)"
+    },
+
+    {
+        ipa: "◌ʰ",
+        sampa: "◌_h",
+        value: "aspiration (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Aspirated_consonant"
+    },
+
+    {
+        ipa: "◌ʰ",
+        sampa: "◌_h",
+        value: "aspiration (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Aspirated_consonant"
+    },
+
+    {
+        ipa: "◌̹",
+        sampa: "◌_O",
+        value: "more rounded (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Relative_articulation#More_rounded"
+    },
+
+    {
+        ipa: "◌̜",
+        sampa: "◌_c",
+        value: "less rounded (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Relative_articulation#More_rounded"
+    },
+
+    {
+        ipa: "◌̟",
+        sampa: "◌_+",
+        value: "advanced (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Relative_articulation#Advanced_and_retracted"
+    },
+
+    {
+        ipa: "◌̠",
+        sampa: "◌_-",
+        value: "retracted (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Relative_articulation#Advanced_and_retracted"
+    },
+
+    {
+        ipa: "◌̈",
+        sampa: "◌_\"",
+        value: "centralized (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Relative_articulation#Centralized"
+    },
+
+    {
+        ipa: "◌̽",
+        sampa: "◌_x",
+        value: "mid-centralized (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Relative_articulation#Centralized"
+    },
+
+    {
+        ipa: "◌̩",
+        sampa: "◌=",
+        value: "syllabic (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Syllabic_consonant"
+    },
+
+    {
+        ipa: "◌̯",
+        sampa: "◌_^",
+        value: "non-syllabic (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Semivowel"
+    },
+
+    {
+        ipa: "◌˞",
+        sampa: "◌`",
+        value: "rhoticity (diacritic)",
+        url: "https://en.wikipedia.org/wiki/R-colored_vowel"
+    },
 ]
 
 export const full_suprasegmentals = [
