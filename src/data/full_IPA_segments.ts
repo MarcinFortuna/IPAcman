@@ -1277,6 +1277,104 @@ export const full_diacritics = [
         value: "rhoticity (diacritic)",
         url: "https://en.wikipedia.org/wiki/R-colored_vowel"
     },
+
+    {
+        ipa: "◌̤",
+        sampa: "◌_t",
+        value: "breathy voice (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Breathy_voice"
+    },
+
+    {
+        ipa: "◌̰",
+        sampa: "◌_k",
+        value: "creaky voice (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Creaky_voice"
+    },
+
+    {
+        ipa: "◌̼",
+        sampa: "◌_N",
+        value: "linguolabial (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Linguolabial_consonant"
+    },
+
+    {
+        ipa: "◌ʷ",
+        sampa: "◌_w",
+        value: "labialized (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Labialization"
+    },
+
+    {
+        ipa: "◌ʲ",
+        sampa: "◌_j",
+        value: "palatalized (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Palatalization_(phonetics)"
+    },
+
+    {
+        ipa: "◌ˠ",
+        sampa: "◌_G",
+        value: "velarized (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Velarization"
+    },
+
+    {
+        ipa: "◌ˤ",
+        sampa: "◌_?\\",
+        value: "pharyngealized (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Pharyngealization"
+    },
+
+    {
+        ipa: "◌̴",
+        sampa: "◌_e",
+        value: "velarized or pharyngealized (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Velarization"
+    },
+
+    {
+        ipa: "◌̴",
+        sampa: "◌_e",
+        value: "velarized or pharyngealized (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Velarization"
+    },
+
+    {
+        ipa: "◌̝",
+        sampa: "◌_r",
+        value: "raised (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Relative_articulation#Raised"
+    },
+
+    {
+        ipa: "◌̞",
+        sampa: "◌_o",
+        value: "lowered (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Relative_articulation#Raised"
+    },
+
+    {
+        ipa: "◌̞",
+        sampa: "◌_o",
+        value: "lowered (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Relative_articulation#Raised"
+    },
+
+    {
+        ipa: "◌̘",
+        sampa: "◌_A",
+        value: "advanced tongue root (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Advanced_and_retracted_tongue_root"
+    },
+
+    {
+        ipa: "◌̙",
+        sampa: "◌_q",
+        value: "retracted tongue root (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Advanced_and_retracted_tongue_root"
+    },
 ]
 
 export const full_suprasegmentals = [
