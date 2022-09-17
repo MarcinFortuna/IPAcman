@@ -1375,6 +1375,62 @@ export const full_diacritics = [
         value: "retracted tongue root (diacritic)",
         url: "https://en.wikipedia.org/wiki/Advanced_and_retracted_tongue_root"
     },
+
+    {
+        ipa: "◌̪",
+        sampa: "◌_d",
+        value: "dental (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Dental_consonant"
+    },
+
+    {
+        ipa: "◌̺",
+        sampa: "◌_a",
+        value: "apical (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Apical_consonant"
+    },
+
+    {
+        ipa: "◌̺",
+        sampa: "◌_a",
+        value: "apical (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Apical_consonant"
+    },
+
+    {
+        ipa: "◌̻",
+        sampa: "◌_m",
+        value: "laminal (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Laminal_consonant"
+    },
+
+    {
+        ipa: "◌̃",
+        sampa: "◌~",
+        value: "nasalised (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Nasalization"
+    },
+
+    {
+        ipa: "◌ⁿ",
+        sampa: "◌_n",
+        value: "nasal release (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Nasal_release"
+    },
+
+    {
+        ipa: "◌ˡ",
+        sampa: "◌_l",
+        value: "lateral release (diacritic)",
+        url: "https://en.wikipedia.org/wiki/Lateral_release_(phonetics)"
+    },
+
+    {
+        ipa: "◌̚",
+        sampa: "◌_}",
+        value: "no audible release (diacritic)",
+        url: "https://en.wikipedia.org/wiki/No_audible_release"
+    },
 ]
 
 export const full_suprasegmentals = [
