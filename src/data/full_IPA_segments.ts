@@ -1440,6 +1440,55 @@ export const full_suprasegmentals = [
         sampa: "\"◌",
         value: "primary stress",
         url: "https://en.wikipedia.org/wiki/Stress_(linguistics)"
+    },
+
+    {
+        ipa: "ˌ◌",
+        sampa: "%◌",
+        value: "secondary stress",
+        url: "https://en.wikipedia.org/wiki/Stress_(linguistics)"
+    },
+
+    {
+        ipa: "◌ː",
+        sampa: "◌:",
+        value: "long (mark)",
+        url: "https://en.wikipedia.org/wiki/Length_(phonetics)"
+    },
+
+    {
+        ipa: "◌ˑ",
+        sampa: "◌:\\",
+        value: "half long (mark)",
+        url: "https://en.wikipedia.org/wiki/Length_(phonetics)"
+    },
+
+    {
+        ipa: "|",
+        sampa: "|",
+        value: "minor (foot) group",
+        url: "https://en.wikipedia.org/wiki/Prosodic_unit"
+    },
+
+    {
+        ipa: "‖",
+        sampa: "||",
+        value: "major (intonation) group",
+        url: "https://en.wikipedia.org/wiki/Prosodic_unit"
+    },
+
+    {
+        ipa: ".",
+        sampa: ".",
+        value: "syllable break",
+        url: "https://en.wikipedia.org/wiki/Syllable"
+    },
+
+    {
+        ipa: "‿",
+        sampa: "-\\",
+        value: "linking mark (tie bar)",
+        url: "https://en.wikipedia.org/wiki/Diphthong#Transcription"
     }
 
 ]
