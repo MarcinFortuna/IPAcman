@@ -1501,6 +1501,110 @@ export const full_tones_and_word_accents = [
         sampa: "◌_T",
         value: "extra-high tone",
         url: "https://en.wikipedia.org/wiki/Tone_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "◌́",
+        ipa_letter: "◌˦",
+        sampa: "◌_H",
+        value: "high tone",
+        url: "https://en.wikipedia.org/wiki/Tone_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "◌̄",
+        ipa_letter: "◌˧",
+        sampa: "◌_M",
+        value: "mid tone",
+        url: "https://en.wikipedia.org/wiki/Tone_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "◌̀",
+        ipa_letter: "◌˨",
+        sampa: "◌_L",
+        value: "low tone",
+        url: "https://en.wikipedia.org/wiki/Tone_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "◌̏",
+        ipa_letter: "◌˩",
+        sampa: "◌_B",
+        value: "extra low tone",
+        url: "https://en.wikipedia.org/wiki/Tone_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "◌̌",
+        ipa_letter: "",
+        sampa: "◌_R",
+        value: "rising tone",
+        url: "https://en.wikipedia.org/wiki/Tone_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "◌̂",
+        ipa_letter: "",
+        sampa: "◌_F",
+        value: "falling tone",
+        url: "https://en.wikipedia.org/wiki/Tone_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "◌᷄",
+        ipa_letter: "",
+        sampa: "◌_H_T",
+        value: "high rising tone",
+        url: "https://en.wikipedia.org/wiki/Tone_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "◌᷅",
+        ipa_letter: "",
+        sampa: "◌_B_L",
+        value: "low rising tone",
+        url: "https://en.wikipedia.org/wiki/Tone_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "◌᷈",
+        ipa_letter: "",
+        sampa: "◌_R_F",
+        value: "rising-falling tone",
+        url: "https://en.wikipedia.org/wiki/Tone_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "",
+        ipa_letter: "ꜜ◌",
+        sampa: "!◌",
+        value: "downstep",
+        url: "https://en.wikipedia.org/wiki/Downstep"
+    },
+
+    {
+        ipa_diacritic: "",
+        ipa_letter: "ꜛ◌",
+        sampa: "^◌",
+        value: "upstep",
+        url: "https://en.wikipedia.org/wiki/Upstep"
+    },
+
+    {
+        ipa_diacritic: "",
+        ipa_letter: "↗︎◌",
+        sampa: "<R>︎◌",
+        value: "global rise",
+        url: "https://en.wikipedia.org/wiki/Intonation_(linguistics)"
+    },
+
+    {
+        ipa_diacritic: "",
+        ipa_letter: "↘︎◌",
+        sampa: "<F>︎◌",
+        value: "global fall",
+        url: "https://en.wikipedia.org/wiki/Intonation_(linguistics)"
     }
 
 ]
