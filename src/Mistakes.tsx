@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { phonemes } from './RP_segments_API';
+import { phonemes } from './data/RP_segments';
 import {MistakeType} from "./types/types";
 
 interface MistakesProps {
