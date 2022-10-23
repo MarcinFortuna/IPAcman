@@ -7,6 +7,7 @@ import IpaSampa from './IpaSampa';
 import {MistakesTriggerButton} from './MistakesTriggerButton';
 import PaceSelector from './PaceSelector';
 import {MistakeType, Question} from "./types/types";
+import {SettingsModal} from "./Settings";
 
 interface PanelProps {
     setAlphabet: (e: React.FormEvent<HTMLDivElement>) => void
@@ -31,6 +32,7 @@ export const Panel = (props: PanelProps) => {
         <Score score={props.score}/>
         <Lives life={props.life}/>
         <MistakesTriggerButton mistakes={props.mistakes}/>
+        <SettingsModal />
     </div>);
 
 }
