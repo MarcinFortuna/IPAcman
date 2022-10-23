@@ -2,6 +2,7 @@ import * as React from 'react';
 import Popup from "reactjs-popup";
 import {useState} from "react";
 import {useStore} from "./ZustandStore";
+import IpaSampa from "./IpaSampa";
 
 export const SettingsModal = () => {
 
@@ -20,7 +21,7 @@ export const SettingsModal = () => {
                 <button onClick={closeModal} className="close_button">
                     &times;
                 </button>
-                <button onClick={toggleUseIpa}>{String(useIpa)}</button>
+                <IpaSampa setAlphabet={toggleUseIpa}></IpaSampa>
             </div>
         </Popup>
 

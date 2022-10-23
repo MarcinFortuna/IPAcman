@@ -86,6 +86,6 @@ export type MainComponentState = {
     mistakes: MistakeType[]
     modalOpen: boolean
     pace: number
-    useIpa: boolean
+    // useIpa: boolean
     user: any
 }

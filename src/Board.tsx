@@ -1,9 +1,36 @@
 import * as React from 'react';
-import { Square } from './Square';
+import {Square} from './Square';
 import {BoardGrid, GridElement} from "./types/types";
+import {useState} from "react";
 
-interface BoardProps {
+export const BoardFunctional = () => {
 
+    const grid = new Array(20).fill(null).map(x => Array(30).fill(null).map(y => Array(2).fill("")));
+    grid[0][0] = ["pacman right", ""];
+
+    const [board, setBoard] = useState(grid);
+    const useIpa = true;
+
+    const boardElements = board.map((row: any, i: number) => {
+        return (
+            <tr key={"row_" + i}>
+                {row.map((col: GridElement, j: number) =>
+                    <Square classname={board[i][j][0]}
+                            ipa={(useIpa ? board[i][j][1]["ipa"] : board[i][j][1]["sampa"]) || board[i][j][1]}
+                            key={i + "_" + j}/>
+                )}
+            </tr>)
+    });
+
+    return (
+        <div id="boardDiv">
+            <table cellSpacing="0">
+                <tbody>
+                {boardElements}
+                </tbody>
+            </table>
+        </div>
+    )
 }
 
 export class Board extends React.Component<any, any> {
@@ -13,7 +40,7 @@ export class Board extends React.Component<any, any> {
         grid: BoardGrid
     }
 
-    constructor(props: BoardProps) {
+    constructor(props: any) {
         super(props);
         // @ts-ignore
         let grid: BoardGrid = Array(20).fill().map(x => Array(30).fill().map(y => Array(2).fill("")))
