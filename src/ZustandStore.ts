@@ -1,7 +1,8 @@
 import create from 'zustand';
 import {Phoneme} from "./types/types";
+import {State} from "zustand/ts3.4";
 
-export const useStore = (create<unknown>((set: (partial: unknown, replace?: (boolean | undefined)) => void) => ({
+export const useStore = (create<State>((set: (partial: unknown, replace?: (boolean | undefined)) => void) => ({
     gameOn: false,
     toggleGameOn: () => set((state) => ({gameOn: !state.gameOn})),
     useIpa: true,

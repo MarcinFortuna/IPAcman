@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Square} from './Square';
-import {BoardGrid, GridElement, Phoneme, Question} from "./types/types";
-import {useEffect, useState} from "react";
+import {BoardGrid, GridElement, MistakeType, Phoneme, Question} from "./types/types";
+import {useEffect, useRef, useState} from "react";
 import {useStore} from "./ZustandStore";
 import { questions } from './data/RP_questions';
 import {consonants, phonemes, vowels} from "./data/RP_segments";
@@ -16,6 +16,21 @@ export const BoardFunctional = (props: any) => {
     const currentlySearched = useStore((state: any) => state.currentlySearched);
     const setCurrentlySearched = useStore((state: any) => state.setCurrentlySearched);
 
+    // @ts-ignore
+    const phonemesOnTheBoardRef = useRef(useStore.getState().phonemesOnTheBoard)
+    useEffect(() => useStore.subscribe(
+      // @ts-ignore
+ state => (phonemesOnTheBoardRef.current = state.phonemesOnTheBoard)
+    ), []);
+
+    // @ts-ignore
+    const currentlySearchedRef = useRef(useStore.getState().currentlySearched);
+    useEffect(() => useStore.subscribe(
+        // @ts-ignore
+        state => (currentlySearchedRef.current = state.currentlySearched)
+    ), []);
+
+
     const grid = new Array(20).fill(null).map(x => Array(30).fill(null).map(y => Array(2).fill("")));
     grid[0][0] = ["pacman right", ""];
 
@@ -26,15 +41,10 @@ export const BoardFunctional = (props: any) => {
 
     const chooseADirectionAtRandom = () => directions[Math.floor(Math.random() * 8)];
 
-    useEffect(() => {
-        console.log(props.phonemesOnTheBoard);
-        // setCurrentPhonemesOnBoard(props.phonemesOnTheBoard);
-    }, [props.phonemesOnTheBoard])
-
-    const resetGame = () => {
-        if (props.pace) props.clearAllIntervals();
-        setBoard(grid);
-    }
+    // const resetGame = () => {
+    //     if (props.pace) props.clearAllIntervals();
+    //     setBoard(grid);
+    // }
 
     const findPacman = () => {
         for (let i = 0; i < board.length; i++) {
@@ -82,19 +92,30 @@ export const BoardFunctional = (props: any) => {
         let p_string = "pacman " + direction;
         let newPhoneme: null | Phoneme[] = null;
         if (newGrid[newCoords[0]][newCoords[1]][0] === "coin") {
-            if (eatAPhoneme(newGrid[newCoords[0]][newCoords[1]])) {
+            if (eatAPhoneme(newGrid[newCoords[0]][newCoords[1]][1])) {
                 p_string += " success";
             } else {
                 p_string += " failure";
             }
             newPhoneme = generateXRandomPhonemes("any", 1);
             newGrid = putPhonemesOnTheBoard(newPhoneme);
+
+            let eatenPhonemeData = newGrid[newCoords[0]][newCoords[1]][1]
+            let index: number = phonemesOnTheBoardRef.current.findIndex(x => x["sampa"] === eatenPhonemeData.sampa);
+
+            let newPhonemesOnTheBoard: Phoneme[] = phonemesOnTheBoardRef.current.slice();
+            newPhonemesOnTheBoard = newPhonemesOnTheBoard.filter((x: Phoneme, i: number) => i !== index);
+            newPhonemesOnTheBoard.push(newPhoneme[0]);
+
+            let newQuestion: Question = generateRandomQuestion(newPhonemesOnTheBoard);
+            setNewPhonemeList(newPhonemesOnTheBoard);
+            setCurrentlySearched(newQuestion);
+
         }
         // @ts-ignore
         newGrid[oldCoords[0]][oldCoords[1]] = ["", ""];
         newGrid[newCoords[0]][newCoords[1]] = [p_string, ""];
         setBoard(newGrid);
-        if (newPhoneme) addPhonemeToList(newPhoneme[0]);
     }
 
     const handleKeyDown = (e: any) => {
@@ -108,19 +129,27 @@ export const BoardFunctional = (props: any) => {
     }
 
     const eatAPhoneme = (phoneme: any) => {
-        let sampa: string = phoneme[1]["sampa"];
-        console.log(sampa);
-        console.log(props);
-        let index: number = phonemesOnTheBoard.current.findIndex(x => x["sampa"] === sampa);
-        console.log(index);
-        wipeAPhonemeOut(index);
-        if (props.checkIfPhonemeCurrent(phoneme[1])) {
+        if (checkIfPhonemeCurrent(phoneme)) {
             props.increaseScore();
             return true;
         } else {
             props.loseLife();
             return false;
         }
+    }
+
+    const checkIfPhonemeCurrent = (phoneme: Phoneme) => {
+        let phoneme_classes: string[] = [];
+        for (let prop in phoneme) {
+            phoneme_classes.push(phoneme[prop]);
+        }
+        let result: boolean = currentlySearchedRef.current.classes.some(x => phoneme_classes.includes(x));
+        if (!result) {
+            let mistake: MistakeType[] = [{guessedPhoneme: phoneme, guessedQuestion: currentlySearched}];
+            console.log(mistake);
+            // this.setState({ mistakes: this.state.mistakes.concat(mistake) })
+        }
+        return result;
     }
 
     const setupGame = () => {
@@ -225,7 +254,7 @@ export const BoardFunctional = (props: any) => {
 
     useEffect(() => {
         if (gameOn) setupGame()
-        else resetGame();
+        // else resetGame();
     }, [gameOn]);
 
     // useEffect(() => {

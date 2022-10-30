@@ -43,7 +43,7 @@ export class Main extends React.Component<any, any> {
         }
         if (this.state.score > prevState.score || this.state.life < prevState.life) {
             await new Promise(r => setTimeout(r, 100));
-            this.generate_random_question();
+            // this.generate_random_question();
         }
         if (this.props.user.uid && prevProps.user.uid !== this.props.user.uid) {
             this.addUserInfoToState(this.props.user.uid);
@@ -69,97 +69,6 @@ export class Main extends React.Component<any, any> {
                 }
             });
         });
-    }
-
-    generate_random_question() {
-        let classes_of_phonemes_on_the_board: string[] = [];
-        this.state.phonemesOnTheBoard.forEach(x => {
-            if (x) {
-                // @ts-ignore
-                for (let prop in x[1]) {
-                    classes_of_phonemes_on_the_board.push(x[1][prop]);
-                }
-            }
-        });
-        let index: number = Math.floor(Math.random() * questions.length);
-        while (!classes_of_phonemes_on_the_board.some(
-            x => questions[index]["classes"].indexOf(x) > -1
-        )) {
-            index = Math.floor(Math.random() * questions.length);
-        }
-        let currently_searched: Question = questions[index];
-        this.setState({ currentlySearched: currently_searched })
-    }
-
-    generate_random_phoneme(category: string) {
-        let random_number: number;
-        let random_phoneme: Phoneme;
-        let get_random_phoneme = (category) => {
-            if (category === "C") {
-                random_number = Math.floor(Math.random() * consonants.length);
-                random_phoneme = consonants[random_number];
-            }
-            if (category === "V") {
-                random_number = Math.floor(Math.random() * vowels.length);
-                random_phoneme = vowels[random_number];
-            } else {
-                random_number = Math.floor(Math.random() * phonemes.length);
-                random_phoneme = phonemes[random_number];
-            }
-        }
-        get_random_phoneme(category);
-        // Due to few questions which eliminate diphthongs and many diphthongs in the inventory,
-        // there sometimes arises huge surplus of diphthongs on the board.
-        // This is why there is an artificial restriction limiting the number of diphthongs to 2 at the same time.
-        let diphthong_count: number = 0;
-        for (let i = 0; i < this.state.phonemesOnTheBoard.length; i++) {
-            // @ts-ignore
-            if (this.state.phonemesOnTheBoard[i] && this.state.phonemesOnTheBoard[i][1].hasOwnProperty("type")) diphthong_count++;
-        }
-
-        // @ts-ignore
-        while (this.state.phonemesOnTheBoard.some(x => x && x[1]["sampa"] === random_phoneme["sampa"]) || (diphthong_count >= 2 && random_phoneme.hasOwnProperty("type"))) {
-            get_random_phoneme(category);
-        }
-        // @ts-ignore
-        return random_phoneme;
-    }
-
-    addPhonemeToList(phonemeInfo: GridElement) {
-        let oldList: (GridElement | null)[] = this.state.phonemesOnTheBoard.slice();
-        if (oldList.length > 5) {
-            let null_index: number = oldList.findIndex(x => x === null);
-            oldList[null_index] = phonemeInfo;
-            this.setState({ phonemesOnTheBoard: oldList })
-        } else {
-            this.setState({
-                phonemesOnTheBoard: oldList.concat([phonemeInfo])
-            })
-        }
-    }
-
-    wipeAPhonemeOut(index: number) {
-        // @ts-ignore
-        console.log(index);
-        // @ts-ignore
-        if (this?.state?.phonemesOnTheBoard[index][2]) clearInterval(this.state.phonemesOnTheBoard[index][2][1]);
-        let oldList: (GridElement | null)[] = this.state.phonemesOnTheBoard.slice();
-        oldList[index] = null;
-        this.setState({ phonemesOnTheBoard: oldList })
-    }
-
-    checkIfPhonemeCurrent(phoneme: Phoneme) {
-        let phoneme_classes: string[] = [];
-        for (let prop in phoneme) {
-            phoneme_classes.push(phoneme[prop]);
-        }
-
-        let result: boolean = this.state.currentlySearched.classes.some(x => phoneme_classes.includes(x));
-        if (!result) {
-            let mistake: MistakeType[] = [{guessedPhoneme: phoneme, guessedQuestion: this.state.currentlySearched}];
-            this.setState({ mistakes: this.state.mistakes.concat(mistake) })
-        }
-        return result;
     }
 
     setAPhonemeInMotion(sampa: string, direction: string, pace: number, callback_function: (direction:string, sampa: string) => void) {
@@ -275,8 +184,7 @@ export class Main extends React.Component<any, any> {
     render() {
         return (<div id="main">
             <StatusBar user={this.props.user} userOtherData={this.state.user} />
-            <BoardFunctional gameOn={this.state.gameOn} generate_random_question={this.generate_random_question.bind(this)} addPhonemeToList={this.addPhonemeToList.bind(this)} wipeAPhonemeOut={this.wipeAPhonemeOut.bind(this)} phonemesOnTheBoard={this.state.phonemesOnTheBoard} checkIfPhonemeCurrent={this.checkIfPhonemeCurrent.bind(this)} increaseScore={this.increaseScore.bind(this)} loseLife={this.loseLife.bind(this)} generate_random_phoneme={this.generate_random_phoneme.bind(this)} pace={this.state.pace} setAPhonemeInMotion={this.setAPhonemeInMotion.bind(this)} clearAllIntervals={this.clearAllIntervals.bind(this)} />
-            {/*<Board gameOn={this.state.gameOn} generate_random_question={this.generate_random_question.bind(this)} addPhonemeToList={this.addPhonemeToList.bind(this)} wipeAPhonemeOut={this.wipeAPhonemeOut.bind(this)} phonemesOnTheBoard={this.state.phonemesOnTheBoard} checkIfPhonemeCurrent={this.checkIfPhonemeCurrent.bind(this)} increaseScore={this.increaseScore.bind(this)} loseLife={this.loseLife.bind(this)} generate_random_phoneme={this.generate_random_phoneme.bind(this)} pace={this.state.pace} setAPhonemeInMotion={this.setAPhonemeInMotion.bind(this)} clearAllIntervals={this.clearAllIntervals.bind(this)} />*/}
+            <BoardFunctional gameOn={this.state.gameOn} phonemesOnTheBoard={this.state.phonemesOnTheBoard} increaseScore={this.increaseScore.bind(this)} loseLife={this.loseLife.bind(this)} pace={this.state.pace} setAPhonemeInMotion={this.setAPhonemeInMotion.bind(this)} clearAllIntervals={this.clearAllIntervals.bind(this)} />
             <Panel startGame={this.startGame.bind(this)} stopGame={this.stopGame.bind(this)} gameOn={this.state.gameOn} currentlySearched={this.state.currentlySearched} score={this.state.score} life={this.state.life} mistakes={this.state.mistakes} selectPace={this.selectPace.bind(this)} />
             <Modal open={this.state.modalOpen} mistakes={this.state.mistakes} closeModal={this.closeModal.bind(this)} score={this.state.score} />
         </div>)
