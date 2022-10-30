@@ -7,6 +7,7 @@ import {MistakesTriggerButton} from './MistakesTriggerButton';
 import PaceSelector from './PaceSelector';
 import {MistakeType, Question} from "./types/types";
 import {SettingsModal} from "./Settings";
+import {useStore} from "./ZustandStore";
 
 interface PanelProps {
     gameOn: boolean
@@ -21,11 +22,15 @@ interface PanelProps {
 
 export const Panel = (props: PanelProps) => {
 
+    const gameOn = useStore((state: any) => state.gameOn);
+    const toggleGameOn = useStore((state: any) => state.toggleGameOn);
+    const currentlySearched = useStore((state: any) => state.currentlySearched)
+
     return (<div id="panel">
         <h2 id="logo"><img src={require("./assets/ipacman_logo.png")} alt=""/> IPAcman</h2>
         <PaceSelector selectPace={props.selectPace} gameOn={props.gameOn}/>
-        <StartStopButton gameOn={props.gameOn} startGame={props.startGame} stopGame={props.stopGame}/>
-        <CurrentQuestion currentlySearched={props.currentlySearched}/>
+        <StartStopButton gameOn={gameOn} startGame={toggleGameOn} stopGame={toggleGameOn}/>
+        <CurrentQuestion currentlySearched={currentlySearched}/>
         <Score score={props.score}/>
         <Lives life={props.life}/>
         <MistakesTriggerButton mistakes={props.mistakes}/>
