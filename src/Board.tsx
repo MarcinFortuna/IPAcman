@@ -3,33 +3,38 @@ import {Square} from './Square';
 import {BoardGrid, GridElement, MistakeType, Phoneme, Question} from "./types/types";
 import {useEffect, useRef, useState} from "react";
 import {useStore} from "./ZustandStore";
-import { questions } from './data/RP_questions';
+import {questions} from './data/RP_questions';
 import {consonants, phonemes, vowels} from "./data/RP_segments";
 
 export const BoardFunctional = (props: any) => {
 
     const gameOn = useStore((state: any) => state.gameOn);
     const phonemesOnTheBoard = useStore((state: any) => state.phonemesOnTheBoard);
-    const addPhonemeToList = useStore((state: any) => state.addPhonemeToTheList);
     const setNewPhonemeList = useStore((state:any) => state.setNewPhonemeList);
-    const wipeAPhonemeOut = useStore((state: any) => state.removePhonemeFromTheList);
-    const currentlySearched = useStore((state: any) => state.currentlySearched);
     const setCurrentlySearched = useStore((state: any) => state.setCurrentlySearched);
+    const setMistakes = useStore((state:any) => state.setMistakes);
+    const increaseScore = useStore((state:any) => state.increaseScore);
+    const life = useStore((state: any) => state.life);
+    const loseLife = useStore((state:any) => state.loseLife);
 
-    // @ts-ignore
     const phonemesOnTheBoardRef = useRef(useStore.getState().phonemesOnTheBoard)
     useEffect(() => useStore.subscribe(
-      // @ts-ignore
  state => (phonemesOnTheBoardRef.current = state.phonemesOnTheBoard)
     ), []);
 
-    // @ts-ignore
     const currentlySearchedRef = useRef(useStore.getState().currentlySearched);
     useEffect(() => useStore.subscribe(
-        // @ts-ignore
         state => (currentlySearchedRef.current = state.currentlySearched)
     ), []);
 
+    const mistakesRef = useRef(useStore.getState().mistakes);
+    useEffect(() => useStore.subscribe(
+        state => (mistakesRef.current = state.mistakes)
+    ), []);
+
+    useEffect(() => {
+        if (life <= 0) props.stopGame();
+    }, [life])
 
     const grid = new Array(20).fill(null).map(x => Array(30).fill(null).map(y => Array(2).fill("")));
     grid[0][0] = ["pacman right", ""];
@@ -84,7 +89,6 @@ export const BoardFunctional = (props: any) => {
     }
 
     const movePacman = async (direction: string) => {
-        console.log("In move pacman", direction);
         let newGrid: any = board.slice();
         // @ts-ignore
         let oldCoords: number[] = findPacman();
@@ -130,10 +134,10 @@ export const BoardFunctional = (props: any) => {
 
     const eatAPhoneme = (phoneme: any) => {
         if (checkIfPhonemeCurrent(phoneme)) {
-            props.increaseScore();
+            increaseScore();
             return true;
         } else {
-            props.loseLife();
+            loseLife();
             return false;
         }
     }
@@ -145,9 +149,8 @@ export const BoardFunctional = (props: any) => {
         }
         let result: boolean = currentlySearchedRef.current.classes.some(x => phoneme_classes.includes(x));
         if (!result) {
-            let mistake: MistakeType[] = [{guessedPhoneme: phoneme, guessedQuestion: currentlySearched}];
-            console.log(mistake);
-            // this.setState({ mistakes: this.state.mistakes.concat(mistake) })
+            let mistake: MistakeType[] = [{guessedPhoneme: phoneme, guessedQuestion: currentlySearchedRef.current}];
+            setMistakes(mistakesRef.current.concat(mistake));
         }
         return result;
     }
@@ -209,7 +212,6 @@ export const BoardFunctional = (props: any) => {
 
         for (let i = 0; i < phonemeArr.length; i++) {
             let pos: number[] = generateRandomPosition();
-            // @ts-ignore
             let pickedSquare: GridElement = newGrid[pos[0]][pos[1]].slice();
             while (pickedSquare[0].includes("pacman") || pickedSquare[0].includes("coin")) {
                 pos = generateRandomPosition();
@@ -256,12 +258,6 @@ export const BoardFunctional = (props: any) => {
         if (gameOn) setupGame()
         // else resetGame();
     }, [gameOn]);
-
-    // useEffect(() => {
-    //     if (phonemesOnTheBoard.length === 6) {
-    //         generateRandomQuestion();
-    //     }
-    // }, [phonemesOnTheBoard])
 
     const boardElements = board.map((row: any, i: number) => {
         return (
