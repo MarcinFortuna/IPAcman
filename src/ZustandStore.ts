@@ -6,8 +6,8 @@ type ipacmanStore = {
     toggleGameOn: () => void
     useIpa: boolean
     toggleUseIpa: () => void
-    phonemesOnTheBoard: Phoneme[]
-    setNewPhonemeList: (phonemeArr: Phoneme[]) => void
+    // phonemesOnTheBoard: Phoneme[]
+    // setNewPhonemeList: (phonemeArr: Phoneme[]) => void
     currentlySearched: Question
     setCurrentlySearched: (searched: Question) => void
     score: number
@@ -23,8 +23,6 @@ export const useStore = (create<ipacmanStore>((set: (partial: (Partial<ipacmanSt
     toggleGameOn: () => set((state) => ({gameOn: !state.gameOn})),
     useIpa: true,
     toggleUseIpa: () => set((state) => ({useIpa: !state.useIpa})),
-    phonemesOnTheBoard: [],
-    setNewPhonemeList: (phonemeArr: Phoneme[]) => set((state) => ({phonemesOnTheBoard: phonemeArr})),
     currentlySearched: {question: "", classes: [""]},
     setCurrentlySearched: (searched: any) => set((state) => ({currentlySearched: searched})),
     score: 0,

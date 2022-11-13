@@ -7,18 +7,18 @@ import {User} from "firebase";
 
 const App = () => {
 
-  const [currentUser, setCurrentUser] = useState<User | {email: string}>({email: ""});
+  const [currentUser, setCurrentUser] = useState<User | {email: string}>({email: "test"});
 
-  auth.onAuthStateChanged( (user: User | null) => {
-    if (user) {
-      user = auth.currentUser;
-      if (user !== null) setCurrentUser(user);
-      console.log(user?.email);
-      console.log("Auth state changed!");
-    } else {
-      if (currentUser?.email) setCurrentUser({email: ""});
-    }
-  });
+  // auth.onAuthStateChanged( (user: User | null) => {
+  //   if (user) {
+  //     user = auth.currentUser;
+  //     if (user !== null) setCurrentUser(user);
+  //     console.log(user?.email);
+  //     console.log("Auth state changed!");
+  //   } else {
+  //     setCurrentUser({email: "test"});
+  //   }
+  // });
 
   return (
     <div className="App">

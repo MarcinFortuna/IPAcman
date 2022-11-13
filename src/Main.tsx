@@ -12,17 +12,15 @@ interface MainProps {
     user: User | {email: string}
 }
 
-export function Main(props: MainProps) {
-
-    const {} = props;
+export const Main = (props: MainProps) => {
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [pace, setPace] = useState<number>(0);
     const [userState, setUserState] = useState<any>("");
     //
     // useEffect(() => {
-    //     addUserInfoToState(uid);
-    // }, [user.uid]);
+    //     if (props.user) addUserInfoToState("");
+    // }, []);
 
 
     // async componentDidUpdate(prevProps, prevState) {
@@ -56,20 +54,6 @@ export function Main(props: MainProps) {
         //         userDbKey: userDbKey
         //     });
         // });
-    }
-
-    const setAPhonemeInMotion = (sampa: string, direction: string, pace: number, callback_function: (direction:string, sampa: string) => void) => {
-    //     // @ts-ignore
-    //     let phonemeIndex = this.state.phonemesOnTheBoard.findIndex(x => x[1]["sampa"] === sampa);
-    //     // @ts-ignore
-    //     if (this.state.phonemesOnTheBoard[phonemeIndex] && this.state.phonemesOnTheBoard[phonemeIndex][2]) clearInterval(this.state.phonemesOnTheBoard[phonemeIndex][2][1]);
-    //     let newState: (GridElement | null)[] = this.state.phonemesOnTheBoard.slice();
-    //     let movementInterval = setInterval(() => {
-    //         callback_function(direction, sampa);
-    //     }, pace);
-    //     // @ts-ignore
-    //     newState[phonemeIndex][2] = [direction, movementInterval];
-    //     this.setState({ phonemesOnTheBoard: newState })
     }
 
     // async sendGameStatsToFirebase() {
@@ -134,7 +118,7 @@ export function Main(props: MainProps) {
 
         return (<div id="main">
             <StatusBar user={{"email":"test"}} userOtherData={userState} />
-            <BoardFunctional pace={pace} setAPhonemeInMotion={setAPhonemeInMotion} clearAllIntervals={clearAllIntervals} stopGame={stopGame}/>
+            <BoardFunctional pace={pace} clearAllIntervals={clearAllIntervals} stopGame={stopGame}/>
             <Panel selectPace={selectPace} />
             <Modal open={modalOpen} closeModal={closeModal} />
         </div>)

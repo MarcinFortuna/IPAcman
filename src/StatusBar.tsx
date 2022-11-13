@@ -14,7 +14,8 @@ interface StatusBarProps {
     }
 }
 
-const StatusBar = (props: StatusBarProps) => {
+// const StatusBar = (props: StatusBarProps) => {
+const StatusBar = (props: any) => {
 
     let greeting: string;
 
