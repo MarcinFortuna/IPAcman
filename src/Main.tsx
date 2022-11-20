@@ -5,22 +5,22 @@ import { Panel } from './Panel';
 import StatusBar from './StatusBar';
 // import { databaseLeaderboard, databaseUsers, database } from './Firebase';
 import {MainComponentState, GridElement, ObjectToPushToFirebase} from "./types/types";
-// import {User} from "firebase";
+import {User} from "firebase/auth";
 import {useEffect, useState} from "react";
 
-// interface MainProps {
-//     user: User | {email: string}
-// }
+interface MainProps {
+    user: User | null
+}
 
-export const Main = (props) => {
+export const Main = (props: MainProps) => {
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [pace, setPace] = useState<number>(0);
     const [userState, setUserState] = useState<any>("");
-    //
-    // useEffect(() => {
-    //     if (props.user) addUserInfoToState("");
-    // }, []);
+
+    useEffect(() => {
+        if (props.user) addUserInfoToState("");
+    }, []);
 
 
     // async componentDidUpdate(prevProps, prevState) {
@@ -117,7 +117,7 @@ export const Main = (props) => {
     }
 
         return (<div id="main">
-            <StatusBar user={{"email":"test"}} userOtherData={userState} />
+            <StatusBar user={props.user} userOtherData={userState} />
             <BoardFunctional pace={pace} clearAllIntervals={clearAllIntervals} stopGame={stopGame}/>
             <Panel selectPace={selectPace} />
             <Modal open={modalOpen} closeModal={closeModal} />

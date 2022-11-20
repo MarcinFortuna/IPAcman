@@ -1,30 +1,32 @@
 import * as React from 'react';
 import './App.css';
 import {Main} from './Main';
-// import {auth} from './Firebase';
-import {useState} from "react";
-// import {User} from "firebase";
+import {auth} from './Firebase';
+import {useEffect, useState} from "react";
+import {User, onAuthStateChanged} from "firebase/auth";
 
 const App = () => {
 
-  // const [currentUser, setCurrentUser] = useState<User | {email: string}>({email: "test"});
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-  // auth.onAuthStateChanged( (user: User | null) => {
-  //   if (user) {
-  //     user = auth.currentUser;
-  //     if (user !== null) setCurrentUser(user);
-  //     console.log(user?.email);
-  //     console.log("Auth state changed!");
-  //   } else {
-  //     setCurrentUser({email: "test"});
-  //   }
-  // });
+  useEffect(() => {
+    onAuthStateChanged(auth, (user: User | null) => {
+      if (user) {
+        user = auth.currentUser;
+        if (user !== null) setCurrentUser(user);
+        console.log(user?.email);
+        console.log("Auth state changed!");
+      } else {
+        setCurrentUser(null);
+      }
+    });
+  }, [auth]);
 
   return (
     <div className="App">
-      <Main user={""} />
+      <Main user={currentUser} />
     </div>
   );
-}
+};
 
 export default App;

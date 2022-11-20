@@ -1,9 +1,12 @@
 import * as React from 'react';
-// import {databaseLeaderboard} from './Firebase';
+import {databaseLeaderboard} from './Firebase';
 import {useEffect, useState} from "react";
 import {LeaderboardItem} from "./types/types";
+import {query, orderByChild, limitToLast, get} from 'firebase/database';
 
 export const Leaderboard = () => {
+
+    const leaderboardQuery = query(databaseLeaderboard, orderByChild('score'), limitToLast(10));
 
     const [results, setResults] = useState<LeaderboardItem[]>([]);
 
@@ -33,28 +36,24 @@ export const Leaderboard = () => {
     };
 
     useEffect(() => {
-
         let resultsFromSessionStorage: string = JSON.parse(sessionStorage.getItem("results") as string);
-        // if (!resultsFromSessionStorage) {
-        //     console.log("Results in session storage not found. Fetching the current leaderboard from Firebase");
-        //     databaseLeaderboard.orderByChild('score').limitToLast(10).once('value')
-        //         .then(snapshot => snapshot.val())
-        //         .then(async (res) => {
-        //             await parseResults(res);
-        //             sessionStorage.setItem("results", JSON.stringify(res));
-        //         });
-        //     console.log("New leaderboard set in session storage");
-        // } else {
-        //     parseResults(resultsFromSessionStorage);
-        //     console.log("Leaderboard retrieved from session storage");
-        // }
 
+        if (!resultsFromSessionStorage) {
+            console.log("Results in session storage not found. Fetching the current leaderboard from Firebase");
+            get(leaderboardQuery)
+                .then((snapshot) => {
+                    parseResults(snapshot.val());
+                })
+                .catch((error) => console.error(error));
+        } else {
+            parseResults(resultsFromSessionStorage);
+            console.log("Leaderboard retrieved from session storage");
+        }
     }, []);
 
 
     let leaderboard = (results)
         .filter(x => x.score && x.displayName)
-        .filter((x: LeaderboardItem, index: number) => index <= 9)
         .map((parsed_result: LeaderboardItem, index: number) =>
             <tr key={index}>
                 <td>{parsed_result.displayName}</td>

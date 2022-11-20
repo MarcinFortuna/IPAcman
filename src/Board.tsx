@@ -21,6 +21,7 @@ export const BoardFunctional = (props: any) => {
     const life = useSelector((state: RootState) => state.ipacmanData.life);
 
     const gameOn = useSelector((state: RootState) => state.ipacmanData.gameOn);
+    const gameOnRef = useRef(gameOn);
 
     const [phonemesOnTheBoard, setPhonemesOnTheBoard, phonemesOnTheBoardRef] = useState<Phoneme[]>([]);
     const [directions, setDirection, directionRef] = useState<string[]>(["", "", "", "", "", ""]);
@@ -103,13 +104,13 @@ export const BoardFunctional = (props: any) => {
     }
 
     const handleKeyDown = (e: any) => {
-        // if (currentGameOn.current) {
+        if (gameOnRef.current) {
             e.preventDefault();
             if (e.key === "a" || e.key === "h" || e.key === "ArrowLeft") movePacman("left");
             if (e.key === "d" || e.key === "l" || e.key === "ArrowRight") movePacman("right");
             if (e.key === "s" || e.key === "j" || e.key === "ArrowDown") movePacman("down");
             if (e.key === "w" || e.key === "k" || e.key === "ArrowUp") movePacman("up");
-        // }
+        }
     }
 
     const eatAPhoneme = (phoneme: any) => {
@@ -185,7 +186,6 @@ export const BoardFunctional = (props: any) => {
             let diphthong_count: number = 0;
             let combinedPhonemeArr = [...currentPhonemeArr, ...newPhonemeArr];
             for (let i = 0; i < combinedPhonemeArr.length; i++) {
-                // @ts-ignore
                 if (combinedPhonemeArr[i] && combinedPhonemeArr[i].hasOwnProperty("type")) diphthong_count++;
             }
 
@@ -292,7 +292,10 @@ export const BoardFunctional = (props: any) => {
     }, []);
 
     useEffect(() => {
-        if (gameOn) setupGame()
+        gameOnRef.current = gameOn;
+        if (gameOn) {
+            setupGame();
+        }
         // else resetGame();
     }, [gameOn]);
 
