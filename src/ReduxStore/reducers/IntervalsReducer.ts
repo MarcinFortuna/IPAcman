@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+    import { createSlice } from '@reduxjs/toolkit'
+    import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface IntervalsState {
     intervals: {
-        interval: any,
+        interval: number | NodeJS.Timeout,
         sampa: string
     }[]
 }
@@ -51,9 +51,9 @@ export const intervalsSlice = createSlice({
             state.intervals[action.payload.index] = {interval: 0, sampa: ""}
         }
     },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { setNewInterval, resetInterval } = intervalsSlice.actions
+export const { setNewInterval, resetInterval } = intervalsSlice.actions;
 
-export default intervalsSlice.reducer
+export default intervalsSlice.reducer;

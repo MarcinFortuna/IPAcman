@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { intervalsSlice } from "./reducers";
+import { intervalsSlice } from './reducers/IntervalsReducer';
+import { ipacmanSlice } from "./reducers/IpacmanReducer";
 
 export const store = configureStore({
   reducer: {
-      intervals: intervalsSlice.reducer
+      intervals: intervalsSlice.reducer,
+      ipacmanData: ipacmanSlice.reducer
   },
 })
 

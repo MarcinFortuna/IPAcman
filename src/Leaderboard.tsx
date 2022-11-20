@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {databaseLeaderboard} from './Firebase';
+// import {databaseLeaderboard} from './Firebase';
 import {useEffect, useState} from "react";
 import {LeaderboardItem} from "./types/types";
 
@@ -35,19 +35,19 @@ export const Leaderboard = () => {
     useEffect(() => {
 
         let resultsFromSessionStorage: string = JSON.parse(sessionStorage.getItem("results") as string);
-        if (!resultsFromSessionStorage) {
-            console.log("Results in session storage not found. Fetching the current leaderboard from Firebase");
-            databaseLeaderboard.orderByChild('score').limitToLast(10).once('value')
-                .then(snapshot => snapshot.val())
-                .then(async (res) => {
-                    await parseResults(res);
-                    sessionStorage.setItem("results", JSON.stringify(res));
-                });
-            console.log("New leaderboard set in session storage");
-        } else {
-            parseResults(resultsFromSessionStorage);
-            console.log("Leaderboard retrieved from session storage");
-        }
+        // if (!resultsFromSessionStorage) {
+        //     console.log("Results in session storage not found. Fetching the current leaderboard from Firebase");
+        //     databaseLeaderboard.orderByChild('score').limitToLast(10).once('value')
+        //         .then(snapshot => snapshot.val())
+        //         .then(async (res) => {
+        //             await parseResults(res);
+        //             sessionStorage.setItem("results", JSON.stringify(res));
+        //         });
+        //     console.log("New leaderboard set in session storage");
+        // } else {
+        //     parseResults(resultsFromSessionStorage);
+        //     console.log("Leaderboard retrieved from session storage");
+        // }
 
     }, []);
 

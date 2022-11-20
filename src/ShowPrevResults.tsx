@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState, useEffect} from "react";
-import {database} from './Firebase';
+// import {database} from './Firebase';
 import {getCorrectAnswers} from './Mistakes';
 import {PreviousResults, UserData} from "./types/types";
 
@@ -33,20 +33,20 @@ export const ShowPrevResults = (props: ShowPrevResultsProps) => {
 
     useEffect(() => {
         let attemptsFromSessionStorage = JSON.parse(sessionStorage.getItem("attempts") as string);
-        if (!attemptsFromSessionStorage) {
-            console.log("Previous attempts in session storage not found. Fetching the current list of previous attempts from Firebase");
-            let dbUserUrl = database.ref('Users/' + props.userData.userDbKey + '/attempts/').orderByChild('timestamp');
-            dbUserUrl.once('value', async snapshot => {
-                let attemptsFromDB: {[key: string]: any} = await snapshot.val();
-                let parsedAttempts: PreviousResults[] = parseAttempts(attemptsFromDB);
-                setAttempts(parsedAttempts);
-                sessionStorage.setItem("attempts", JSON.stringify(parsedAttempts));
-                console.log("New list of previous attempts set in session storage");
-            });
-        } else {
-            setAttempts(attemptsFromSessionStorage);
-            console.log("A list of previous attempts retrieved from session storage");
-        }
+        // if (!attemptsFromSessionStorage) {
+        //     console.log("Previous attempts in session storage not found. Fetching the current list of previous attempts from Firebase");
+        //     let dbUserUrl = database.ref('Users/' + props.userData.userDbKey + '/attempts/').orderByChild('timestamp');
+        //     dbUserUrl.once('value', async snapshot => {
+        //         let attemptsFromDB: {[key: string]: any} = await snapshot.val();
+        //         let parsedAttempts: PreviousResults[] = parseAttempts(attemptsFromDB);
+        //         setAttempts(parsedAttempts);
+        //         sessionStorage.setItem("attempts", JSON.stringify(parsedAttempts));
+        //         console.log("New list of previous attempts set in session storage");
+        //     });
+        // } else {
+        //     setAttempts(attemptsFromSessionStorage);
+        //     console.log("A list of previous attempts retrieved from session storage");
+        // }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

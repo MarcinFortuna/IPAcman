@@ -1,13 +1,14 @@
 import * as React from 'react';
 import Popup from "reactjs-popup";
 import {useState} from "react";
-import {useStore} from "./ZustandStore";
 import IpaSampa from "./IpaSampa";
+import {useSelector} from "react-redux";
+import {RootState} from "./ReduxStore/store";
+import {toggleUseIpa} from './ReduxStore/reducers/IpacmanReducer';
 
 export const SettingsModal = () => {
 
-    const useIpa = useStore((state: any) => state.useIpa);
-    const toggleUseIpa = useStore((state: any) => state.toggleUseIpa);
+    const useIpa = useSelector((state: RootState) => state.ipacmanData.useIpa);
 
     const [open, setOpen] = useState<boolean>(false);
     const closeModal = () => {setOpen(false)};

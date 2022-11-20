@@ -2,7 +2,8 @@ import * as React from 'react';
 import Popup from 'reactjs-popup';
 import {Mistakes} from './Mistakes';
 import {SyntheticEvent} from "react";
-import {useStore} from "./ZustandStore";
+import {useSelector} from "react-redux";
+import {RootState} from "./ReduxStore/store";
 
 interface ModalProps {
     open: boolean
@@ -11,13 +12,15 @@ interface ModalProps {
 
 export const Modal = (props: ModalProps) => {
 
-    const mistakes = useStore((state) => state.mistakes);
-    const score = useStore((state) => state.score);
+    const {open, closeModal} = props;
+
+    const mistakes = useSelector((state: RootState) => state.ipacmanData.mistakes);
+    const score = useSelector((state: RootState) => state.ipacmanData.score);
 
     return (
-        <Popup open={props.open} modal onClose={props.closeModal}>
+        <Popup open={open} modal onClose={closeModal}>
             <div className="modal">
-                <button onClick={props.closeModal} className="close_button">
+                <button onClick={closeModal} className="close_button">
                     &times;
                 </button>
                 <h1>GAME OVER</h1>

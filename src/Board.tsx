@@ -3,14 +3,14 @@ import {Square} from './Square';
 import {BoardGrid, GridElement, MistakeType, Phoneme, Question} from "./types/types";
 import {useEffect, useRef} from "react";
 import useState from 'react-usestateref';
-import {useStore} from "./ZustandStore";
 import {questions} from './data/RP_questions';
 import {consonants, phonemes, vowels} from "./data/RP_segments";
 import {movement, chooseADirectionAtRandom, generateRandomPosition} from "./helperFunctions";
 
-import type { RootState } from './store';
+import type { RootState } from './ReduxStore/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { setNewInterval, resetInterval } from './reducers';
+import { setNewInterval, resetInterval } from './ReduxStore/reducers/IntervalsReducer';
+import { loseLife, setCurrentlySearched, addMistake, increaseScore } from './ReduxStore/reducers/IpacmanReducer';
 
 
 export const BoardFunctional = (props: any) => {
@@ -18,25 +18,20 @@ export const BoardFunctional = (props: any) => {
     const intervalsStateArray = useSelector((state: RootState) => state.intervals.intervals);
     const dispatch = useDispatch();
 
-    const gameOn = useStore((state: any) => state.gameOn);
-    const setCurrentlySearched = useStore((state: any) => state.setCurrentlySearched);
-    const setMistakes = useStore((state:any) => state.setMistakes);
-    const increaseScore = useStore((state:any) => state.increaseScore);
-    const life = useStore((state: any) => state.life);
-    const loseLife = useStore((state:any) => state.loseLife);
+    const life = useSelector((state: RootState) => state.ipacmanData.life);
+
+    const gameOn = useSelector((state: RootState) => state.ipacmanData.gameOn);
 
     const [phonemesOnTheBoard, setPhonemesOnTheBoard, phonemesOnTheBoardRef] = useState<Phoneme[]>([]);
     const [directions, setDirection, directionRef] = useState<string[]>(["", "", "", "", "", ""]);
 
-    const currentlySearchedRef = useRef(useStore.getState().currentlySearched);
-    useEffect(() => useStore.subscribe(
-        state => (currentlySearchedRef.current = state.currentlySearched)
-    ), []);
+    const currentlySearched = useSelector((state: RootState) => state.ipacmanData.currentlySearched);
+    const currentlySearchedRef = useRef(currentlySearched);
+    useEffect(() => {
+        currentlySearchedRef.current = currentlySearched;
+    }, [currentlySearched]);
 
-    const mistakesRef = useRef(useStore.getState().mistakes);
-    useEffect(() => useStore.subscribe(
-        state => (mistakesRef.current = state.mistakes)
-    ), []);
+    // const mistakes = useSelector((state: RootState) => state.ipacmanData.mistakes);
 
     useEffect(() => {
         if (life <= 0) props.stopGame();
@@ -46,8 +41,8 @@ export const BoardFunctional = (props: any) => {
     grid[0][0] = ["pacman right", ""];
 
     const [board, setBoard, boardRef] = useState(grid);
-    const useIpa = true;
 
+    const useIpa = useSelector((state: RootState) => state.ipacmanData.useIpa);
 
     // const resetGame = () => {
     //     if (props.pace) props.clearAllIntervals();
@@ -98,7 +93,7 @@ export const BoardFunctional = (props: any) => {
             let newQuestion: Question = generateRandomQuestion(newPhonemesOnTheBoard);
 
             setPhonemesOnTheBoard(newPhonemesOnTheBoard);
-            setCurrentlySearched(newQuestion);
+            dispatch(setCurrentlySearched(newQuestion));
 
         }
         // @ts-ignore
@@ -119,10 +114,10 @@ export const BoardFunctional = (props: any) => {
 
     const eatAPhoneme = (phoneme: any) => {
         if (checkIfPhonemeCurrent(phoneme)) {
-            increaseScore();
+            dispatch(increaseScore());
             return true;
         } else {
-            loseLife();
+            dispatch(loseLife());
             return false;
         }
     }
@@ -134,20 +129,19 @@ export const BoardFunctional = (props: any) => {
         }
         let result: boolean = currentlySearchedRef.current.classes.some(x => phonemeClasses.includes(x));
         if (!result) {
-            let mistake: MistakeType[] = [{guessedPhoneme: phoneme, guessedQuestion: currentlySearchedRef.current}];
-            setMistakes(mistakesRef.current.concat(mistake));
+            let mistake: MistakeType = {guessedPhoneme: phoneme, guessedQuestion: currentlySearched};
+            dispatch(addMistake(mistake));
         }
         return result;
     }
 
     const setupGame = () => {
         let phonemes: Phoneme[] = generateXRandomPhonemes("any", 6) as Phoneme[];
-        console.log(phonemes);
         const newBoard: BoardGrid = putPhonemesOnTheBoard(phonemes);
         const randomQuestion: Question = generateRandomQuestion(phonemes);
         setBoard(newBoard);
         setPhonemesOnTheBoard(phonemes);
-        setCurrentlySearched(randomQuestion);
+        dispatch(setCurrentlySearched(randomQuestion));
         console.log("setup complete");
     };
 
@@ -261,7 +255,7 @@ export const BoardFunctional = (props: any) => {
     const movePhoneme = (phoneme: Phoneme, intervalId?: any) => {
         let index: number = phonemesOnTheBoardRef.current.findIndex(x => x.sampa === phoneme.sampa);
         if (index === -1) {
-            console.log("Clearing interval " + intervalId);
+            // console.log("Clearing interval " + intervalId);
             clearInterval(intervalId);
             return;
         }

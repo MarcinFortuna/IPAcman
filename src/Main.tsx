@@ -3,16 +3,16 @@ import { BoardFunctional } from './Board';
 import { Modal } from './Modal';
 import { Panel } from './Panel';
 import StatusBar from './StatusBar';
-import { databaseLeaderboard, databaseUsers, database } from './Firebase';
+// import { databaseLeaderboard, databaseUsers, database } from './Firebase';
 import {MainComponentState, GridElement, ObjectToPushToFirebase} from "./types/types";
-import {User} from "firebase";
+// import {User} from "firebase";
 import {useEffect, useState} from "react";
 
-interface MainProps {
-    user: User | {email: string}
-}
+// interface MainProps {
+//     user: User | {email: string}
+// }
 
-export const Main = (props: MainProps) => {
+export const Main = (props) => {
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [pace, setPace] = useState<number>(0);

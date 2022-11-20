@@ -1,13 +1,13 @@
 import * as React from 'react';
 import './App.css';
 import {Main} from './Main';
-import {auth} from './Firebase';
+// import {auth} from './Firebase';
 import {useState} from "react";
-import {User} from "firebase";
+// import {User} from "firebase";
 
 const App = () => {
 
-  const [currentUser, setCurrentUser] = useState<User | {email: string}>({email: "test"});
+  // const [currentUser, setCurrentUser] = useState<User | {email: string}>({email: "test"});
 
   // auth.onAuthStateChanged( (user: User | null) => {
   //   if (user) {
@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <Main user={currentUser} />
+      <Main user={""} />
     </div>
   );
 }

@@ -6,7 +6,8 @@ import Lives from './Lives';
 import {MistakesTriggerButton} from './MistakesTriggerButton';
 import PaceSelector from './PaceSelector';
 import {SettingsModal} from "./Settings";
-import {useStore} from "./ZustandStore";
+import {useSelector} from "react-redux";
+import {RootState} from "./ReduxStore/store";
 
 interface PanelProps {
     selectPace: (e: React.FormEvent<HTMLDivElement>) => void
@@ -14,17 +15,18 @@ interface PanelProps {
 
 export const Panel = (props: PanelProps) => {
 
-    const gameOn = useStore((state) => state.gameOn);
-    const toggleGameOn = useStore((state) => state.toggleGameOn);
-    const currentlySearched = useStore((state) => state.currentlySearched)
-    const score = useStore((state) => state.score);
-    const life = useStore((state) => state.life);
-    const mistakes = useStore((state) => state.mistakes);
+    const {selectPace} = props;
+
+    const gameOn = useSelector((state :RootState) => state.ipacmanData.gameOn);
+    const currentlySearched = useSelector((state: RootState) => state.ipacmanData.currentlySearched)
+    const score = useSelector((state: RootState) => state.ipacmanData.score);
+    const mistakes = useSelector((state: RootState) => state.ipacmanData.mistakes);
+    const life = useSelector((state: RootState) => state.ipacmanData.life);
 
     return (<div id="panel">
         <h2 id="logo"><img src={require("./assets/ipacman_logo.png")} alt=""/> IPAcman</h2>
-        <PaceSelector selectPace={props.selectPace} gameOn={gameOn}/>
-        <StartStopButton gameOn={gameOn} startGame={toggleGameOn} stopGame={toggleGameOn}/>
+        <PaceSelector selectPace={selectPace} gameOn={gameOn}/>
+        <StartStopButton />
         <CurrentQuestion currentlySearched={currentlySearched}/>
         <Score score={score}/>
         <Lives life={life}/>
