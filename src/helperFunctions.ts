@@ -35,3 +35,4 @@ export const chooseADirectionAtRandom = () => directions[Math.floor(Math.random(
 
 export const generateRandomPosition = () => [Math.floor(Math.random() * 20), Math.floor(Math.random() * 30)];
 
+export const checkDistance = (phonemeCoords: number[], pacmanCoords: number[]) => (Math.abs(phonemeCoords[0] - pacmanCoords[0]) < 3 || Math.abs(phonemeCoords[1] - pacmanCoords[1]) < 3)

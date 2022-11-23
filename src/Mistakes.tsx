@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { phonemes } from './data/RP_segments';
+import {phonemes} from './data/RP_segments';
 import {MistakeType} from "./types/types";
 
 interface MistakesProps {
@@ -8,7 +8,6 @@ interface MistakesProps {
 
 export const getCorrectAnswers = (mistakes_arr: MistakeType[]) => {
   let mistakes: string[][] = [];
-
   for (let i = 0; i < mistakes_arr.length; i++) {
     let mistake: string[] = [];
     mistake.push(mistakes_arr[i]["guessedQuestion"]["question"]);

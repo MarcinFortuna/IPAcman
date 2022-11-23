@@ -5,7 +5,7 @@ import {useEffect, useRef} from "react";
 import useState from 'react-usestateref';
 import {questions} from './data/RP_questions';
 import {consonants, phonemes, vowels} from "./data/RP_segments";
-import {movement, chooseADirectionAtRandom, generateRandomPosition} from "./helperFunctions";
+import {movement, chooseADirectionAtRandom, generateRandomPosition, checkDistance} from "./helperFunctions";
 
 import type { RootState } from './ReduxStore/store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,11 +28,10 @@ export const BoardFunctional = (props: any) => {
 
     const currentlySearched = useSelector((state: RootState) => state.ipacmanData.currentlySearched);
     const currentlySearchedRef = useRef(currentlySearched);
+
     useEffect(() => {
         currentlySearchedRef.current = currentlySearched;
     }, [currentlySearched]);
-
-    // const mistakes = useSelector((state: RootState) => state.ipacmanData.mistakes);
 
     useEffect(() => {
         if (life <= 0) props.stopGame();
@@ -130,7 +129,7 @@ export const BoardFunctional = (props: any) => {
         }
         let result: boolean = currentlySearchedRef.current.classes.some(x => phonemeClasses.includes(x));
         if (!result) {
-            let mistake: MistakeType = {guessedPhoneme: phoneme, guessedQuestion: currentlySearched};
+            let mistake: MistakeType = {guessedPhoneme: phoneme, guessedQuestion: currentlySearchedRef.current};
             dispatch(addMistake(mistake));
         }
         return result;
@@ -206,7 +205,8 @@ export const BoardFunctional = (props: any) => {
         for (let i = 0; i < phonemeArr.length; i++) {
             let pos: number[] = generateRandomPosition();
             let pickedSquare: GridElement = newGrid[pos[0]][pos[1]].slice();
-            while (pickedSquare[0].includes("pacman") || pickedSquare[0].includes("coin")) {
+            const pacmanPos: number[] = findPacman() as number[];
+            while (checkDistance(pos, pacmanPos) || pickedSquare[0].includes("coin")) {
                 pos = generateRandomPosition();
                 // @ts-ignore
                 pickedSquare = newGrid[pos[0]][pos[1]].slice();
