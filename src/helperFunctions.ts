@@ -3,25 +3,25 @@ export const movement = (direction, oldCoords) => {
     let newCoords: number[] = oldCoords.slice();
 
     if (direction === "left" && newCoords[1] !== 0) newCoords[1] -= 1;
-    if (direction === "right" && newCoords[1] !== 29) newCoords[1] += 1;
-    if (direction === "up" && newCoords[0] !== 0) newCoords[0] -= 1;
-    if (direction === "down" && newCoords[0] !== 19) newCoords[0] += 1;
+    else if (direction === "right" && newCoords[1] !== 29) newCoords[1] += 1;
+    else if (direction === "up" && newCoords[0] !== 0) newCoords[0] -= 1;
+    else if (direction === "down" && newCoords[0] !== 19) newCoords[0] += 1;
 
     // The directions below are only for phonemes
 
-    if (direction === "up-left" && newCoords[1] !== 0 && newCoords[0] !== 0) {
+    else if (direction === "up-left" && newCoords[1] !== 0 && newCoords[0] !== 0) {
         newCoords[1] -= 1;
         newCoords[0] -= 1;
     }
-    if (direction === "down-left" && newCoords[1] !== 0 && newCoords[0] !== 19) {
+    else if (direction === "down-left" && newCoords[1] !== 0 && newCoords[0] !== 19) {
         newCoords[1] -= 1;
         newCoords[0] += 1;
     }
-    if (direction === "up-right" && newCoords[1] !== 29 && newCoords[0] !== 0) {
+    else if (direction === "up-right" && newCoords[1] !== 29 && newCoords[0] !== 0) {
         newCoords[1] += 1;
         newCoords[0] -= 1;
     }
-    if (direction === "down-right" && newCoords[1] !== 29 && newCoords[0] !== 19) {
+    else if (direction === "down-right" && newCoords[1] !== 29 && newCoords[0] !== 19) {
         newCoords[1] += 1;
         newCoords[0] += 1;
     }

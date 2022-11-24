@@ -45,15 +45,18 @@ export const intervalsSlice = createSlice({
             state.intervals[action.payload.index] = {
                 interval: action.payload.interval,
                 sampa: action.payload.sampa
-            }
+            };
         },
         resetInterval: (state, action: PayloadAction<any>) => {
-            state.intervals[action.payload.index] = {interval: 0, sampa: ""}
+            state.intervals[action.payload.index] = {interval: 0, sampa: ""};
+        },
+        resetAllIntervals: (state) => {
+            state.intervals = initialState.intervals;
         }
     },
 });
 
 // Action creators are generated for each case reducer function
-export const { setNewInterval, resetInterval } = intervalsSlice.actions;
+export const { setNewInterval, resetInterval, resetAllIntervals } = intervalsSlice.actions;
 
 export default intervalsSlice.reducer;

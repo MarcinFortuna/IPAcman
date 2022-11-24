@@ -6,14 +6,24 @@ import useState from 'react-usestateref';
 import {questions} from './data/RP_questions';
 import {consonants, phonemes, vowels} from "./data/RP_segments";
 import {movement, chooseADirectionAtRandom, generateRandomPosition, checkDistance} from "./helperFunctions";
-
 import type { RootState } from './ReduxStore/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { setNewInterval, resetInterval } from './ReduxStore/reducers/IntervalsReducer';
-import { loseLife, setCurrentlySearched, addMistake, increaseScore } from './ReduxStore/reducers/IpacmanReducer';
+import { setNewInterval, resetInterval, resetAllIntervals } from './ReduxStore/reducers/IntervalsReducer';
+import {
+    loseLife,
+    setCurrentlySearched,
+    addMistake,
+    increaseScore,
+    resetCurrentlySearched,
+    resetLife,
+    resetMistakes,
+    resetScore
+} from './ReduxStore/reducers/IpacmanReducer';
 
 
 export const BoardFunctional = (props: any) => {
+
+    const gameReset = props.gameReset;
 
     const intervalsStateArray = useSelector((state: RootState) => state.intervals.intervals);
     const dispatch = useDispatch();
@@ -35,7 +45,7 @@ export const BoardFunctional = (props: any) => {
 
     useEffect(() => {
         if (life <= 0) props.stopGame();
-    }, [life])
+    }, [life]);
 
     const grid = new Array(20).fill(null).map(x => Array(30).fill(null).map(y => Array(2).fill("")));
     grid[0][0] = ["pacman right", ""];
@@ -44,15 +54,25 @@ export const BoardFunctional = (props: any) => {
 
     const useIpa = useSelector((state: RootState) => state.ipacmanData.useIpa);
 
-    // const resetGame = () => {
-    //     if (props.pace) props.clearAllIntervals();
-    //     setBoard(grid);
-    // }
+    const resetGame = () => {
+        setPhonemesOnTheBoard([]);
+        setBoard(grid);
+        setDirection(["", "", "", "", "", ""]);
+        dispatch(resetAllIntervals());
+        dispatch(resetLife());
+        dispatch(resetMistakes());
+        dispatch(resetScore());
+        dispatch(resetCurrentlySearched());
+    }
+
+    useEffect(() => {
+        if (gameReset) resetGame();
+    }, [gameReset]);
 
     const findPacman = () => {
-        for (let i = 0; i < board.length; i++) {
-            for (let j = 0; j < board[i].length; j++) {
-                if (board[i][j][0].includes("pacman")) return [i, j];
+        for (let i = 0; i < boardRef.current.length; i++) {
+            for (let j = 0; j < boardRef.current[i].length; j++) {
+                if (boardRef.current[i][j][0].includes("pacman")) return [i, j];
             }
         }
         return false;
@@ -68,7 +88,7 @@ export const BoardFunctional = (props: any) => {
     }
 
     const movePacman = (direction: string) => {
-        let newGrid: any = board.slice();
+        let newGrid: any = boardRef.current.slice();
         // @ts-ignore
         let oldCoords: number[] = findPacman();
         let newCoords: number[] = movement(direction, oldCoords);
@@ -199,8 +219,7 @@ export const BoardFunctional = (props: any) => {
     }
 
     const putPhonemesOnTheBoard = (phonemeArr: Phoneme[], oldGrid?: BoardGrid) => {
-
-        let newGrid: any = oldGrid ? oldGrid : board.slice();
+        let newGrid: any = oldGrid ? oldGrid : boardRef.current.slice();
 
         for (let i = 0; i < phonemeArr.length; i++) {
             let pos: number[] = generateRandomPosition();
@@ -255,13 +274,12 @@ export const BoardFunctional = (props: any) => {
     const movePhoneme = (phoneme: Phoneme, intervalId?: any) => {
         let index: number = phonemesOnTheBoardRef.current.findIndex(x => x.sampa === phoneme.sampa);
         if (index === -1) {
-            // console.log("Clearing interval " + intervalId);
             clearInterval(intervalId);
             return;
         }
         let direction: string = directionRef.current[index];
 
-        let newGrid: any = board.slice();
+        let newGrid: any = boardRef.current.slice();
         // @ts-ignore
         let oldCoords: number[] | boolean = findAPhoneme(phoneme.sampa);
         let newCoords: number[] = movement(direction, oldCoords);
@@ -296,7 +314,6 @@ export const BoardFunctional = (props: any) => {
         if (gameOn) {
             setupGame();
         }
-        // else resetGame();
     }, [gameOn]);
 
     const boardElements = board.map((row: any, i: number) => {

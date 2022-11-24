@@ -11,11 +11,12 @@ import {RootState} from "./ReduxStore/store";
 
 interface PanelProps {
     selectPace: (e: React.FormEvent<HTMLDivElement>) => void
+    stopGame: () => void
 }
 
 export const Panel = (props: PanelProps) => {
 
-    const {selectPace} = props;
+    const {selectPace, stopGame} = props;
 
     const gameOn = useSelector((state :RootState) => state.ipacmanData.gameOn);
     const currentlySearched = useSelector((state: RootState) => state.ipacmanData.currentlySearched)
@@ -26,7 +27,7 @@ export const Panel = (props: PanelProps) => {
     return (<div id="panel">
         <h2 id="logo"><img src={require("./assets/ipacman_logo.png")} alt=""/> IPAcman</h2>
         <PaceSelector selectPace={selectPace} gameOn={gameOn}/>
-        <StartStopButton />
+        <StartStopButton stopGame={stopGame}/>
         <CurrentQuestion currentlySearched={currentlySearched}/>
         <Score score={score}/>
         <Lives life={life}/>

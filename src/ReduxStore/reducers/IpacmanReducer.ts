@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
+import type {PayloadAction} from '@reduxjs/toolkit'
 
 import {MistakeType, Question} from "../../types/types";
 
@@ -25,15 +25,50 @@ export const ipacmanSlice = createSlice({
     name: 'ipacman',
     initialState,
     reducers: {
-        toggleGameOn: (state) => {state.gameOn = !state.gameOn},
-        toggleUseIpa: (state) => {state.useIpa = !state.useIpa},
-        setCurrentlySearched: (state, action: PayloadAction<any>) => {state.currentlySearched = action.payload},
-        increaseScore: (state) => {state.score++},
-        loseLife: (state) => {state.life--},
-        addMistake: (state, action: PayloadAction<any>) => {state.mistakes.push(action.payload)}
+        toggleGameOn: (state) => {
+            state.gameOn = !state.gameOn
+        },
+        toggleUseIpa: (state) => {
+            state.useIpa = !state.useIpa
+        },
+        setCurrentlySearched: (state, action: PayloadAction<any>) => {
+            state.currentlySearched = action.payload
+        },
+        resetCurrentlySearched: (state) => {
+            state.currentlySearched = {question: "", classes: []}
+        },
+        increaseScore: (state) => {
+            state.score++
+        },
+        resetScore: (state) => {
+            state.score = 0
+        },
+        loseLife: (state) => {
+            state.life--
+        },
+        resetLife: (state) => {
+            state.life = 3
+        },
+        addMistake: (state, action: PayloadAction<any>) => {
+            state.mistakes.push(action.payload)
+        },
+        resetMistakes: (state) => {
+            state.mistakes = []
+        }
     }
 });
 
-export const { toggleGameOn, toggleUseIpa, setCurrentlySearched, increaseScore, loseLife, addMistake } = ipacmanSlice.actions;
+export const {
+    toggleGameOn,
+    toggleUseIpa,
+    setCurrentlySearched,
+    resetCurrentlySearched,
+    increaseScore,
+    resetScore,
+    loseLife,
+    resetLife,
+    addMistake,
+    resetMistakes
+} = ipacmanSlice.actions;
 
 export default ipacmanSlice.reducer;
