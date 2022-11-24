@@ -4,6 +4,7 @@ import {Main} from './Main';
 import {auth} from './Firebase';
 import {useEffect, useState} from "react";
 import {User, onAuthStateChanged} from "firebase/auth";
+import { ChakraProvider } from '@chakra-ui/react';
 
 const App = () => {
 
@@ -23,9 +24,11 @@ const App = () => {
   }, [auth]);
 
   return (
-    <div className="App">
-      <Main user={currentUser} />
-    </div>
+      <ChakraProvider>
+        <div className="App">
+          <Main user={currentUser} />
+        </div>
+      </ChakraProvider>
   );
 };
 

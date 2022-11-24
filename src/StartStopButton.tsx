@@ -2,6 +2,7 @@ import * as React from 'react';
 import {AppDispatch, RootState} from "./ReduxStore/store";
 import {useSelector, useDispatch} from "react-redux";
 import {toggleGameOn} from './ReduxStore/reducers/IpacmanReducer';
+import { Button } from '@chakra-ui/react'
 
 const StartStopButton = (props) => {
 
@@ -12,9 +13,9 @@ const StartStopButton = (props) => {
     const buttonContent: string = gameOn ? "Stop Game" : "Start Game";
 
     return (
-      <button id="startStopButton" onClick={() => gameOn ? stopGame() : dispatch(toggleGameOn())}>
+      <Button colorScheme="yellow" id="startStopButton" onClick={() => gameOn ? stopGame() : dispatch(toggleGameOn())}>
           {buttonContent}
-      </button>
+      </Button>
     );
 }
 
