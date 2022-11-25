@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { BoardFunctional } from './Board';
-import { Modal } from './Modal';
-import { Panel } from './Panel';
+import {BoardFunctional} from './Board';
+import {Modal} from './Modal';
+import {Panel} from './Panel';
 import StatusBar from './StatusBar';
-import { databaseLeaderboard, databaseUsers, database } from './Firebase';
+import {databaseLeaderboard, databaseUsers, database} from './Firebase';
 import {MainComponentState, GridElement, ObjectToPushToFirebase} from "./types/types";
 import {User} from "firebase/auth";
 import {useEffect, useState} from "react";
@@ -11,6 +11,7 @@ import {get, orderByChild, query, equalTo, ref, push, set, ThenableReference} fr
 import {RootState} from "./ReduxStore/store";
 import {useSelector, useDispatch} from "react-redux";
 import {toggleGameOn} from './ReduxStore/reducers/IpacmanReducer';
+import {Grid, GridItem} from "@chakra-ui/react";
 
 interface MainProps {
     user: User | null
@@ -52,14 +53,15 @@ export const Main = (props: MainProps) => {
                     affiliation: affiliation,
                     userDbKey: userDbKey
                 });
-        });
+            });
     }
 
     const sendGameStatsToFirebase = async () => {
         if (!(props.user && props.user.email)) {
             console.log("not logged in");
             return
-        };
+        }
+        ;
         let objectToPush: ObjectToPushToFirebase = {
             score: score,
             uid: props.user.uid,
@@ -70,7 +72,7 @@ export const Main = (props: MainProps) => {
             displayName: userState.displayName,
             affiliation: userState.affiliation
         };
-        let dbUserUrl: any = ref(database,'Users/' + userState.userDbKey + '/attempts/');
+        let dbUserUrl: any = ref(database, 'Users/' + userState.userDbKey + '/attempts/');
         let newDbEntry: ThenableReference = push(dbUserUrl);
         console.log(objectToPush);
         await set(newDbEntry, objectToPush);
@@ -87,7 +89,7 @@ export const Main = (props: MainProps) => {
         setModalOpen(true);
     }
 
-    const closeModal = () =>  {
+    const closeModal = () => {
         setModalOpen(false);
         setGameReset(true);
     }
@@ -97,12 +99,26 @@ export const Main = (props: MainProps) => {
     }
 
 
-    return (<div id="main">
-        <StatusBar user={props.user} userOtherData={userState} />
-        <BoardFunctional pace={pace} stopGame={stopGame} gameReset={gameReset}/>
-        <Panel selectPace={selectPace} stopGame={stopGame}/>
-        <Modal open={modalOpen} closeModal={closeModal} />
-    </div>)
+    return (<Grid id="main"
+                  templateAreas={`"header header"
+                  "main panel"`}
+                  gridTemplateRows={'100px 1fr'}
+                  gridTemplateColumns={'1034px 1fr'}
+                  h='200px'
+                  gap='1'
+                  color='blackAlpha.700'
+    >
+        <GridItem area={'header'}>
+            <StatusBar user={props.user} userOtherData={userState}/>
+        </GridItem>
+        <GridItem area={'main'}>
+            <BoardFunctional pace={pace} stopGame={stopGame} gameReset={gameReset}/>
+        </GridItem>
+        <GridItem area={'panel'}>
+            <Panel selectPace={selectPace} stopGame={stopGame}/>
+        </GridItem>
+        <Modal open={modalOpen} closeModal={closeModal}/>
+    </Grid>)
 
 }
 

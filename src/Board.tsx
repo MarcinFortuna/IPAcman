@@ -19,7 +19,7 @@ import {
     resetMistakes,
     resetScore
 } from './ReduxStore/reducers/IpacmanReducer';
-
+import {Box} from '@chakra-ui/react';
 
 export const BoardFunctional = (props: any) => {
 
@@ -328,14 +328,43 @@ export const BoardFunctional = (props: any) => {
     });
 
     return (
-        <>
-            <div id="boardDiv">
+        <Box sx={{
+            width: "1034px",
+            td: {
+                overflow: "hidden",
+                width: "34px",
+                height: "34px",
+                padding: "1px",
+                backgroundColor: "#181819",
+                textAlign: "center"
+            },
+            ".pacman, .coin": {
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundSize: "30px",
+                fontWeight: "bold",
+            },
+            '.left': {
+                transform: 'rotate(180deg)'
+            },
+            '.up': {
+                transform: 'rotate(-90deg)'
+            },
+            '.down': {
+                transform: 'rotate(90deg)'
+            },
+            '.pacman.success': {
+                backgroundColor: 'green !important'
+            },
+            '.pacman.failure': {
+                backgroundColor: 'red !important'
+            },
+        }}>
                 <table cellSpacing="0">
                     <tbody>
                     {boardElements}
                     </tbody>
                 </table>
-            </div>
-        </>
+            </Box>
     )
 }

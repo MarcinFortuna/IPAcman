@@ -13,7 +13,11 @@ const StartStopButton = (props) => {
     const buttonContent: string = gameOn ? "Stop Game" : "Start Game";
 
     return (
-      <Button colorScheme="yellow" id="startStopButton" onClick={() => gameOn ? stopGame() : dispatch(toggleGameOn())}>
+      <Button colorScheme="yellow" id="startStopButton"
+              onClick={() => gameOn ? stopGame() : dispatch(toggleGameOn())}
+              sx={{
+                  width: "100px"
+              }}>
           {buttonContent}
       </Button>
     );

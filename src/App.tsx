@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './App.css';
+// import './App.css';
 import {Main} from './Main';
 import {auth} from './Firebase';
 import {useEffect, useState} from "react";
