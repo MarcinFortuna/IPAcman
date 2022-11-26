@@ -3,6 +3,7 @@ import {SignInSignUpPopup} from './SignInSignUpPopup';
 import {signOutOfApp} from './Firebase'
 import {LeaderboardPopup} from './LeaderboardPopup';
 import {ShowPrevResultsPopup} from './ShowPrevResultsPopup';
+import {Box, Text} from "@chakra-ui/react";
 
 // interface StatusBarProps {
 //     user: {
@@ -27,14 +28,14 @@ const StatusBar = (props: any) => {
     }
 
     return (
-        <div id="statusBar">
-            <span className="statusBarString">{greeting}</span>
+        <Box display="flex" id="statusBar">
+            <Text fontSize="sm" className="statusBarString">{greeting}</Text>
             {(props.user && props.user.email) ? <LeaderboardPopup/> : <div></div>}
             {(props.user && props.user.email) ? <ShowPrevResultsPopup userData={props.userOtherData}/> : <div></div>}
             {!(props.user && props.user.email) ? <SignInSignUpPopup/> : <div>
                 <button type="button" className="button" onClick={signOutOfApp}>Log out</button>
             </div>}
-        </div>
+        </Box>
     );
 }
 

@@ -23,8 +23,14 @@ const App = () => {
     });
   }, [auth]);
 
+  const theme = {
+    colors: {
+      mainYellow: "#e8d55d"
+    }
+  }
+
   return (
-      <ChakraProvider>
+      <ChakraProvider cssVarsRoot='.App' theme={theme}>
         <div className="App">
           <Main user={currentUser} />
         </div>

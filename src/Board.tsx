@@ -20,6 +20,8 @@ import {
     resetScore
 } from './ReduxStore/reducers/IpacmanReducer';
 import {Box} from '@chakra-ui/react';
+import coin from './assets/coin.png';
+import pacman from './assets/pacman-r.png';
 
 export const BoardFunctional = (props: any) => {
 
@@ -47,7 +49,7 @@ export const BoardFunctional = (props: any) => {
         if (life <= 0) props.stopGame();
     }, [life]);
 
-    const grid = new Array(20).fill(null).map(x => Array(30).fill(null).map(y => Array(2).fill("")));
+    const grid = new Array(18).fill(null).map(x => Array(26).fill(null).map(y => Array(2).fill("")));
     grid[0][0] = ["pacman right", ""];
 
     const [board, setBoard, boardRef] = useState(grid);
@@ -156,7 +158,7 @@ export const BoardFunctional = (props: any) => {
     }
 
     const setupGame = () => {
-        let phonemes: Phoneme[] = generateXRandomPhonemes("any", 6) as Phoneme[];
+        let phonemes: Phoneme[] = generateXRandomPhonemes("any", 5) as Phoneme[];
         const newBoard: BoardGrid = putPhonemesOnTheBoard(phonemes);
         const randomQuestion: Question = generateRandomQuestion(phonemes);
         setBoard(newBoard);
@@ -167,8 +169,8 @@ export const BoardFunctional = (props: any) => {
 
     useEffect(() => {
         if (!props.pace) return;
-        if (phonemesOnTheBoard.length === 6 && props.pace) {
-            for (let i = 0; i < 6; i++) {
+        if (phonemesOnTheBoard.length === 5 && props.pace) {
+            for (let i = 0; i < 5; i++) {
                 if (intervalsStateArray[i].interval === 0) {
                     let action = setAPhonemeInMotion(phonemesOnTheBoard[i], props.pace, movePhoneme, i);
                     dispatch(setNewInterval(action));
@@ -329,11 +331,10 @@ export const BoardFunctional = (props: any) => {
 
     return (
         <Box sx={{
-            width: "1034px",
             td: {
                 overflow: "hidden",
-                width: "34px",
-                height: "34px",
+                width: "30px",
+                height: "30px",
                 padding: "1px",
                 backgroundColor: "#181819",
                 textAlign: "center"
@@ -359,6 +360,12 @@ export const BoardFunctional = (props: any) => {
             '.pacman.failure': {
                 backgroundColor: 'red !important'
             },
+            '.coin': {
+                backgroundImage: coin
+            },
+            '.pacman': {
+                backgroundImage: pacman
+            }
         }}>
                 <table cellSpacing="0">
                     <tbody>
