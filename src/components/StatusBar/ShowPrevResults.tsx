@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {useState, useEffect} from "react";
-import {database} from './Firebase';
+import {database} from '../../api/Firebase';
 import {ref, query, orderByChild, get} from "firebase/database";
-import {getCorrectAnswers} from './Mistakes';
-import {PreviousResults, UserData} from "./types/types";
+import {getCorrectAnswers} from '../../helperFunctions';
+import {PreviousResults, UserData} from "../../types/types";
 
 interface ShowPrevResultsProps {
     userData: UserData
@@ -12,7 +12,7 @@ interface ShowPrevResultsProps {
 export const ShowPrevResults = (props: ShowPrevResultsProps) => {
 
     const [attempts, setAttempts] = useState<PreviousResults[]>([]);
-
+    console.log(props);
     const parseAttempts = (data: any) => {
         let results: PreviousResults[] = [];
         for (let i in data) {

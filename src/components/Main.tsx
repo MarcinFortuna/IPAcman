@@ -1,16 +1,16 @@
 import * as React from 'react';
-import {BoardFunctional} from './Board';
-import {Modal} from './Modal';
-import {Panel} from './Panel';
-import StatusBar from './StatusBar';
-import {databaseLeaderboard, databaseUsers, database} from './Firebase';
-import {MainComponentState, GridElement, ObjectToPushToFirebase} from "./types/types";
+import {BoardFunctional} from './Board/Board';
+import {Modal} from './Panel/Modal';
+import {Panel} from './Panel/Panel';
+import StatusBar from './StatusBar/StatusBar';
+import {databaseLeaderboard, databaseUsers, database} from '../api/Firebase';
+import {MainComponentState, GridElement, ObjectToPushToFirebase} from "../types/types";
 import {User} from "firebase/auth";
 import {useEffect, useState} from "react";
 import {get, orderByChild, query, equalTo, ref, push, set, ThenableReference} from "firebase/database";
-import {RootState} from "./ReduxStore/store";
+import {RootState} from "../ReduxStore/store";
 import {useSelector, useDispatch} from "react-redux";
-import {toggleGameOn} from './ReduxStore/reducers/IpacmanReducer';
+import {toggleGameOn} from '../ReduxStore/reducers/IpacmanReducer';
 import {Container, Grid, GridItem} from "@chakra-ui/react";
 
 interface MainProps {
@@ -20,7 +20,6 @@ interface MainProps {
 export const Main = (props: MainProps) => {
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
-    const [pace, setPace] = useState<number>(0);
     const [userState, setUserState] = useState<any>("");
     const [gameReset, setGameReset] = useState<boolean>(false);
 
@@ -33,6 +32,7 @@ export const Main = (props: MainProps) => {
     const mistakes = useSelector((state: RootState) => state.ipacmanData.mistakes);
     const score = useSelector((state: RootState) => state.ipacmanData.score);
     const gameOn = useSelector((state: RootState) => state.ipacmanData.gameOn);
+    const pace = useSelector((state: RootState) => state.ipacmanData.pace);
 
     useEffect(() => {
         if (gameOn) setGameReset(false);
@@ -60,8 +60,7 @@ export const Main = (props: MainProps) => {
         if (!(props.user && props.user.email)) {
             console.log("not logged in");
             return
-        }
-        ;
+        };
         let objectToPush: ObjectToPushToFirebase = {
             score: score,
             uid: props.user.uid,
@@ -94,29 +93,25 @@ export const Main = (props: MainProps) => {
         setGameReset(true);
     }
 
-    const selectPace = (e) => {
-        setPace(Number(e.target.value));
-    }
-
 
     return (
         <Container maxW="100%" height="100%">
         <Grid id="main"
                   templateAreas={`"header header"
                   "main panel"`}
-                  gridTemplateRows={'20px 1fr'}
-                  gridTemplateColumns={'1034px 1fr'}
-                  gap='1'
+                  // gridTemplateRows={'20px 1fr'}
+                  // gridTemplateColumns={'1034px 1fr'}
+                  // gap='10'
                   color='blackAlpha.700'
         >
         <GridItem area={'header'}>
             <StatusBar user={props.user} userOtherData={userState}/>
         </GridItem>
         <GridItem area={'main'}>
-            <BoardFunctional pace={pace} stopGame={stopGame} gameReset={gameReset}/>
+            <BoardFunctional stopGame={stopGame} gameReset={gameReset} pace={pace}/>
         </GridItem>
         <GridItem area={'panel'}>
-            <Panel selectPace={selectPace} stopGame={stopGame}/>
+            <Panel stopGame={stopGame}/>
         </GridItem>
         <Modal open={modalOpen} closeModal={closeModal}/>
     </Grid>

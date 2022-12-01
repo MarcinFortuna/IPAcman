@@ -10,6 +10,7 @@ export interface IpacmanStore {
     score: number
     life: number
     mistakes: MistakeType[]
+    pace: number
 }
 
 const initialState: IpacmanStore = {
@@ -18,7 +19,8 @@ const initialState: IpacmanStore = {
     currentlySearched: {question: "", classes: []},
     score: 0,
     life: 3,
-    mistakes: []
+    mistakes: [],
+    pace: 0
 }
 
 export const ipacmanSlice = createSlice({
@@ -54,6 +56,9 @@ export const ipacmanSlice = createSlice({
         },
         resetMistakes: (state) => {
             state.mistakes = []
+        },
+        setPace: (state, action: PayloadAction<any>) => {
+            state.pace = action.payload
         }
     }
 });
@@ -68,7 +73,8 @@ export const {
     loseLife,
     resetLife,
     addMistake,
-    resetMistakes
+    resetMistakes,
+    setPace
 } = ipacmanSlice.actions;
 
 export default ipacmanSlice.reducer;

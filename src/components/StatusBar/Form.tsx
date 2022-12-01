@@ -1,5 +1,5 @@
 import * as React from "react";
-import {signIn, signUp} from "./Firebase";
+import {signIn, signUp} from "../../api/Firebase";
 
 interface FormProps {
     option: number

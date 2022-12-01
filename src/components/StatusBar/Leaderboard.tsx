@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {databaseLeaderboard} from './Firebase';
+import {databaseLeaderboard} from '../../api/Firebase';
 import {useEffect, useState} from "react";
-import {LeaderboardItem} from "./types/types";
+import {LeaderboardItem} from "../../types/types";
 import {query, orderByChild, limitToLast, get} from 'firebase/database';
 
 export const Leaderboard = () => {

@@ -1,17 +1,17 @@
 import * as React from 'react';
 import Emoji from './Emoji';
+import {useSelector} from "react-redux";
+import {RootState} from "../../ReduxStore/store";
 
-interface LivesProps {
-    life: number
-}
+const Lives = () => {
+    const life = useSelector((state: RootState) => state.ipacmanData.life);
 
-const Lives = (props: LivesProps) => {
     let output: string[] = [];
-    if (props.life) {
-        for (let i = 0; i < props.life; i++) {
+    if (life) {
+        for (let i = 0; i < life; i++) {
             output.push("🧡");
         }
-        for (let j = 3; j >= 3 - props.life; j--) {
+        for (let j = 3; j >= 3 - life; j--) {
             output.push("♡");
         }
     } else {

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {Square} from './Square';
-import {BoardGrid, GridElement, MistakeType, Phoneme, Question} from "./types/types";
+import {BoardGrid, GridElement, MistakeType, Phoneme, Question} from "../../types/types";
 import {useEffect, useRef} from "react";
 import useState from 'react-usestateref';
-import {questions} from './data/RP_questions';
-import {consonants, phonemes, vowels} from "./data/RP_segments";
-import {movement, chooseADirectionAtRandom, generateRandomPosition, checkDistance} from "./helperFunctions";
-import type { RootState } from './ReduxStore/store';
+import {questions} from '../../data/RP_questions';
+import {consonants, phonemes, vowels} from "../../data/RP_segments";
+import {movement, chooseADirectionAtRandom, generateRandomPosition, checkDistance} from "../../helperFunctions";
+import type { RootState } from '../../ReduxStore/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { setNewInterval, resetInterval, resetAllIntervals } from './ReduxStore/reducers/IntervalsReducer';
+import { setNewInterval, resetInterval, resetAllIntervals } from '../../ReduxStore/reducers/IntervalsReducer';
 import {
     loseLife,
     setCurrentlySearched,
@@ -18,10 +18,10 @@ import {
     resetLife,
     resetMistakes,
     resetScore
-} from './ReduxStore/reducers/IpacmanReducer';
+} from '../../ReduxStore/reducers/IpacmanReducer';
 import {Box} from '@chakra-ui/react';
-import coin from './assets/coin.png';
-import pacman from './assets/pacman-r.png';
+import coin from '../../assets/coin.png';
+import pacman from '../../assets/pacman-r.png';
 
 export const BoardFunctional = (props: any) => {
 
@@ -284,6 +284,10 @@ export const BoardFunctional = (props: any) => {
         let newGrid: any = boardRef.current.slice();
         // @ts-ignore
         let oldCoords: number[] | boolean = findAPhoneme(phoneme.sampa);
+        if (oldCoords === false) {
+            console.error(`Phoneme ${phoneme.sampa} not found!`);
+            return;
+        }
         let newCoords: number[] = movement(direction, oldCoords);
         if (newGrid[newCoords[0]][newCoords[1]][0].includes("pacman")) {
             return false;

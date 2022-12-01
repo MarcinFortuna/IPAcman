@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {AppDispatch, RootState} from "./ReduxStore/store";
+import {AppDispatch, RootState} from "../../ReduxStore/store";
 import {useSelector, useDispatch} from "react-redux";
-import {toggleGameOn} from './ReduxStore/reducers/IpacmanReducer';
+import {toggleGameOn} from '../../ReduxStore/reducers/IpacmanReducer';
 import { Button } from '@chakra-ui/react'
 
 const StartStopButton = (props) => {
