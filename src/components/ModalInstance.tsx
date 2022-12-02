@@ -14,12 +14,13 @@ import * as React from "react";
 interface ModalProps {
     buttonText: string
     modalTitle?: string
+    hideCloseButton?: boolean
     children: React.ReactNode
 }
 
 export const ModalInstance = (props: ModalProps) => {
 
-    const {buttonText, modalTitle, children} = props;
+    const {buttonText, modalTitle, children, hideCloseButton} = props;
     const {isOpen, onOpen, onClose} = useDisclosure();
 
     return (
@@ -39,12 +40,11 @@ export const ModalInstance = (props: ModalProps) => {
                     <ModalBody>
                         {children}
                     </ModalBody>
-                    <ModalFooter>
+                    {hideCloseButton ? null : <ModalFooter>
                         <Button colorScheme='yellow' mr={3} onClick={onClose}>
                             Close
                         </Button>
-                        {/*<Button variant='ghost'>Secondary Action</Button>*/}
-                    </ModalFooter>
+                    </ModalFooter>}
                 </ModalContent>
             </Modal>
         </>

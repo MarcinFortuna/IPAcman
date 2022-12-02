@@ -37,7 +37,7 @@ const StatusBar = (props: any) => {
                 <ModalInstance buttonText="Show previous results" modalTitle="All my results"><ShowPrevResults
                     userData={props.userOtherData}/></ModalInstance> : null}
             {!(props.user && props.user.email) ?
-                <ModalInstance buttonText="Log in" modalTitle={""}><FormContainer/></ModalInstance> :
+                <ModalInstance buttonText="Log in" modalTitle={""} hideCloseButton={true}><FormContainer/></ModalInstance> :
                 <Button variant="outline" onClick={signOutOfApp}>Log out</Button>}
         </Box>);
 }
