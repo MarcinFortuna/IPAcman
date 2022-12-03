@@ -8,7 +8,6 @@ import {Mistakes} from "./Mistakes";
 import {SettingsIcon} from '@chakra-ui/icons';
 import {Box} from "@chakra-ui/react";
 import IpacmanHeading from "./IpacmanHeading";
-import {Settings} from "./Settings";
 import DisplaySettings from "./DisplaySettings";
 
 interface PanelProps {
@@ -17,7 +16,7 @@ interface PanelProps {
 
 export const Panel = (props: PanelProps) => {
     const {stopGame} = props;
-    return (<Box display="flex" flexDirection="column" alignItems="center" gap="1">
+    return (<Box display="flex" flexDirection="column" alignItems="center" gap="1" width="235px" p={2}>
         <IpacmanHeading/>
         <DisplaySettings />
         <StartStopButton stopGame={stopGame}/>

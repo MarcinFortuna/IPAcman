@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useSelector} from "react-redux";
 import {RootState} from "../../ReduxStore/store";
+import {Card, Heading} from "@chakra-ui/react";
 
 
 const Score = () => {
@@ -8,10 +9,10 @@ const Score = () => {
     const score = useSelector((state: RootState) => state.ipacmanData.score);
 
     return (
-        <div id="score">
-            Current score:<br></br>
-            <span>{score}</span>
-        </div>
+        <Card display="flex" alignItems="center" flexDirection="column" width="100%">
+            Current score:
+            <Heading size="md">{score}</Heading>
+        </Card>
     );
 }
 

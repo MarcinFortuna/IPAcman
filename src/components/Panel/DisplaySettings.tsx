@@ -2,9 +2,6 @@ import * as React from 'react';
 import {useSelector} from "react-redux";
 import {RootState} from "../../ReduxStore/store";
 import {paceMapping} from "../../helperFunctions";
-import {ModalInstance} from "../ModalInstance";
-import {SettingsIcon} from "@chakra-ui/icons";
-import {Settings} from "./Settings";
 import {Box} from "@chakra-ui/react";
 
 const DisplaySettings = () => {

@@ -7,10 +7,13 @@ import {Card, CardHeader, CardBody, Heading} from '@chakra-ui/react';
 const CurrentQuestion = () => {
     const currentlySearched: Question = useSelector((state: RootState) => state.ipacmanData.currentlySearched)
     return (
-        <Card id="questionBox">
-            <CardHeader>Now I would like to eat...</CardHeader>
-            <CardBody>
-                <Heading size="xs" fontSize="monospace">{currentlySearched.question}</Heading>
+        <Card id="questionBox" width="100%" height="119px">
+            <CardHeader pb={0}>Now I would like to eat...</CardHeader>
+            <CardBody sx={{
+                maxWidth: "300px",
+                textAlign: "center"
+            }}>
+                <Heading size="xs" fontFamily="monospace" noOfLines={2}>{currentlySearched.question}</Heading>
             </CardBody>
         </Card>
     );

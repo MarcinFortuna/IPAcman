@@ -2,6 +2,7 @@ import * as React from 'react';
 import Emoji from './Emoji';
 import {useSelector} from "react-redux";
 import {RootState} from "../../ReduxStore/store";
+import {Box, Card} from "@chakra-ui/react";
 
 const Lives = () => {
     const life = useSelector((state: RootState) => state.ipacmanData.life);
@@ -19,13 +20,16 @@ const Lives = () => {
             output.push("♡");
         }
     }
+
     return (
-        <div id="lives">
+        <Card display="flex" flexDirection="column" alignItems="center" width="100%">
             Lives:<br></br>
-            <Emoji symbol={output[0]} />
-            <Emoji symbol={output[1]} />
-            <Emoji symbol={output[2]} />
-        </div>
+            <Box>
+                <Emoji symbol={output[0]} />
+                <Emoji symbol={output[1]} />
+                <Emoji symbol={output[2]} />
+            </Box>
+        </Card>
     );
 }
 
