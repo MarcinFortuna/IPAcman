@@ -5,6 +5,8 @@ import IpaSampa from "./IpaSampa";
 import {useSelector} from "react-redux";
 import {RootState} from "../../ReduxStore/store";
 import {toggleUseIpa} from '../../ReduxStore/reducers/IpacmanReducer';
+import PaceSelector from "./PaceSelector";
+import {Box} from "@chakra-ui/react";
 
 export const Settings = () => {
 
@@ -12,5 +14,6 @@ export const Settings = () => {
 
     return <>
         <IpaSampa setAlphabet={toggleUseIpa}/>
+        <PaceSelector />
     </>
 }

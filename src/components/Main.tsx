@@ -11,7 +11,7 @@ import {get, orderByChild, query, equalTo, ref, push, set, ThenableReference} fr
 import {RootState} from "../ReduxStore/store";
 import {useSelector, useDispatch} from "react-redux";
 import {toggleGameOn} from '../ReduxStore/reducers/IpacmanReducer';
-import {Container, Grid, GridItem} from "@chakra-ui/react";
+import {Container, Box} from "@chakra-ui/react";
 
 interface MainProps {
     user: User | null
@@ -95,27 +95,14 @@ export const Main = (props: MainProps) => {
 
 
     return (
-        <Container maxW="100%" height="100%">
-        <Grid id="main"
-                  templateAreas={`"header header"
-                  "main panel"`}
-                  // gridTemplateRows={'20px 1fr'}
-                  // gridTemplateColumns={'1034px 1fr'}
-                  // gap='10'
-                  color='blackAlpha.700'
-        >
-        <GridItem area={'header'}>
+        <Container maxW="1200px" height="100%" sx={{margin: "auto"}}>
             <StatusBar user={props.user} userOtherData={userState}/>
-        </GridItem>
-        <GridItem area={'main'}>
-            <BoardFunctional stopGame={stopGame} gameReset={gameReset} pace={pace}/>
-        </GridItem>
-        <GridItem area={'panel'}>
-            <Panel stopGame={stopGame}/>
-        </GridItem>
-        <Modal open={modalOpen} closeModal={closeModal}/>
-    </Grid>
-            </Container>
+            <Box display="flex">
+                <BoardFunctional stopGame={stopGame} gameReset={gameReset} pace={pace}/>
+                <Panel stopGame={stopGame}/>
+            </Box>
+            <Modal open={modalOpen} closeModal={closeModal}/>
+        </Container>
     )
 
 }

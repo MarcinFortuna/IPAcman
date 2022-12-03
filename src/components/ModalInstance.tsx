@@ -12,7 +12,7 @@ import {
 import * as React from "react";
 
 interface ModalProps {
-    buttonText: string
+    buttonText: string | React.ReactNode
     modalTitle?: string
     hideCloseButton?: boolean
     children: React.ReactNode

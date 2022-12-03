@@ -19,7 +19,7 @@ import {
     resetMistakes,
     resetScore
 } from '../../ReduxStore/reducers/IpacmanReducer';
-import {Box} from '@chakra-ui/react';
+import {Box, useMediaQuery} from '@chakra-ui/react';
 import coin from '../../assets/coin.png';
 import pacman from '../../assets/pacman-r.png';
 
@@ -333,12 +333,17 @@ export const BoardFunctional = (props: any) => {
             </tr>)
     });
 
+    const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
+
     return (
         <Box sx={{
+            minWidth: isLargerThan800 ? '780px' : '676px',
+            maxWidth: isLargerThan800 ? '780px' : '676px',
+            display: "block",
             td: {
                 overflow: "hidden",
-                width: "30px",
-                height: "30px",
+                width: isLargerThan800 ? "30px" : "26px",
+                height: isLargerThan800 ? "30px" : "26px",
                 padding: "1px",
                 backgroundColor: "#181819",
                 textAlign: "center"

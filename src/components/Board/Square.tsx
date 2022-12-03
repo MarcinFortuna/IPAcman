@@ -8,8 +8,10 @@ interface SquareProps {
 
 export const Square = (props: SquareProps) => {
 
-    let square_content: string = props.ipa ? props.ipa : "";
+    const {classname, ipa} = props;
+
+    let square_content: string = ipa ? ipa : "";
     return (
-      <td className={props.classname}>{square_content}</td>
-    )
+        <td className={classname}>{square_content}</td>
+    );
 }
