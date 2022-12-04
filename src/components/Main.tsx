@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {BoardFunctional} from './Board/Board';
-import {Modal} from './Panel/Modal';
 import {Panel} from './Panel/Panel';
 import StatusBar from './StatusBar/StatusBar';
 import {databaseLeaderboard, databaseUsers, database} from '../api/Firebase';
@@ -11,7 +10,8 @@ import {get, orderByChild, query, equalTo, ref, push, set, ThenableReference} fr
 import {RootState} from "../ReduxStore/store";
 import {useSelector, useDispatch} from "react-redux";
 import {toggleGameOn} from '../ReduxStore/reducers/IpacmanReducer';
-import {Container, Box} from "@chakra-ui/react";
+import {Container, Box, useDisclosure} from "@chakra-ui/react";
+import GameOverModal from "./GameOverModal";
 
 interface MainProps {
     user: User | null
@@ -19,7 +19,7 @@ interface MainProps {
 
 export const Main = (props: MainProps) => {
 
-    const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const {isOpen, onOpen, onClose} = useDisclosure();
     const [userState, setUserState] = useState<any>("");
     const [gameReset, setGameReset] = useState<boolean>(false);
 
@@ -85,23 +85,22 @@ export const Main = (props: MainProps) => {
         if (gameOn) dispatch(toggleGameOn());
         await sendGameStatsToFirebase();
         await new Promise(r => setTimeout(r, 1000));
-        setModalOpen(true);
+        onOpen();
     }
 
     const closeModal = () => {
-        setModalOpen(false);
+        onClose();
         setGameReset(true);
     }
 
-
     return (
-        <Container maxW="1200px" height="100%" sx={{margin: "auto"}}>
+        <Container width="fit-content" maxWidth="fit-content" height="100%" sx={{margin: "5px auto"}}>
             <StatusBar user={props.user} userOtherData={userState}/>
             <Box display="flex">
                 <BoardFunctional stopGame={stopGame} gameReset={gameReset} pace={pace}/>
                 <Panel stopGame={stopGame}/>
             </Box>
-            <Modal open={modalOpen} closeModal={closeModal}/>
+            <GameOverModal isOpen={isOpen} onClose={closeModal}/>
         </Container>
     )
 

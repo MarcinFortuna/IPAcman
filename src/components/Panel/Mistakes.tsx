@@ -4,6 +4,17 @@ import {MistakeType} from "../../types/types";
 import {getCorrectAnswers} from "../../helperFunctions";
 import {useSelector} from "react-redux";
 import {RootState} from "../../ReduxStore/store";
+import {
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    TableContainer,
+    Text,
+} from '@chakra-ui/react'
+
 
 export const Mistakes = () => {
 
@@ -13,28 +24,29 @@ export const Mistakes = () => {
     let mistakes: string[][] = getCorrectAnswers(mistakesState);
 
     let mistake_list_items: JSX.Element[] = mistakes.map((mistake: string[], i: number) =>
-        <tr key={i}>
-            <td>{mistake[0]}</td>
-            <td>{mistake[1]}</td>
-            <td>{mistake[2]}</td>
-        </tr>
+        <Tr key={i}>
+            <Td>{mistake[0]}</Td>
+            <Td>{mistake[1]}</Td>
+            <Td>{mistake[2]}</Td>
+        </Tr>
     );
 
     return (
-        <div>
-            <h2>Your mistakes:</h2>
+        <>
             {mistakes_present ?
-                <table id="mistakes_table" cellSpacing="0">
-                    <thead>
-                    <tr>
-                        <td>Question</td>
-                        <td>Your guess</td>
-                        <td>Correct answers</td>
-                    </tr>
-                    </thead>
-                    <tbody>{mistake_list_items}</tbody>
-                </table>
-                : <p id="no_mistakes">You have not made any mistakes yet!</p>}
-        </div>
+                <TableContainer>
+                    <Table size="sm" cellSpacing="0">
+                        <Thead>
+                            <Tr>
+                                <Th>Question</Th>
+                                <Th>Your guess</Th>
+                                <Th>Correct answers</Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>{mistake_list_items}</Tbody>
+                    </Table>
+                </TableContainer>
+                : <Text>You have not made any mistakes yet!</Text>}
+        </>
     );
 };

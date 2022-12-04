@@ -3,6 +3,16 @@ import {databaseLeaderboard} from '../../api/Firebase';
 import {useEffect, useState} from "react";
 import {LeaderboardItem} from "../../types/types";
 import {query, orderByChild, limitToLast, get} from 'firebase/database';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+} from '@chakra-ui/react'
+
 
 export const Leaderboard = () => {
 
@@ -51,32 +61,33 @@ export const Leaderboard = () => {
         }
     }, []);
 
-
     let leaderboard = (results)
         .filter(x => x.score && x.displayName)
         .map((parsed_result: LeaderboardItem, index: number) =>
-            <tr key={index}>
-                <td>{parsed_result.displayName}</td>
-                <td>{parsed_result.affiliation}</td>
-                <td>{parsed_result.datetime}</td>
-                <td>{parsed_result.pace}</td>
-                <td style={{textAlign: "right"}}>{parsed_result.score}</td>
-            </tr>);
+            <Tr key={index}>
+                <Td>{index + 1}</Td>
+                <Td>{parsed_result.displayName}</Td>
+                <Td>{parsed_result.affiliation}</Td>
+                <Td>{parsed_result.datetime}</Td>
+                <Td>{parsed_result.pace}</Td>
+                <Td style={{textAlign: "right"}}>{parsed_result.score}</Td>
+            </Tr>);
 
     return (
-        <div>
-            {<table id="leaderboard" cellSpacing="0">
-                <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Affiliation</td>
-                    <td>Date</td>
-                    <td>Pace</td>
-                    <td>Score</td>
-                </tr>
-                </thead>
-                <tbody>{leaderboard}</tbody>
-            </table>}
-        </div>
+        <TableContainer>
+            {<Table cellSpacing="0" size="sm">
+                <Thead>
+                    <Tr>
+                        <Th>No.</Th>
+                        <Th>Name</Th>
+                        <Th>Affiliation</Th>
+                        <Th>Date</Th>
+                        <Th>Pace</Th>
+                        <Th isNumeric>Score</Th>
+                    </Tr>
+                </Thead>
+                <Tbody>{leaderboard}</Tbody>
+            </Table>}
+        </TableContainer>
     );
 }

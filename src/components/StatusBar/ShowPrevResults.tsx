@@ -4,6 +4,15 @@ import {database} from '../../api/Firebase';
 import {ref, query, orderByChild, get} from "firebase/database";
 import {getCorrectAnswers} from '../../helperFunctions';
 import {PreviousResults, UserData} from "../../types/types";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+} from '@chakra-ui/react'
 
 interface ShowPrevResultsProps {
     userData: UserData
@@ -51,30 +60,30 @@ export const ShowPrevResults = (props: ShowPrevResultsProps) => {
     }, []);
 
     let list_items = attempts.map((x: PreviousResults, idx: number) =>
-        <tbody key={idx}>
-        <tr>
-            <td className="prevResultsTrHeader" colSpan={3}>{x.datetime} | Score: {x.score}</td>
-        </tr>
-        {x.results.map((y: string[], i: number) => <tr key={i}>
-            <td>{y[0]}</td>
-            <td>{y[1]}</td>
-            <td>{y[2]}</td>
-        </tr>)}
-        </tbody>
+        <Tbody key={idx}>
+        <Tr>
+            <Td className="prevResultsTrHeader" colSpan={3}>{x.datetime} | Score: {x.score}</Td>
+        </Tr>
+        {x.results.map((y: string[], i: number) => <Tr key={i}>
+            <Td>{y[0]}</Td>
+            <Td>{y[1]}</Td>
+            <Td>{y[2]}</Td>
+        </Tr>)}
+        </Tbody>
     );
 
     return (
-        <div>
-            {<table id="showPrevResults" cellSpacing="0">
-                <thead>
-                <tr>
-                    <td>Question</td>
-                    <td>Your guess</td>
-                    <td>Correct answers</td>
-                </tr>
-                </thead>
+        <TableContainer>
+            {<Table size="sm" cellSpacing="0">
+                <Thead>
+                <Tr>
+                    <Th>Question</Th>
+                    <Th>Your guess</Th>
+                    <Th>Correct answers</Th>
+                </Tr>
+                </Thead>
                 {list_items}
-            </table>}
-        </div>
+            </Table>}
+        </TableContainer>
     );
 };

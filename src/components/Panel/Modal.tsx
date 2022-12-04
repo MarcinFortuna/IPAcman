@@ -18,14 +18,6 @@ export const Modal = (props: ModalProps) => {
 
     return (
         <Popup open={open} modal onClose={closeModal}>
-            <div className="modal">
-                <button onClick={closeModal} className="close_button">
-                    &times;
-                </button>
-                <h1>GAME OVER</h1>
-                <h2>Your score: {score}</h2>
-                <Mistakes />
-            </div>
         </Popup>
     )
 };

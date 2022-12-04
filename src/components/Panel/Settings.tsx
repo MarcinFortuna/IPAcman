@@ -10,10 +10,8 @@ import {Box} from "@chakra-ui/react";
 
 export const Settings = () => {
 
-    const useIpa = useSelector((state: RootState) => state.ipacmanData.useIpa);
-
     return <>
-        <IpaSampa setAlphabet={toggleUseIpa}/>
+        <IpaSampa />
         <PaceSelector />
     </>
 }

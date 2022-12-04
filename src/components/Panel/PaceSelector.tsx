@@ -1,4 +1,4 @@
-import {useRadioGroup, HStack} from '@chakra-ui/react';
+import {useRadioGroup, HStack, Heading} from '@chakra-ui/react';
 import * as React from 'react';
 import RadioCard from "../RadioCard";
 import {useSelector, useDispatch} from "react-redux";
@@ -27,16 +27,19 @@ const PaceSelector = () => {
     const group = getRootProps()
 
     return (
-        <HStack {...group}>
-            {options.map((value) => {
-                const radio = getRadioProps({value})
-                return (
-                    <RadioCard key={value} {...radio} isDisabled={gameOn}>
-                        {value}
-                    </RadioCard>
-                )
-            })}
-        </HStack>
+        <>
+            <Heading size="md">Pace: </Heading>
+            <HStack {...group}>
+                {options.map((value) => {
+                    const radio = getRadioProps({value})
+                    return (
+                        <RadioCard key={value} {...radio} isDisabled={gameOn}>
+                            {value}
+                        </RadioCard>
+                    )
+                })}
+            </HStack>
+        </>
     )
 }
 

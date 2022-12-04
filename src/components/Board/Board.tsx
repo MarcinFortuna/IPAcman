@@ -333,17 +333,17 @@ export const BoardFunctional = (props: any) => {
             </tr>)
     });
 
-    const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
+    const [isLargerThan1040] = useMediaQuery('(min-width: 1040px)');
 
     return (
         <Box sx={{
-            minWidth: isLargerThan800 ? '780px' : '676px',
-            maxWidth: isLargerThan800 ? '780px' : '676px',
+            minWidth: isLargerThan1040 ? '780px' : '676px',
+            maxWidth: isLargerThan1040 ? '780px' : '676px',
             display: "block",
             td: {
                 overflow: "hidden",
-                width: isLargerThan800 ? "30px" : "26px",
-                height: isLargerThan800 ? "30px" : "26px",
+                width: isLargerThan1040 ? "30px" : "26px",
+                height: isLargerThan1040 ? "30px" : "26px",
                 padding: "1px",
                 backgroundColor: "#181819",
                 textAlign: "center"
@@ -351,8 +351,9 @@ export const BoardFunctional = (props: any) => {
             ".pacman, .coin": {
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
-                backgroundSize: "30px",
+                backgroundSize: "92%",
                 fontWeight: "bold",
+                fontSize: isLargerThan1040 ? 'md' : 'sm'
             },
             '.left': {
                 transform: 'rotate(180deg)'
