@@ -1,5 +1,6 @@
 import * as React from "react";
 import {Heading, Image} from "@chakra-ui/react";
+import ipacmanLogoURL from '../../assets/ipacman_logo.png';
 
 const IpacmanHeading = () => {
     return (<Heading as="h2" noOfLines={1}
@@ -14,7 +15,7 @@ const IpacmanHeading = () => {
                          width: '195px'
                      }}
     >
-        <Image src={require("../../assets/ipacman_logo.png")} alt="IPAcman" borderRadius='5px' boxSize='30px'
+        <Image src={ipacmanLogoURL} alt="IPAcman" borderRadius='5px' boxSize='30px'
                display="inline-block"/>
         IPAcman
     </Heading>);

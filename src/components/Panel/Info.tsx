@@ -15,6 +15,9 @@ const Info = () => {
                     <Link href={'https://www.typescriptlang.org/'} isExternal>TypeScript <ExternalLinkIcon/></Link>
                 </ListItem>
                 <ListItem>
+                    <Link href={'https://vitejs.dev/'} isExternal>Vite <ExternalLinkIcon/></Link>
+                </ListItem>
+                <ListItem>
                     <Link href={'https://redux-toolkit.js.org/'} isExternal>Redux Toolkit <ExternalLinkIcon/></Link>
                 </ListItem>
                 <ListItem>

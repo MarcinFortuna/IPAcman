@@ -7,13 +7,14 @@
     "noImplicitAny": false,
     "module": "esnext",
     "jsx": "react",
-    "target": "es5",
+    "target": "ESNext",
     "allowJs": true,
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
+    "types": ["vite/client", "vite-plugin-svgr/client"],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

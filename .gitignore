@@ -24,4 +24,4 @@ yarn-error.log*
 yarn.lock
 
 # Firebase config
-/src/firebase_config.ts
+/src/api/firebase_config.ts

@@ -11,23 +11,20 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+    "eslint-plugin-react": "^7.31.11",
     "firebase": "^9.14.0",
     "framer-motion": "^6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "react-scripts": "5.0.1",
     "react-usestateref": "^1.0.8",
     "reactjs-popup": "^2.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "start": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "lint": "eslint ./src --ext .ts"
   },
   "browserslist": {
     "production": [
@@ -44,13 +41,13 @@
   "devDependencies": {
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
-    "react-error-overlay": "6.0.11",
-    "source-map-loader": "^4.0.0",
-    "ts-loader": "^9.3.1",
-    "typescript": "^4.9.3"
-  },
-  "resolutions": {
-    "//": "See https://github.com/facebook/create-react-app/issues/11773",
-    "react-error-overlay": "6.0.9"
+    "@typescript-eslint/eslint-plugin": "^5.45.1",
+    "@typescript-eslint/parser": "^5.45.1",
+    "@vitejs/plugin-react": "^2.2.0",
+    "eslint": "^8.29.0",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.5",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-tsconfig-paths": "^4.0.0"
   }
 }

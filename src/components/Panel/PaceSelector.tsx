@@ -24,7 +24,7 @@ const PaceSelector = () => {
         onChange: selectPace
     });
 
-    const group = getRootProps()
+    const group = getRootProps();
 
     return (
         <>
