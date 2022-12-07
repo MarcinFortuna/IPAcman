@@ -76,16 +76,3 @@ export type GridElement = [
 ]
 
 export type BoardGrid = GridElement[][]
-
-export type MainComponentState = {
-    gameOn: boolean
-    currentlySearched: Question
-    phonemesOnTheBoard: (GridElement | null)[]
-    score: number
-    life: number
-    mistakes: MistakeType[]
-    modalOpen: boolean
-    pace: number
-    // useIpa: boolean
-    user: any
-}

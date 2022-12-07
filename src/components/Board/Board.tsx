@@ -23,9 +23,15 @@ import {Box, useMediaQuery} from '@chakra-ui/react';
 import coin from '../../assets/coin.png';
 import pacman from '../../assets/pacman-r.png';
 
-export const BoardFunctional = (props: any) => {
+interface BoardProps {
+    stopGame: () => void
+    gameReset: boolean
+    pace: number
+}
 
-    const gameReset = props.gameReset;
+export const Board = (props: BoardProps) => {
+
+    const {stopGame, gameReset, pace} = props;
 
     const intervalsStateArray = useSelector((state: RootState) => state.intervals.intervals);
     const dispatch = useDispatch();
@@ -46,10 +52,10 @@ export const BoardFunctional = (props: any) => {
     }, [currentlySearched]);
 
     useEffect(() => {
-        if (life <= 0) props.stopGame();
+        if (life <= 0) stopGame();
     }, [life]);
 
-    const grid = new Array(18).fill(null).map(x => Array(26).fill(null).map(y => Array(2).fill("")));
+    const grid = new Array(18).fill(null).map(() => Array(26).fill(null).map(() => Array(2).fill("")));
     grid[0][0] = ["pacman right", ""];
 
     const [board, setBoard, boardRef] = useState(grid);
@@ -91,9 +97,8 @@ export const BoardFunctional = (props: any) => {
 
     const movePacman = (direction: string) => {
         let newGrid: any = boardRef.current.slice();
-        // @ts-ignore
-        let oldCoords: number[] = findPacman();
-        let newCoords: number[] = movement(direction, oldCoords);
+        const oldCoords: number[] = findPacman() as number[];
+        const newCoords: number[] = movement(direction, oldCoords);
         let p_string = "pacman " + direction;
         let newPhoneme: null | Phoneme[] = null;
         if (newGrid[newCoords[0]][newCoords[1]][0] === "coin") {
@@ -102,23 +107,22 @@ export const BoardFunctional = (props: any) => {
             } else {
                 p_string += " failure";
             }
-            let eatenPhonemeData = newGrid[newCoords[0]][newCoords[1]][1];
-            let index: number = phonemesOnTheBoardRef.current.findIndex(x => x["sampa"] === eatenPhonemeData.sampa);
+            const eatenPhonemeData: Phoneme = newGrid[newCoords[0]][newCoords[1]][1];
+            const index: number = phonemesOnTheBoardRef.current.findIndex(x => x["sampa"] === eatenPhonemeData.sampa);
             dispatch(resetInterval({index: index}));
 
             newPhoneme = generateXRandomPhonemes("any", 1);
             newGrid = putPhonemesOnTheBoard(newPhoneme);
 
-            let newPhonemesOnTheBoard: Phoneme[] = phonemesOnTheBoardRef.current.slice();
+            const newPhonemesOnTheBoard: Phoneme[] = phonemesOnTheBoardRef.current.slice();
             newPhonemesOnTheBoard[index] = newPhoneme[0];
 
-            let newQuestion: Question = generateRandomQuestion(newPhonemesOnTheBoard);
+            const newQuestion: Question = generateRandomQuestion(newPhonemesOnTheBoard);
 
             setPhonemesOnTheBoard(newPhonemesOnTheBoard);
             dispatch(setCurrentlySearched(newQuestion));
 
         }
-        // @ts-ignore
         newGrid[oldCoords[0]][oldCoords[1]] = ["", ""];
         newGrid[newCoords[0]][newCoords[1]] = [p_string, ""];
         setBoard(newGrid);
@@ -145,20 +149,20 @@ export const BoardFunctional = (props: any) => {
     }
 
     const checkIfPhonemeCurrent = (phoneme: Phoneme) => {
-        let phonemeClasses: string[] = [];
-        for (let prop in phoneme) {
+        const phonemeClasses: string[] = [];
+        for (const prop in phoneme) {
             phonemeClasses.push(phoneme[prop]);
         }
-        let result: boolean = currentlySearchedRef.current.classes.some(x => phonemeClasses.includes(x));
+        const result: boolean = currentlySearchedRef.current.classes.some(x => phonemeClasses.includes(x));
         if (!result) {
-            let mistake: MistakeType = {guessedPhoneme: phoneme, guessedQuestion: currentlySearchedRef.current};
+            const mistake: MistakeType = {guessedPhoneme: phoneme, guessedQuestion: currentlySearchedRef.current};
             dispatch(addMistake(mistake));
         }
         return result;
     }
 
     const setupGame = () => {
-        let phonemes: Phoneme[] = generateXRandomPhonemes("any", 5) as Phoneme[];
+        const phonemes: Phoneme[] = generateXRandomPhonemes("any", 5) as Phoneme[];
         const newBoard: BoardGrid = putPhonemesOnTheBoard(phonemes);
         const randomQuestion: Question = generateRandomQuestion(phonemes);
         setBoard(newBoard);
@@ -168,11 +172,11 @@ export const BoardFunctional = (props: any) => {
     };
 
     useEffect(() => {
-        if (!props.pace) return;
-        if (phonemesOnTheBoard.length === 5 && props.pace) {
+        if (!pace) return;
+        if (phonemesOnTheBoard.length === 5 && pace) {
             for (let i = 0; i < 5; i++) {
                 if (intervalsStateArray[i].interval === 0) {
-                    let action = setAPhonemeInMotion(phonemesOnTheBoard[i], props.pace, movePhoneme, i);
+                    const action = setAPhonemeInMotion(phonemesOnTheBoard[i], pace, movePhoneme, i);
                     dispatch(setNewInterval(action));
                 }
             }
@@ -182,8 +186,8 @@ export const BoardFunctional = (props: any) => {
     // Phoneme functions
 
     const generateXRandomPhonemes = (category: string, num: number) => {
-        let currentPhonemeArr: Phoneme[] = phonemesOnTheBoardRef.current.slice();
-        let newPhonemeArr: Phoneme[] = [];
+        const currentPhonemeArr: Phoneme[] = phonemesOnTheBoardRef.current.slice();
+        const newPhonemeArr: Phoneme[] = [];
         for (let i = 0; i < num; i++) {
             let randomNumber: number;
             let randomPhoneme: Phoneme;
@@ -204,8 +208,8 @@ export const BoardFunctional = (props: any) => {
             // Due to few questions which eliminate diphthongs and many diphthongs in the inventory,
             // there sometimes arises huge surplus of diphthongs on the board.
             // This is why there is an artificial restriction limiting the number of diphthongs to 2 at the same time.
-            let diphthong_count: number = 0;
-            let combinedPhonemeArr = [...currentPhonemeArr, ...newPhonemeArr];
+            let diphthong_count = 0;
+            const combinedPhonemeArr = [...currentPhonemeArr, ...newPhonemeArr];
             for (let i = 0; i < combinedPhonemeArr.length; i++) {
                 if (combinedPhonemeArr[i] && combinedPhonemeArr[i].hasOwnProperty("type")) diphthong_count++;
             }
@@ -221,7 +225,7 @@ export const BoardFunctional = (props: any) => {
     }
 
     const putPhonemesOnTheBoard = (phonemeArr: Phoneme[], oldGrid?: BoardGrid) => {
-        let newGrid: any = oldGrid ? oldGrid : boardRef.current.slice();
+        const newGrid: any = oldGrid ? oldGrid : boardRef.current.slice();
 
         for (let i = 0; i < phonemeArr.length; i++) {
             let pos: number[] = generateRandomPosition();
@@ -229,7 +233,6 @@ export const BoardFunctional = (props: any) => {
             const pacmanPos: number[] = findPacman() as number[];
             while (checkDistance(pos, pacmanPos) || pickedSquare[0].includes("coin")) {
                 pos = generateRandomPosition();
-                // @ts-ignore
                 pickedSquare = newGrid[pos[0]][pos[1]].slice();
             }
             pickedSquare[0] = "coin";
@@ -240,12 +243,11 @@ export const BoardFunctional = (props: any) => {
     }
 
     const generateRandomQuestion = (phonemeArr?: Phoneme[]) => {
-        let phonemesToAnalyze: Phoneme[] = phonemeArr ? phonemeArr : phonemesOnTheBoard;
-        let classesOfPhonemesOnTheBoard: string[] = [];
+        const phonemesToAnalyze: Phoneme[] = phonemeArr ? phonemeArr : phonemesOnTheBoard;
+        const classesOfPhonemesOnTheBoard: string[] = [];
         phonemesToAnalyze.forEach(x => {
             if (x) {
-                // @ts-ignore
-                for (let prop in x) {
+                for (const prop in x) {
                     classesOfPhonemesOnTheBoard.push(x[prop]);
                 }
             }
@@ -256,16 +258,16 @@ export const BoardFunctional = (props: any) => {
         )) {
             index = Math.floor(Math.random() * questions.length);
         }
-        let currentlySearched: Question = questions[index];
+        const currentlySearched: Question = questions[index];
         return currentlySearched;
     }
 
     const setAPhonemeInMotion = (phoneme: Phoneme, pace: number, callback_function: (phoneme: Phoneme, intervalId?: any) => void, index?: number) => {
-        let interval = setInterval(function(){
+        const interval = setInterval(function(){
             callback_function(phoneme, interval);
         }, pace);
-        let randomDirection = chooseADirectionAtRandom();
-        setDirection((directions) => directions.map((x: string, i: number) => i === index ? randomDirection : x));
+        const randomDirection = chooseADirectionAtRandom();
+        setDirection((directions: string[]) => directions.map((x: string, i: number) => i === index ? randomDirection : x));
         return {
             interval: interval,
             index: index || 0,
@@ -274,35 +276,31 @@ export const BoardFunctional = (props: any) => {
     }
 
     const movePhoneme = (phoneme: Phoneme, intervalId?: any) => {
-        let index: number = phonemesOnTheBoardRef.current.findIndex(x => x.sampa === phoneme.sampa);
+        const index: number = phonemesOnTheBoardRef.current.findIndex(x => x.sampa === phoneme.sampa);
         if (index === -1) {
             clearInterval(intervalId);
             return;
         }
-        let direction: string = directionRef.current[index];
+        const direction: string = directionRef.current[index];
 
-        let newGrid: any = boardRef.current.slice();
-        // @ts-ignore
-        let oldCoords: number[] | boolean = findAPhoneme(phoneme.sampa);
+        const newGrid: any = boardRef.current.slice();
+        const oldCoords: number[] | boolean = findAPhoneme(phoneme.sampa);
         if (oldCoords === false) {
             console.error(`Phoneme ${phoneme.sampa} not found!`);
             return;
         }
-        let newCoords: number[] = movement(direction, oldCoords);
+        const newCoords: number[] = movement(direction, oldCoords);
         if (newGrid[newCoords[0]][newCoords[1]][0].includes("pacman")) {
             return false;
         }
-        // @ts-ignore
         if ((oldCoords[0] === newCoords[0] && oldCoords[1] === newCoords[1]) || newGrid[newCoords[0]][newCoords[1]][0] === "coin") {
             let newRandomDirection = chooseADirectionAtRandom();
             while (newRandomDirection === direction) newRandomDirection = chooseADirectionAtRandom();
             setDirection((directions) => directions.map((x: string, i: number) => i === index ? newRandomDirection : x));
             return;
-        };
-        // @ts-ignore
-        let phonemeInfo = newGrid[oldCoords[0]][oldCoords[1]];
+        }
+        const phonemeInfo = newGrid[oldCoords[0]][oldCoords[1]];
         newGrid[newCoords[0]][newCoords[1]] = phonemeInfo;
-        // @ts-ignore
         newGrid[oldCoords[0]][oldCoords[1]] = ["", ""];
         setBoard(newGrid);
     }

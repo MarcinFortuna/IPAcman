@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {BoardFunctional} from './Board/Board';
+import {Board} from './Board/Board';
 import {Panel} from './Panel/Panel';
 import StatusBar from './StatusBar/StatusBar';
 import {databaseLeaderboard, databaseUsers, database} from '../api/Firebase';
-import {MainComponentState, GridElement, ObjectToPushToFirebase} from "../types/types";
+import {ObjectToPushToFirebase} from "../types/types";
 import {User} from "firebase/auth";
 import {useEffect, useState} from "react";
-import {get, orderByChild, query, equalTo, ref, push, set, ThenableReference} from "firebase/database";
+import {get, orderByChild, query, equalTo, ref, push, set, ThenableReference, DatabaseReference} from "firebase/database";
 import {RootState} from "../ReduxStore/store";
 import {useSelector, useDispatch} from "react-redux";
 import {toggleGameOn} from '../ReduxStore/reducers/IpacmanReducer';
@@ -42,11 +42,11 @@ export const Main = (props: MainProps) => {
         const userQuery = query(databaseUsers, orderByChild('uid'), equalTo(uid as string));
         get(userQuery)
             .then((snapshot) => {
-                let userData = snapshot.val();
-                let userDbKey = Object.keys(userData)[0];
-                let username = userData[userDbKey]["name"];
-                let displayName = userData[userDbKey]["displayName"];
-                let affiliation = userData[userDbKey]["affiliation"];
+                const userData = snapshot.val();
+                const userDbKey = Object.keys(userData)[0];
+                const username = userData[userDbKey]["name"];
+                const displayName = userData[userDbKey]["displayName"];
+                const affiliation = userData[userDbKey]["affiliation"];
                 setUserState({
                     username: username,
                     displayName: displayName,
@@ -60,8 +60,8 @@ export const Main = (props: MainProps) => {
         if (!(props.user && props.user.email)) {
             console.log("not logged in");
             return
-        };
-        let objectToPush: ObjectToPushToFirebase = {
+        }
+        const objectToPush: ObjectToPushToFirebase = {
             score: score,
             uid: props.user.uid,
             pace: pace,
@@ -71,11 +71,11 @@ export const Main = (props: MainProps) => {
             displayName: userState.displayName,
             affiliation: userState.affiliation
         };
-        let dbUserUrl: any = ref(database, 'Users/' + userState.userDbKey + '/attempts/');
-        let newDbEntry: ThenableReference = push(dbUserUrl);
+        const dbUserUrl: DatabaseReference = ref(database, 'Users/' + userState.userDbKey + '/attempts/');
+        const newDbEntry: ThenableReference = push(dbUserUrl);
         console.log(objectToPush);
         await set(newDbEntry, objectToPush);
-        let newLeaderboardEntry: ThenableReference = push(databaseLeaderboard);
+        const newLeaderboardEntry: ThenableReference = push(databaseLeaderboard);
         await set(newLeaderboardEntry, objectToPush);
         sessionStorage.removeItem("results");
         sessionStorage.removeItem("attempts");
@@ -97,7 +97,7 @@ export const Main = (props: MainProps) => {
         <Container width="fit-content" maxWidth="fit-content" height="100%" sx={{margin: "5px auto"}}>
             <StatusBar user={props.user} userOtherData={userState}/>
             <Box display="flex">
-                <BoardFunctional stopGame={stopGame} gameReset={gameReset} pace={pace}/>
+                <Board stopGame={stopGame} gameReset={gameReset} pace={pace}/>
                 <Panel stopGame={stopGame}/>
             </Box>
             <GameOverModal isOpen={isOpen} onClose={closeModal}/>

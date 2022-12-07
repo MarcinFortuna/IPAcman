@@ -3,7 +3,7 @@ import {phonemes} from "./data/RP_segments";
 
 export const movement = (direction: string, oldCoords: number[]) => {
 
-    let newCoords: number[] = oldCoords.slice();
+    const newCoords: number[] = oldCoords.slice();
 
     if (direction === "left" && newCoords[1] !== 0) newCoords[1] -= 1;
     else if (direction === "right" && newCoords[1] !== 25) newCoords[1] += 1;
@@ -41,21 +41,20 @@ export const generateRandomPosition = () => [Math.floor(Math.random() * 18), Mat
 export const checkDistance = (phonemeCoords: number[], pacmanCoords: number[]) => (Math.abs(phonemeCoords[0] - pacmanCoords[0]) < 3 || Math.abs(phonemeCoords[1] - pacmanCoords[1]) < 3);
 
 export const getCorrectAnswers = (mistakes_arr: MistakeType[]) => {
-  let mistakes: string[][] = [];
+  const mistakes: string[][] = [];
   for (let i = 0; i < mistakes_arr.length; i++) {
-    let mistake: string[] = [];
+    const mistake: string[] = [];
     mistake.push(mistakes_arr[i]["guessedQuestion"]["question"]);
     mistake.push(mistakes_arr[i]["guessedPhoneme"]["ipa"]);
-    let correct_answers: string[] = []
+    const correct_answers: string[] = []
     for (let j = 0; j < phonemes.length; j++) {
-      for (let prop in phonemes[j]) {
-        // @ts-ignore
+      for (const prop in phonemes[j]) {
         if (mistakes_arr[i]["guessedQuestion"]["classes"].includes(phonemes[j][prop])) {
           correct_answers.push(phonemes[j]["ipa"]);
         }
       }
     }
-    let correct_answers_str: string = [...new Set(correct_answers)].sort().join(", ");
+    const correct_answers_str: string = [...new Set(correct_answers)].sort().join(", ");
     mistake.push(correct_answers_str);
     mistakes.push(mistake);
   }

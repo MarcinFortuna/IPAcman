@@ -4,7 +4,11 @@ import {useSelector, useDispatch} from "react-redux";
 import {toggleGameOn} from '../../ReduxStore/reducers/IpacmanReducer';
 import { Button } from '@chakra-ui/react'
 
-const StartStopButton = (props) => {
+interface StartStopButtonProps {
+    stopGame: () => void
+}
+
+const StartStopButton = (props: StartStopButtonProps) => {
 
     const {stopGame} = props;
 

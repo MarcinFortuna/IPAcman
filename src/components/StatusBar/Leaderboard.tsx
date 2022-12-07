@@ -11,7 +11,7 @@ import {
   Th,
   Td,
   TableContainer,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 
 export const Leaderboard = () => {
@@ -22,14 +22,14 @@ export const Leaderboard = () => {
 
     const parseResults = (data: any) => {
 
-        let all_results = Object.values(data);
-        let parsed_results: LeaderboardItem[] = [];
+        const all_results = Object.values(data);
+        const parsed_results: LeaderboardItem[] = [];
 
         all_results.forEach((result: any) => {
-            let datetime: Date = new Date(Math.floor(result.timestamp / 1000) * 1000);
-            let datetime_human: string = datetime.toLocaleString("en-GB");
-            let datetime_human_no_seconds: string = datetime_human.substring(0, datetime_human.length - 3);
-            let parsed_result: LeaderboardItem = {
+            const datetime: Date = new Date(Math.floor(result.timestamp / 1000) * 1000);
+            const datetime_human: string = datetime.toLocaleString("en-GB");
+            const datetime_human_no_seconds: string = datetime_human.substring(0, datetime_human.length - 3);
+            const parsed_result: LeaderboardItem = {
                 name: result.username,
                 displayName: result.displayName,
                 affiliation: result.affiliation,
@@ -46,7 +46,7 @@ export const Leaderboard = () => {
     };
 
     useEffect(() => {
-        let resultsFromSessionStorage: string = JSON.parse(sessionStorage.getItem("results") as string);
+        const resultsFromSessionStorage: string = JSON.parse(sessionStorage.getItem("results") as string);
 
         if (!resultsFromSessionStorage) {
             console.log("Results in session storage not found. Fetching the current leaderboard from Firebase");
@@ -61,7 +61,7 @@ export const Leaderboard = () => {
         }
     }, []);
 
-    let leaderboard = (results)
+    const leaderboard = (results)
         .filter(x => x.score && x.displayName)
         .map((parsed_result: LeaderboardItem, index: number) =>
             <Tr key={index}>

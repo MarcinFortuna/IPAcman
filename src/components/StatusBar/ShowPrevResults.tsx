@@ -12,7 +12,7 @@ import {
   Th,
   Td,
   TableContainer,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 interface ShowPrevResultsProps {
     userData: UserData
@@ -21,17 +21,16 @@ interface ShowPrevResultsProps {
 export const ShowPrevResults = (props: ShowPrevResultsProps) => {
 
     const [attempts, setAttempts] = useState<PreviousResults[]>([]);
-    console.log(props);
-    const parseAttempts = (data: any) => {
-        let results: PreviousResults[] = [];
-        for (let i in data) {
+    const parseAttempts = (data: object) => {
+        const results: PreviousResults[] = [];
+        for (const i in data) {
             if (typeof data[i] !== "object") continue;
-            let datetime: Date = new Date(Math.floor(data[i].timestamp / 1000) * 1000);
-            let datetime_human: string = datetime.toLocaleString("en-GB");
-            let datetime_human_no_seconds: string = datetime_human.substring(0, datetime_human.length - 3);
+            const datetime: Date = new Date(Math.floor(data[i].timestamp / 1000) * 1000);
+            const datetime_human: string = datetime.toLocaleString("en-GB");
+            const datetime_human_no_seconds: string = datetime_human.substring(0, datetime_human.length - 3);
             let mistakes_with_results: string[][] = [];
             if (data[i]["mistakes"]) mistakes_with_results = getCorrectAnswers(data[i]["mistakes"]);
-            let old_result: PreviousResults = {
+            const old_result: PreviousResults = {
                 datetime: datetime_human_no_seconds,
                 results: mistakes_with_results,
                 score: data[i].score
@@ -42,13 +41,13 @@ export const ShowPrevResults = (props: ShowPrevResultsProps) => {
     }
 
     useEffect(() => {
-        let attemptsFromSessionStorage = JSON.parse(sessionStorage.getItem("attempts") as string);
+        const attemptsFromSessionStorage = JSON.parse(sessionStorage.getItem("attempts") as string);
         if (!attemptsFromSessionStorage) {
             console.log("Previous attempts in session storage not found. Fetching the current list of previous attempts from Firebase");
-            let dbUserUrl = query(ref(database, 'Users/' + props.userData.userDbKey + '/attempts/'), orderByChild('timestamp'));
+            const dbUserUrl = query(ref(database, 'Users/' + props.userData.userDbKey + '/attempts/'), orderByChild('timestamp'));
             get(dbUserUrl).then(async (snapshot) => {
-                let attemptsFromDB: {[key: string]: any} = await snapshot.val();
-                let parsedAttempts: PreviousResults[] = parseAttempts(attemptsFromDB);
+                const attemptsFromDB: {[key: string]: any} = await snapshot.val();
+                const parsedAttempts: PreviousResults[] = parseAttempts(attemptsFromDB);
                 setAttempts(parsedAttempts);
                 sessionStorage.setItem("attempts", JSON.stringify(parsedAttempts));
                 console.log("New list of previous attempts set in session storage");
@@ -59,7 +58,7 @@ export const ShowPrevResults = (props: ShowPrevResultsProps) => {
         }
     }, []);
 
-    let list_items = attempts.map((x: PreviousResults, idx: number) =>
+    const list_items = attempts.map((x: PreviousResults, idx: number) =>
         <Tbody key={idx}>
         <Tr>
             <Td className="prevResultsTrHeader" colSpan={3}>{x.datetime} | Score: {x.score}</Td>

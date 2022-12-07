@@ -13,8 +13,8 @@ const Form = (props: FormProps) => {
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const data: FormData = new FormData(event.currentTarget);
-		let email: string | undefined = (data.get("email"))?.toString();
-		let password: string | undefined = (data.get("password"))?.toString();
+		const email: string | undefined = (data.get("email"))?.toString();
+		const password: string | undefined = (data.get("password"))?.toString();
 		if (option === 1) {
 			if (!email || !password) {
 				alert("Enter email and password!");
@@ -30,9 +30,9 @@ const Form = (props: FormProps) => {
 				alert("Your password does not match the repeated password!");
 				return;
 			} else {
-				let name: string | undefined = (data.get("username"))?.toString();
-				let displayName: string | undefined = (data.get("displayName"))?.toString();
-				let affiliation: string | undefined = (data.get("affiliation"))?.toString();
+				const name: string | undefined = (data.get("username"))?.toString();
+				const displayName: string | undefined = (data.get("displayName"))?.toString();
+				const affiliation: string | undefined = (data.get("affiliation"))?.toString();
 				if (!email || !password || !displayName) {
 					alert("Email, password, and name are obligatory fields!");
 				} else {

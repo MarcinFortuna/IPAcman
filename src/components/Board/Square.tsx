@@ -10,7 +10,7 @@ export const Square = (props: SquareProps) => {
 
     const {classname, ipa} = props;
 
-    let square_content: string = ipa ? ipa : "";
+    const square_content: string = ipa ? ipa : "";
     return (
         <td className={classname}>{square_content}</td>
     );

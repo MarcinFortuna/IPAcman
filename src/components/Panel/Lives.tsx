@@ -7,7 +7,7 @@ import {Box, Card} from "@chakra-ui/react";
 const Lives = () => {
     const life = useSelector((state: RootState) => state.ipacmanData.life);
 
-    let output: string[] = [];
+    const output: string[] = [];
     if (life) {
         for (let i = 0; i < life; i++) {
             output.push("🧡");

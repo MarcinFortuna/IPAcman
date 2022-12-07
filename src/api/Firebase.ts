@@ -17,13 +17,13 @@ export const database = getDatabase(app);
 export const databaseUsers = ref(database, 'Users/');
 export const databaseLeaderboard = ref(database, 'Leaderboard/');
 
-export const signUp = (email: string, password: string, name: string = "", displayName: string, affiliation: string = "") => {
+export const signUp = (email: string, password: string, name = "", displayName: string, affiliation = "") => {
     console.log("in the signUp function");
     createUserWithEmailAndPassword(auth, email, password)
         .then(async (newUser: UserCredential) => {
             console.log(`Signup for ${email} successful`);
-            let uid: string | undefined = newUser?.user?.uid;
-            let newDbEntry: ThenableReference = push(databaseUsers);
+            const uid: string | undefined = newUser?.user?.uid;
+            const newDbEntry: ThenableReference = push(databaseUsers);
             set(newDbEntry, {
                 "uid": uid,
                 "email": email,
@@ -34,8 +34,8 @@ export const signUp = (email: string, password: string, name: string = "", displ
             });
         })
         .catch(error => {
-            let errorCode: boolean | null | undefined = error.code;
-            let errorMessage = error.message;
+            const errorCode: boolean | null | undefined = error.code;
+            const errorMessage = error.message;
             console.log("Signup failed!");
             console.log(errorCode);
             console.log(errorMessage);
@@ -50,8 +50,8 @@ export const signIn = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
         .then(() => {console.log(`Sign in for ${email} was successful`)})
         .catch(error => {
-        let errorCode: boolean | null | undefined = error.code;
-        let errorMessage = error.message;
+        const errorCode: boolean | null | undefined = error.code;
+        const errorMessage = error.message;
         console.log("Signin failed!");
         console.log(errorCode);
         console.log(errorMessage);
@@ -65,8 +65,8 @@ export const signOutOfApp = () => {
     signOut(auth)
         .then(() => {console.log("Sign out successful")})
         .catch(error => {
-        let errorCode: boolean | null | undefined = error.code;
-        let errorMessage = error.message;
+        const errorCode: boolean | null | undefined = error.code;
+        const errorMessage = error.message;
         console.log("Signout failed!");
         console.log(errorCode);
         console.log(errorMessage);
