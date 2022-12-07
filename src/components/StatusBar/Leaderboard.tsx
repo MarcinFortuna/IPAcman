@@ -41,22 +41,23 @@ export const Leaderboard = () => {
             parsed_results.sort((a: LeaderboardItem, b: LeaderboardItem) => a.score > b.score ? -1 : 1);
         });
 
-        setResults(parsed_results);
+        return parsed_results;
 
     };
 
     useEffect(() => {
-        const resultsFromSessionStorage: string = JSON.parse(sessionStorage.getItem("results") as string);
-
+        const resultsFromSessionStorage = JSON.parse(sessionStorage.getItem("results") as string);
         if (!resultsFromSessionStorage) {
             console.log("Results in session storage not found. Fetching the current leaderboard from Firebase");
             get(leaderboardQuery)
                 .then((snapshot) => {
-                    parseResults(snapshot.val());
+                    const parsed_results = parseResults(snapshot.val());
+                    setResults(parsed_results);
+                    sessionStorage.setItem("results", JSON.stringify(parsed_results));
                 })
                 .catch((error) => console.error(error));
         } else {
-            parseResults(resultsFromSessionStorage);
+            setResults(parseResults(resultsFromSessionStorage));
             console.log("Leaderboard retrieved from session storage");
         }
     }, []);

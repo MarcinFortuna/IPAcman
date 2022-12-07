@@ -96,7 +96,7 @@ export const Board = (props: BoardProps) => {
     }
 
     const movePacman = (direction: string) => {
-        let newGrid: any = boardRef.current.slice();
+        let newGrid = boardRef.current.slice();
         const oldCoords: number[] = findPacman() as number[];
         const newCoords: number[] = movement(direction, oldCoords);
         let p_string = "pacman " + direction;
@@ -225,7 +225,7 @@ export const Board = (props: BoardProps) => {
     }
 
     const putPhonemesOnTheBoard = (phonemeArr: Phoneme[], oldGrid?: BoardGrid) => {
-        const newGrid: any = oldGrid ? oldGrid : boardRef.current.slice();
+        const newGrid: any[][] = oldGrid ? oldGrid : boardRef.current.slice();
 
         for (let i = 0; i < phonemeArr.length; i++) {
             let pos: number[] = generateRandomPosition();

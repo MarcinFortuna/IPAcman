@@ -41,7 +41,7 @@ export const ShowPrevResults = (props: ShowPrevResultsProps) => {
     }
 
     useEffect(() => {
-        const attemptsFromSessionStorage = JSON.parse(sessionStorage.getItem("attempts") as string);
+        const attemptsFromSessionStorage: PreviousResults[] = JSON.parse(sessionStorage.getItem("attempts") as string);
         if (!attemptsFromSessionStorage) {
             console.log("Previous attempts in session storage not found. Fetching the current list of previous attempts from Firebase");
             const dbUserUrl = query(ref(database, 'Users/' + props.userData.userDbKey + '/attempts/'), orderByChild('timestamp'));
