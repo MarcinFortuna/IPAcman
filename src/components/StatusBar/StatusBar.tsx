@@ -29,7 +29,8 @@ const StatusBar = (props: StatusBarProps) => {
     return (
         <Box display="flex" id="statusBar" sx={{
             justifyContent: "space-between",
-            alignItems: "center"
+            alignItems: "center",
+            marginBottom: "5px"
         }}>
             <Text fontSize="sm" className="statusBarString">{greeting}</Text>
             <Box>
