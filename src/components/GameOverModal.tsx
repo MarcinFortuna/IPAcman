@@ -15,8 +15,8 @@ import {
 } from "@chakra-ui/react";
 
 interface GameOverModalProps {
-    isOpen: any
-    onClose: any
+    isOpen: boolean
+    onClose: () => void
 }
 
 const GameOverModal = (props: GameOverModalProps) => {

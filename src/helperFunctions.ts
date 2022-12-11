@@ -1,5 +1,5 @@
-import {MistakeType} from "./types/types";
-import {phonemes} from "./data/RP_segments";
+import {LeaderboardItem, MistakeType, ResultsDBResponse, SingleDBResponse} from "./types/types";
+import {consonants, phonemes, vowels} from "./data/RP_segments";
 
 export const movement = (direction: string, oldCoords: number[]) => {
 
@@ -40,6 +40,16 @@ export const generateRandomPosition = () => [Math.floor(Math.random() * 18), Mat
 
 export const checkDistance = (phonemeCoords: number[], pacmanCoords: number[]) => (Math.abs(phonemeCoords[0] - pacmanCoords[0]) < 3 || Math.abs(phonemeCoords[1] - pacmanCoords[1]) < 3);
 
+export const getRandomPhoneme = (category: string) => {
+    if (category === "C") {
+        return consonants[Math.floor(Math.random() * consonants.length)];
+    } else if (category === "V") {
+        return vowels[Math.floor(Math.random() * vowels.length)];
+    } else {
+        return phonemes[Math.floor(Math.random() * phonemes.length)];
+    }
+}
+
 export const getCorrectAnswers = (mistakes_arr: MistakeType[]) => {
   const mistakes: string[][] = [];
   for (let i = 0; i < mistakes_arr.length; i++) {
@@ -59,6 +69,42 @@ export const getCorrectAnswers = (mistakes_arr: MistakeType[]) => {
     mistakes.push(mistake);
   }
   return mistakes;
+}
+
+const timestampToHumanDate = (timestamp: string) => {
+    const datetime: Date = new Date(Math.floor(Number(timestamp) / 1000) * 1000);
+    const datetime_human: string = datetime.toLocaleString("en-GB");
+    return datetime_human.substring(0, datetime_human.length - 3);
+}
+
+export const parseDBResultsResponse = (data: ResultsDBResponse, output: "L"|"P") => {
+
+    const all_results: SingleDBResponse[] = Object.values(data);
+
+    if (output === "L") {
+        return all_results
+            .map((result: SingleDBResponse) => {
+                return {
+                    name: result.username,
+                    displayName: result.displayName,
+                    affiliation: result.affiliation,
+                    score: result.score,
+                    datetime: timestampToHumanDate(result.timestamp),
+                    pace: result.pace === 0 ? 'Still' : result.pace === 800 ? 'Slow' : result.pace === 400 ? 'Medium' : 'Fast'
+                }
+            })
+            .sort((a: LeaderboardItem, b: LeaderboardItem) => a.score > b.score ? -1 : 1);
+    } else if (output === "P") {
+        return all_results.map((result: SingleDBResponse) => {
+            return {
+                datetime: timestampToHumanDate(result.timestamp),
+                results: result.mistakes ? getCorrectAnswers(result.mistakes) : [],
+                score: result.score
+            }
+        });
+    } else {
+        console.error("Output type invalid!");
+    }
 }
 
 export const paceMapping = {

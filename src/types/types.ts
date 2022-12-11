@@ -44,6 +44,21 @@ export type PreviousResults = {
     score: number
 }
 
+export type SingleDBResponse = {
+    affiliation: string
+    displayName: string
+    mistakes: MistakeType[]
+    pace: number
+    score: number
+    timestamp: string
+    uid: string
+    username: string
+}
+
+export type ResultsDBResponse = {
+    [key: string]: SingleDBResponse
+}
+
 export type UserData = {
     userDbKey?: string
     username: string

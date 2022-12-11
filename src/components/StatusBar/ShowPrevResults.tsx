@@ -2,8 +2,8 @@ import * as React from 'react';
 import {useState, useEffect} from "react";
 import {database} from '../../api/Firebase';
 import {ref, query, orderByChild, get} from "firebase/database";
-import {getCorrectAnswers} from '../../helperFunctions';
-import {PreviousResults, UserData} from "../../types/types";
+import {parseDBResultsResponse} from '../../helperFunctions';
+import {PreviousResults, ResultsDBResponse, UserData} from "../../types/types";
 import {
   Table,
   Thead,
@@ -21,24 +21,6 @@ interface ShowPrevResultsProps {
 export const ShowPrevResults = (props: ShowPrevResultsProps) => {
 
     const [attempts, setAttempts] = useState<PreviousResults[]>([]);
-    const parseAttempts = (data: object) => {
-        const results: PreviousResults[] = [];
-        for (const i in data) {
-            if (typeof data[i] !== "object") continue;
-            const datetime: Date = new Date(Math.floor(data[i].timestamp / 1000) * 1000);
-            const datetime_human: string = datetime.toLocaleString("en-GB");
-            const datetime_human_no_seconds: string = datetime_human.substring(0, datetime_human.length - 3);
-            let mistakes_with_results: string[][] = [];
-            if (data[i]["mistakes"]) mistakes_with_results = getCorrectAnswers(data[i]["mistakes"]);
-            const old_result: PreviousResults = {
-                datetime: datetime_human_no_seconds,
-                results: mistakes_with_results,
-                score: data[i].score
-            }
-            results.push(old_result);
-        }
-        return results;
-    }
 
     useEffect(() => {
         const attemptsFromSessionStorage: PreviousResults[] = JSON.parse(sessionStorage.getItem("attempts") as string);
@@ -46,8 +28,8 @@ export const ShowPrevResults = (props: ShowPrevResultsProps) => {
             console.log("Previous attempts in session storage not found. Fetching the current list of previous attempts from Firebase");
             const dbUserUrl = query(ref(database, 'Users/' + props.userData.userDbKey + '/attempts/'), orderByChild('timestamp'));
             get(dbUserUrl).then(async (snapshot) => {
-                const attemptsFromDB: {[key: string]: any} = await snapshot.val();
-                const parsedAttempts: PreviousResults[] = parseAttempts(attemptsFromDB);
+                const attemptsFromDB: ResultsDBResponse = await snapshot.val();
+                const parsedAttempts: PreviousResults[] = parseDBResultsResponse(attemptsFromDB, "P") as PreviousResults[];
                 setAttempts(parsedAttempts);
                 sessionStorage.setItem("attempts", JSON.stringify(parsedAttempts));
                 console.log("New list of previous attempts set in session storage");

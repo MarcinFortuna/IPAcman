@@ -3,7 +3,7 @@ import {Board} from './Board/Board';
 import {Panel} from './Panel/Panel';
 import StatusBar from './StatusBar/StatusBar';
 import {databaseLeaderboard, databaseUsers, database} from '../api/Firebase';
-import {ObjectToPushToFirebase} from "../types/types";
+import {ObjectToPushToFirebase, UserData} from "../types/types";
 import {User} from "firebase/auth";
 import {useEffect, useState} from "react";
 import {get, orderByChild, query, equalTo, ref, push, set, ThenableReference, DatabaseReference} from "firebase/database";
@@ -20,7 +20,7 @@ interface MainProps {
 export const Main = (props: MainProps) => {
 
     const {isOpen, onOpen, onClose} = useDisclosure();
-    const [userState, setUserState] = useState<any>("");
+    const [userState, setUserState] = useState<UserData>({username: "", displayName: ""});
     const [gameReset, setGameReset] = useState<boolean>(false);
 
     const dispatch = useDispatch();
@@ -69,7 +69,7 @@ export const Main = (props: MainProps) => {
             timestamp: Date.now().toString(),
             username: userState.username,
             displayName: userState.displayName,
-            affiliation: userState.affiliation
+            affiliation: userState.affiliation || ""
         };
         const dbUserUrl: DatabaseReference = ref(database, 'Users/' + userState.userDbKey + '/attempts/');
         const newDbEntry: ThenableReference = push(dbUserUrl);

@@ -25,6 +25,9 @@ export const Panel = (props: PanelProps) => {
             sx={{
                 '& *': {
                     fontSize: isLargerThan1040 ? 'md' : 'xs'
+                },
+                '& h4': {
+                    fontSize: isLargerThan1040 ? 'sm' : 'xs'
                 }
             }}
         >

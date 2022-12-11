@@ -12,6 +12,7 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
+import {parseDBResultsResponse} from "../../helperFunctions";
 
 
 export const Leaderboard = () => {
@@ -20,44 +21,20 @@ export const Leaderboard = () => {
 
     const [results, setResults] = useState<LeaderboardItem[]>([]);
 
-    const parseResults = (data: any) => {
-
-        const all_results = Object.values(data);
-        const parsed_results: LeaderboardItem[] = [];
-
-        all_results.forEach((result: any) => {
-            const datetime: Date = new Date(Math.floor(result.timestamp / 1000) * 1000);
-            const datetime_human: string = datetime.toLocaleString("en-GB");
-            const datetime_human_no_seconds: string = datetime_human.substring(0, datetime_human.length - 3);
-            const parsed_result: LeaderboardItem = {
-                name: result.username,
-                displayName: result.displayName,
-                affiliation: result.affiliation,
-                score: result.score,
-                datetime: datetime_human_no_seconds,
-                pace: result.pace === 0 ? 'Still' : result.pace === 800 ? 'Slow' : result.pace === 400 ? 'Medium' : 'Fast'
-            }
-            parsed_results.push(parsed_result);
-            parsed_results.sort((a: LeaderboardItem, b: LeaderboardItem) => a.score > b.score ? -1 : 1);
-        });
-
-        return parsed_results;
-
-    };
-
-    useEffect(() => {
+    useEffect( () => {
         const resultsFromSessionStorage = JSON.parse(sessionStorage.getItem("results") as string);
         if (!resultsFromSessionStorage) {
             console.log("Results in session storage not found. Fetching the current leaderboard from Firebase");
             get(leaderboardQuery)
-                .then((snapshot) => {
-                    const parsed_results = parseResults(snapshot.val());
+                .then(async (snapshot) => {
+                    const dataFromDB = await snapshot.val();
+                    const parsed_results: LeaderboardItem[] = parseDBResultsResponse(dataFromDB, "L") as LeaderboardItem[];
                     setResults(parsed_results);
                     sessionStorage.setItem("results", JSON.stringify(parsed_results));
                 })
                 .catch((error) => console.error(error));
         } else {
-            setResults(parseResults(resultsFromSessionStorage));
+            setResults(resultsFromSessionStorage);
             console.log("Leaderboard retrieved from session storage");
         }
     }, []);

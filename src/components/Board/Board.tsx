@@ -4,8 +4,13 @@ import {BoardGrid, GridElement, MistakeType, Phoneme, Question} from "../../type
 import {useEffect, useRef} from "react";
 import useState from 'react-usestateref';
 import {questions} from '../../data/RP_questions';
-import {consonants, phonemes, vowels} from "../../data/RP_segments";
-import {movement, chooseADirectionAtRandom, generateRandomPosition, checkDistance} from "../../helperFunctions";
+import {
+    movement,
+    chooseADirectionAtRandom,
+    generateRandomPosition,
+    checkDistance,
+    getRandomPhoneme
+} from "../../helperFunctions";
 import type { RootState } from '../../ReduxStore/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { setNewInterval, resetInterval, resetAllIntervals } from '../../ReduxStore/reducers/IntervalsReducer';
@@ -22,6 +27,7 @@ import {
 import {Box, useMediaQuery} from '@chakra-ui/react';
 import coin from '../../assets/coin.png';
 import pacman from '../../assets/pacman-r.png';
+import { initialGrid } from '../../data/initialGrid';
 
 interface BoardProps {
     stopGame: () => void
@@ -55,16 +61,13 @@ export const Board = (props: BoardProps) => {
         if (life <= 0) stopGame();
     }, [life]);
 
-    const grid = new Array(18).fill(null).map(() => Array(26).fill(null).map(() => Array(2).fill("")));
-    grid[0][0] = ["pacman right", ""];
-
-    const [board, setBoard, boardRef] = useState(grid);
+    const [board, setBoard, boardRef] = useState<BoardGrid>(JSON.parse(JSON.stringify(initialGrid)));
 
     const useIpa = useSelector((state: RootState) => state.ipacmanData.useIpa);
 
     const resetGame = () => {
         setPhonemesOnTheBoard([]);
-        setBoard(grid);
+        setBoard(JSON.parse(JSON.stringify(initialGrid)));
         setDirection(["", "", "", "", "", ""]);
         dispatch(resetAllIntervals());
         dispatch(resetLife());
@@ -96,18 +99,18 @@ export const Board = (props: BoardProps) => {
     }
 
     const movePacman = (direction: string) => {
-        let newGrid = boardRef.current.slice();
+        let newGrid: BoardGrid = boardRef.current.slice();
         const oldCoords: number[] = findPacman() as number[];
         const newCoords: number[] = movement(direction, oldCoords);
         let p_string = "pacman " + direction;
         let newPhoneme: null | Phoneme[] = null;
         if (newGrid[newCoords[0]][newCoords[1]][0] === "coin") {
-            if (eatAPhoneme(newGrid[newCoords[0]][newCoords[1]][1])) {
+            if (eatAPhoneme(newGrid[newCoords[0]][newCoords[1]][1] as Phoneme)) {
                 p_string += " success";
             } else {
                 p_string += " failure";
             }
-            const eatenPhonemeData: Phoneme = newGrid[newCoords[0]][newCoords[1]][1];
+            const eatenPhonemeData: Phoneme = newGrid[newCoords[0]][newCoords[1]][1] as Phoneme;
             const index: number = phonemesOnTheBoardRef.current.findIndex(x => x["sampa"] === eatenPhonemeData.sampa);
             dispatch(resetInterval({index: index}));
 
@@ -128,7 +131,7 @@ export const Board = (props: BoardProps) => {
         setBoard(newGrid);
     }
 
-    const handleKeyDown = (e: any) => {
+    const handleKeyDown = (e) => {
         if (gameOnRef.current) {
             e.preventDefault();
             if (e.key === "a" || e.key === "h" || e.key === "ArrowLeft") movePacman("left");
@@ -138,7 +141,7 @@ export const Board = (props: BoardProps) => {
         }
     }
 
-    const eatAPhoneme = (phoneme: any) => {
+    const eatAPhoneme = (phoneme: Phoneme) => {
         if (checkIfPhonemeCurrent(phoneme)) {
             dispatch(increaseScore());
             return true;
@@ -189,51 +192,33 @@ export const Board = (props: BoardProps) => {
         const currentPhonemeArr: Phoneme[] = phonemesOnTheBoardRef.current.slice();
         const newPhonemeArr: Phoneme[] = [];
         for (let i = 0; i < num; i++) {
-            let randomNumber: number;
-            let randomPhoneme: Phoneme;
-            const getRandomPhoneme = (category) => {
-                if (category === "C") {
-                    randomNumber = Math.floor(Math.random() * consonants.length);
-                    randomPhoneme = consonants[randomNumber];
-                }
-                if (category === "V") {
-                    randomNumber = Math.floor(Math.random() * vowels.length);
-                    randomPhoneme = vowels[randomNumber];
-                } else {
-                    randomNumber = Math.floor(Math.random() * phonemes.length);
-                    randomPhoneme = phonemes[randomNumber];
-                }
-            }
-            getRandomPhoneme(category);
+            let randomPhoneme: Phoneme = getRandomPhoneme(category);
             // Due to few questions which eliminate diphthongs and many diphthongs in the inventory,
             // there sometimes arises huge surplus of diphthongs on the board.
             // This is why there is an artificial restriction limiting the number of diphthongs to 2 at the same time.
             let diphthong_count = 0;
             const combinedPhonemeArr = [...currentPhonemeArr, ...newPhonemeArr];
             for (let i = 0; i < combinedPhonemeArr.length; i++) {
-                if (combinedPhonemeArr[i] && combinedPhonemeArr[i].hasOwnProperty("type")) diphthong_count++;
+                if (combinedPhonemeArr[i] && Object.prototype.hasOwnProperty.call(combinedPhonemeArr[i],"type")) diphthong_count++;
             }
-
-            // @ts-ignore
-            while (combinedPhonemeArr.some(x => x && x["sampa"] === randomPhoneme["sampa"]) || (diphthong_count >= 2 && randomPhoneme.hasOwnProperty("type"))) {
-                getRandomPhoneme(category);
+            while (combinedPhonemeArr.some(x => x && x["sampa"] === randomPhoneme["sampa"]) || (diphthong_count >= 2 && Object.prototype.hasOwnProperty.call(randomPhoneme,"type"))) {
+                randomPhoneme = getRandomPhoneme(category);
             }
-            // @ts-ignore
             newPhonemeArr.push(randomPhoneme);
         }
         return newPhonemeArr;
     }
 
     const putPhonemesOnTheBoard = (phonemeArr: Phoneme[], oldGrid?: BoardGrid) => {
-        const newGrid: any[][] = oldGrid ? oldGrid : boardRef.current.slice();
+        const newGrid: BoardGrid = oldGrid ? oldGrid : boardRef.current.slice();
 
         for (let i = 0; i < phonemeArr.length; i++) {
             let pos: number[] = generateRandomPosition();
-            let pickedSquare: GridElement = newGrid[pos[0]][pos[1]].slice();
+            let pickedSquare: GridElement = newGrid[pos[0]][pos[1]].slice() as GridElement;
             const pacmanPos: number[] = findPacman() as number[];
             while (checkDistance(pos, pacmanPos) || pickedSquare[0].includes("coin")) {
                 pos = generateRandomPosition();
-                pickedSquare = newGrid[pos[0]][pos[1]].slice();
+                pickedSquare = newGrid[pos[0]][pos[1]].slice() as GridElement;
             }
             pickedSquare[0] = "coin";
             pickedSquare[1] = phonemeArr[i];
@@ -262,7 +247,7 @@ export const Board = (props: BoardProps) => {
         return currentlySearched;
     }
 
-    const setAPhonemeInMotion = (phoneme: Phoneme, pace: number, callback_function: (phoneme: Phoneme, intervalId?: any) => void, index?: number) => {
+    const setAPhonemeInMotion = (phoneme: Phoneme, pace: number, callback_function: (phoneme: Phoneme, intervalId?: number | NodeJS.Timeout) => void, index?: number) => {
         const interval = setInterval(function(){
             callback_function(phoneme, interval);
         }, pace);
@@ -275,7 +260,7 @@ export const Board = (props: BoardProps) => {
         }
     }
 
-    const movePhoneme = (phoneme: Phoneme, intervalId?: any) => {
+    const movePhoneme = (phoneme: Phoneme, intervalId?: number | NodeJS.Timeout) => {
         const index: number = phonemesOnTheBoardRef.current.findIndex(x => x.sampa === phoneme.sampa);
         if (index === -1) {
             clearInterval(intervalId);
@@ -283,7 +268,7 @@ export const Board = (props: BoardProps) => {
         }
         const direction: string = directionRef.current[index];
 
-        const newGrid: any = boardRef.current.slice();
+        const newGrid: BoardGrid = boardRef.current.slice();
         const oldCoords: number[] | boolean = findAPhoneme(phoneme.sampa);
         if (oldCoords === false) {
             console.error(`Phoneme ${phoneme.sampa} not found!`);
@@ -320,7 +305,7 @@ export const Board = (props: BoardProps) => {
         }
     }, [gameOn]);
 
-    const boardElements = board.map((row: any, i: number) => {
+    const boardElements = board.map((row: GridElement[], i: number) => {
         return (
             <tr key={"row_" + i}>
                 {row.map((col: GridElement, j: number) =>

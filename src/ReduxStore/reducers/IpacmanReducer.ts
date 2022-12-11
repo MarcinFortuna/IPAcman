@@ -33,7 +33,7 @@ export const ipacmanSlice = createSlice({
         toggleUseIpa: (state) => {
             state.useIpa = !state.useIpa
         },
-        setCurrentlySearched: (state, action: PayloadAction<any>) => {
+        setCurrentlySearched: (state, action: PayloadAction<Question>) => {
             state.currentlySearched = action.payload
         },
         resetCurrentlySearched: (state) => {
@@ -51,13 +51,13 @@ export const ipacmanSlice = createSlice({
         resetLife: (state) => {
             state.life = 3
         },
-        addMistake: (state, action: PayloadAction<any>) => {
+        addMistake: (state, action: PayloadAction<MistakeType>) => {
             state.mistakes.push(action.payload)
         },
         resetMistakes: (state) => {
             state.mistakes = []
         },
-        setPace: (state, action: PayloadAction<any>) => {
+        setPace: (state, action: PayloadAction<number>) => {
             state.pace = action.payload
         }
     }

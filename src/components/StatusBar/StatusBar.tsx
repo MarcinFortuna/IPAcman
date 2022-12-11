@@ -7,19 +7,15 @@ import {ShowPrevResults} from "./ShowPrevResults";
 import {Leaderboard} from "./Leaderboard";
 import {SettingsIcon} from "@chakra-ui/icons";
 import {Settings} from "../Panel/Settings";
+import {User} from "firebase/auth";
+import {UserData} from "../../types/types";
 
-// interface StatusBarProps {
-//     user: {
-//         email: string
-//     }
-//     userOtherData: {
-//         username: string
-//         displayName: string
-//     }
-// }
+interface StatusBarProps {
+    user: User | null
+    userOtherData: UserData
+}
 
-// const StatusBar = (props: StatusBarProps) => {
-const StatusBar = (props: any) => {
+const StatusBar = (props: StatusBarProps) => {
 
     let greeting: string;
 

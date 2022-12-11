@@ -13,7 +13,7 @@ const CurrentQuestion = () => {
                 maxWidth: "300px",
                 textAlign: "center"
             }}>
-                <Heading size="xs" fontFamily="monospace" noOfLines={2}>{currentlySearched.question}</Heading>
+                <Heading as="h4" size="xs" fontFamily="monospace" noOfLines={2}>{currentlySearched.question}</Heading>
             </CardBody>
         </Card>
     );
