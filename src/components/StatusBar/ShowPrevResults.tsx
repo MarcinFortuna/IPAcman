@@ -13,6 +13,7 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
+import {useGetRandomPhonemeAndAnswers} from "../../helperQuestionFunctions";
 
 interface ShowPrevResultsProps {
     userData: UserData
@@ -22,6 +23,8 @@ export const ShowPrevResults = (props: ShowPrevResultsProps) => {
 
     const [attempts, setAttempts] = useState<PreviousResults[]>([]);
 
+    const {getCorrectAnswers} = useGetRandomPhonemeAndAnswers();
+
     useEffect(() => {
         const attemptsFromSessionStorage: PreviousResults[] = JSON.parse(sessionStorage.getItem("attempts") as string);
         if (!attemptsFromSessionStorage) {
@@ -29,7 +32,7 @@ export const ShowPrevResults = (props: ShowPrevResultsProps) => {
             const dbUserUrl = query(ref(database, 'Users/' + props.userData.userDbKey + '/attempts/'), orderByChild('timestamp'));
             get(dbUserUrl).then(async (snapshot) => {
                 const attemptsFromDB: ResultsDBResponse = await snapshot.val();
-                const parsedAttempts: PreviousResults[] = parseDBResultsResponse(attemptsFromDB, "P") as PreviousResults[];
+                const parsedAttempts: PreviousResults[] = parseDBResultsResponse(attemptsFromDB, "P", getCorrectAnswers) as PreviousResults[];
                 setAttempts(parsedAttempts);
                 sessionStorage.setItem("attempts", JSON.stringify(parsedAttempts));
                 console.log("New list of previous attempts set in session storage");

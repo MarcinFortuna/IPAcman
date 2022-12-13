@@ -1,4 +1,6 @@
-export const full_consonants_pulmonic = [
+import {Diacritic, FullConsonant, FullVowel, ToneWordAccent} from "../types/types";
+
+export const full_consonants_pulmonic: FullConsonant[] = [
 
     {
         ipa: "p",
@@ -640,7 +642,7 @@ export const full_consonants_pulmonic = [
 
 ]
 
-export const full_consonants_non_pulmonic = [
+export const full_consonants_non_pulmonic: FullConsonant[] = [
 
     {
         ipa: "ʘ",
@@ -787,7 +789,7 @@ export const full_consonants_non_pulmonic = [
 
 ]
 
-export const full_other_symbols = [
+export const full_other_symbols: FullConsonant[] = [
 
     {
         ipa: "ʍ",
@@ -901,7 +903,7 @@ export const full_other_symbols = [
 
 ]
 
-export const full_vowels = [
+export const full_vowels: FullVowel[] = [
 
     {
         ipa: "i",
@@ -1185,7 +1187,7 @@ export const full_vowels = [
 
 ]
 
-export const full_diacritics = [
+export const full_diacritics: Diacritic[] = [
 
     {
         ipa: "◌̥",
@@ -1433,7 +1435,7 @@ export const full_diacritics = [
     },
 ]
 
-export const full_suprasegmentals = [
+export const full_suprasegmentals: Diacritic[] = [
 
     {
         ipa: "ˈ◌",
@@ -1493,7 +1495,7 @@ export const full_suprasegmentals = [
 
 ]
 
-export const full_tones_and_word_accents = [
+export const full_tones_and_word_accents: ToneWordAccent[] = [
 
     {
         ipa_diacritic: "◌̋",

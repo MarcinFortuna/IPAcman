@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
 
-import {MistakeType, Question} from "../../types/types";
+import {MistakeType, Question, SymbolScope} from "../../types/types";
 
 export interface IpacmanStore {
     gameOn: boolean
@@ -11,6 +11,7 @@ export interface IpacmanStore {
     life: number
     mistakes: MistakeType[]
     pace: number
+    symbolScope: SymbolScope
 }
 
 const initialState: IpacmanStore = {
@@ -20,7 +21,23 @@ const initialState: IpacmanStore = {
     score: 0,
     life: 3,
     mistakes: [],
-    pace: 0
+    pace: 0,
+    symbolScope: {
+        selected: 'rp',
+        rp: {
+            consonants: true,
+            vowels: true
+        },
+        fullIpa: {
+            full_consonants_pulmonic: true,
+            full_consonants_non_pulmonic: true,
+            full_other_symbols: true,
+            full_vowels: true,
+            full_diacritics: false,
+            full_suprasegmentals: false,
+            full_tones_and_word_accents: false
+        }
+    }
 }
 
 export const ipacmanSlice = createSlice({
@@ -59,6 +76,9 @@ export const ipacmanSlice = createSlice({
         },
         setPace: (state, action: PayloadAction<number>) => {
             state.pace = action.payload
+        },
+        setSymbolScope: (state, action: PayloadAction<SymbolScope>) => {
+            state.symbolScope = action.payload
         }
     }
 });
@@ -74,7 +94,8 @@ export const {
     resetLife,
     addMistake,
     resetMistakes,
-    setPace
+    setPace,
+    setSymbolScope
 } = ipacmanSlice.actions;
 
 export default ipacmanSlice.reducer;

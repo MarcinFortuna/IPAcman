@@ -1,4 +1,6 @@
-export type MonophthongPhoneme = {
+// RP Phoneme types
+
+export type MonophthongPhonemeRP = {
     ipa: string
     sampa: string
     length: string
@@ -8,16 +10,16 @@ export type MonophthongPhoneme = {
     backness: string
 }
 
-export type DiphthongPhoneme = {
+export type DiphthongPhonemeRP = {
     ipa: string
     sampa: string
     length: string
     type: string
 }
 
-export type VowelPhoneme = MonophthongPhoneme | DiphthongPhoneme
+export type VowelPhonemeRP = MonophthongPhonemeRP | DiphthongPhonemeRP
 
-export type ConsonantPhoneme = {
+export type ConsonantPhonemeRP = {
     ipa: string
     sampa: string
     category: string
@@ -26,7 +28,49 @@ export type ConsonantPhoneme = {
     voice: string
 }
 
-export type Phoneme = VowelPhoneme | ConsonantPhoneme
+// Full IPA Phoneme types
+
+export type FullConsonant = {
+    ipa: string
+    sampa: string
+    airstream: string
+    place: string
+    manner: string
+    voicing: string
+    url: string | URL
+    audio: string | URL
+}
+
+export type FullVowel = {
+    ipa: string
+    sampa: string
+    backness: string
+    height: string
+    roundedness: string
+    url: string | URL
+    audio: string | URL
+}
+
+export type Diacritic = {
+    ipa: string
+    sampa: string
+    value: string
+    url: string | URL
+}
+
+export type ToneWordAccent = {
+    ipa_diacritic: string
+    ipa_letter: string
+    sampa: string
+    value: string
+    url: string | URL
+}
+
+// Aggregate Phonetic Symbol type
+
+export type PhoneticSymbol = VowelPhonemeRP | ConsonantPhonemeRP | FullConsonant | FullVowel | Diacritic | ToneWordAccent
+
+// Other
 
 export type Question = {
     question: string
@@ -34,7 +78,7 @@ export type Question = {
 }
 
 export type MistakeType = {
-    guessedPhoneme: Phoneme
+    guessedPhoneme: PhoneticSymbol
     guessedQuestion: Question
 }
 
@@ -76,18 +120,35 @@ export type LeaderboardItem = {
 }
 
 export type ObjectToPushToFirebase = {
-    score: number,
-    uid: string,
-    pace: number,
-    mistakes: MistakeType[],
-    timestamp: string,
-    username: string,
-    displayName: string,
+    score: number
+    uid: string
+    pace: number
+    mistakes: MistakeType[]
+    timestamp: string
+    username: string
+    displayName: string
     affiliation: string
 }
 
 export type GridElement = [
-    string, Phoneme | string
+    string, PhoneticSymbol | string
 ]
 
 export type BoardGrid = GridElement[][]
+
+export type SymbolScope = {
+    selected: 'rp' | 'fullIpa'
+    rp: {
+        consonants: boolean
+        vowels: boolean
+    }
+    fullIpa: {
+        full_consonants_pulmonic: boolean
+        full_consonants_non_pulmonic: boolean
+        full_other_symbols: boolean
+        full_vowels: boolean
+        full_diacritics: boolean
+        full_suprasegmentals: boolean
+        full_tones_and_word_accents: boolean
+    }
+}

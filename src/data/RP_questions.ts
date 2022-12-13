@@ -1,6 +1,6 @@
 import { Question } from "../types/types";
 
-export const questions: Question[] = [
+export const rp_questions: Question[] = [
 
     {
         question: "an obstruent",

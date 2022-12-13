@@ -31,7 +31,7 @@ const PaceSelector = () => {
             <Heading size="md">Pace: </Heading>
             <HStack {...group}>
                 {options.map((value) => {
-                    const radio = getRadioProps({value})
+                    const radio = getRadioProps({value});
                     return (
                         <RadioCard key={value} {...radio} isDisabled={gameOn}>
                             {value}

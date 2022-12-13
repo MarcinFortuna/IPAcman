@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {MistakeType} from "../../types/types";
-import {getCorrectAnswers} from "../../helperFunctions";
+import {useGetRandomPhonemeAndAnswers} from "../../helperQuestionFunctions";
 import {useSelector} from "react-redux";
 import {RootState} from "../../ReduxStore/store";
 import {
@@ -12,10 +12,11 @@ import {
     Td,
     TableContainer,
     Text,
-} from '@chakra-ui/react'
-
+} from '@chakra-ui/react';
 
 export const Mistakes = () => {
+
+    const {getCorrectAnswers} = useGetRandomPhonemeAndAnswers();
 
     const mistakesState: MistakeType[] = useSelector((state: RootState) => state.ipacmanData.mistakes);
 

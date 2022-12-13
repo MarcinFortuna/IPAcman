@@ -1,16 +1,17 @@
 import * as React from 'react';
 import {Square} from './Square';
-import {BoardGrid, GridElement, MistakeType, Phoneme, Question} from "../../types/types";
+import {BoardGrid, GridElement, MistakeType, PhoneticSymbol, Question} from "../../types/types";
 import {useEffect, useRef} from "react";
 import useState from 'react-usestateref';
-import {questions} from '../../data/RP_questions';
+import {rp_questions} from '../../data/RP_questions';
+import {full_ipa_questions} from '../../data/full_IPA_questions';
 import {
     movement,
     chooseADirectionAtRandom,
     generateRandomPosition,
-    checkDistance,
-    getRandomPhoneme
+    checkDistance
 } from "../../helperFunctions";
+import {useGetRandomPhonemeAndAnswers} from "../../helperQuestionFunctions";
 import type { RootState } from '../../ReduxStore/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { setNewInterval, resetInterval, resetAllIntervals } from '../../ReduxStore/reducers/IntervalsReducer';
@@ -39,6 +40,8 @@ export const Board = (props: BoardProps) => {
 
     const {stopGame, gameReset, pace} = props;
 
+    const {getRandomPhoneme} = useGetRandomPhonemeAndAnswers();
+
     const intervalsStateArray = useSelector((state: RootState) => state.intervals.intervals);
     const dispatch = useDispatch();
 
@@ -47,11 +50,18 @@ export const Board = (props: BoardProps) => {
     const gameOn = useSelector((state: RootState) => state.ipacmanData.gameOn);
     const gameOnRef = useRef(gameOn);
 
-    const [phonemesOnTheBoard, setPhonemesOnTheBoard, phonemesOnTheBoardRef] = useState<Phoneme[]>([]);
+    const [phonemesOnTheBoard, setPhonemesOnTheBoard, phonemesOnTheBoardRef] = useState<PhoneticSymbol[]>([]);
     const [directions, setDirection, directionRef] = useState<string[]>(["", "", "", "", "", ""]);
 
     const currentlySearched = useSelector((state: RootState) => state.ipacmanData.currentlySearched);
     const currentlySearchedRef = useRef(currentlySearched);
+
+    const symbolScope = useSelector((state: RootState) => state.ipacmanData.symbolScope);
+    const symbolScopeRef = useRef(symbolScope);
+
+    useEffect(() => {
+        symbolScopeRef.current = symbolScope;
+    }, [symbolScope]);
 
     useEffect(() => {
         currentlySearchedRef.current = currentlySearched;
@@ -103,21 +113,21 @@ export const Board = (props: BoardProps) => {
         const oldCoords: number[] = findPacman() as number[];
         const newCoords: number[] = movement(direction, oldCoords);
         let p_string = "pacman " + direction;
-        let newPhoneme: null | Phoneme[] = null;
+        let newPhoneme: null | PhoneticSymbol[] = null;
         if (newGrid[newCoords[0]][newCoords[1]][0] === "coin") {
-            if (eatAPhoneme(newGrid[newCoords[0]][newCoords[1]][1] as Phoneme)) {
+            if (eatAPhoneme(newGrid[newCoords[0]][newCoords[1]][1] as PhoneticSymbol)) {
                 p_string += " success";
             } else {
                 p_string += " failure";
             }
-            const eatenPhonemeData: Phoneme = newGrid[newCoords[0]][newCoords[1]][1] as Phoneme;
+            const eatenPhonemeData: PhoneticSymbol = newGrid[newCoords[0]][newCoords[1]][1] as PhoneticSymbol;
             const index: number = phonemesOnTheBoardRef.current.findIndex(x => x["sampa"] === eatenPhonemeData.sampa);
             dispatch(resetInterval({index: index}));
 
-            newPhoneme = generateXRandomPhonemes("any", 1);
+            newPhoneme = generateXRandomPhonemes(1);
             newGrid = putPhonemesOnTheBoard(newPhoneme);
 
-            const newPhonemesOnTheBoard: Phoneme[] = phonemesOnTheBoardRef.current.slice();
+            const newPhonemesOnTheBoard: PhoneticSymbol[] = phonemesOnTheBoardRef.current.slice();
             newPhonemesOnTheBoard[index] = newPhoneme[0];
 
             const newQuestion: Question = generateRandomQuestion(newPhonemesOnTheBoard);
@@ -141,7 +151,7 @@ export const Board = (props: BoardProps) => {
         }
     }
 
-    const eatAPhoneme = (phoneme: Phoneme) => {
+    const eatAPhoneme = (phoneme: PhoneticSymbol) => {
         if (checkIfPhonemeCurrent(phoneme)) {
             dispatch(increaseScore());
             return true;
@@ -151,7 +161,7 @@ export const Board = (props: BoardProps) => {
         }
     }
 
-    const checkIfPhonemeCurrent = (phoneme: Phoneme) => {
+    const checkIfPhonemeCurrent = (phoneme: PhoneticSymbol) => {
         const phonemeClasses: string[] = [];
         for (const prop in phoneme) {
             phonemeClasses.push(phoneme[prop]);
@@ -165,7 +175,7 @@ export const Board = (props: BoardProps) => {
     }
 
     const setupGame = () => {
-        const phonemes: Phoneme[] = generateXRandomPhonemes("any", 5) as Phoneme[];
+        const phonemes: PhoneticSymbol[] = generateXRandomPhonemes(5) as PhoneticSymbol[];
         const newBoard: BoardGrid = putPhonemesOnTheBoard(phonemes);
         const randomQuestion: Question = generateRandomQuestion(phonemes);
         setBoard(newBoard);
@@ -188,28 +198,17 @@ export const Board = (props: BoardProps) => {
 
     // Phoneme functions
 
-    const generateXRandomPhonemes = (category: string, num: number) => {
-        const currentPhonemeArr: Phoneme[] = phonemesOnTheBoardRef.current.slice();
-        const newPhonemeArr: Phoneme[] = [];
+    const generateXRandomPhonemes = (num: number) => {
+        const currentPhonemeArr: PhoneticSymbol[] = phonemesOnTheBoardRef.current.slice();
+        const newPhonemeArr: PhoneticSymbol[] = [];
         for (let i = 0; i < num; i++) {
-            let randomPhoneme: Phoneme = getRandomPhoneme(category);
-            // Due to few questions which eliminate diphthongs and many diphthongs in the inventory,
-            // there sometimes arises huge surplus of diphthongs on the board.
-            // This is why there is an artificial restriction limiting the number of diphthongs to 2 at the same time.
-            let diphthong_count = 0;
-            const combinedPhonemeArr = [...currentPhonemeArr, ...newPhonemeArr];
-            for (let i = 0; i < combinedPhonemeArr.length; i++) {
-                if (combinedPhonemeArr[i] && Object.prototype.hasOwnProperty.call(combinedPhonemeArr[i],"type")) diphthong_count++;
-            }
-            while (combinedPhonemeArr.some(x => x && x["sampa"] === randomPhoneme["sampa"]) || (diphthong_count >= 2 && Object.prototype.hasOwnProperty.call(randomPhoneme,"type"))) {
-                randomPhoneme = getRandomPhoneme(category);
-            }
+            const randomPhoneme: PhoneticSymbol = getRandomPhoneme([...currentPhonemeArr, ...newPhonemeArr]);
             newPhonemeArr.push(randomPhoneme);
         }
         return newPhonemeArr;
     }
 
-    const putPhonemesOnTheBoard = (phonemeArr: Phoneme[], oldGrid?: BoardGrid) => {
+    const putPhonemesOnTheBoard = (phonemeArr: PhoneticSymbol[], oldGrid?: BoardGrid) => {
         const newGrid: BoardGrid = oldGrid ? oldGrid : boardRef.current.slice();
 
         for (let i = 0; i < phonemeArr.length; i++) {
@@ -227,8 +226,8 @@ export const Board = (props: BoardProps) => {
         return newGrid;
     }
 
-    const generateRandomQuestion = (phonemeArr?: Phoneme[]) => {
-        const phonemesToAnalyze: Phoneme[] = phonemeArr ? phonemeArr : phonemesOnTheBoard;
+    const generateRandomQuestion = (phonemeArr?: PhoneticSymbol[]) => {
+        const phonemesToAnalyze: PhoneticSymbol[] = phonemeArr ? phonemeArr : phonemesOnTheBoard;
         const classesOfPhonemesOnTheBoard: string[] = [];
         phonemesToAnalyze.forEach(x => {
             if (x) {
@@ -237,17 +236,15 @@ export const Board = (props: BoardProps) => {
                 }
             }
         });
-        let index: number = Math.floor(Math.random() * questions.length);
-        while (!classesOfPhonemesOnTheBoard.some(
-            x => questions[index]["classes"].indexOf(x) > -1
-        )) {
-            index = Math.floor(Math.random() * questions.length);
-        }
-        const currentlySearched: Question = questions[index];
-        return currentlySearched;
+        const questions: Question[] = symbolScopeRef.current.selected === "rp" ? rp_questions : full_ipa_questions;
+        const filteredQuestions: Question[] = questions.filter((question: Question) => {
+            return classesOfPhonemesOnTheBoard.some((cl: string) => question.classes.includes(cl));
+        });
+        const index: number = Math.floor(Math.random() * filteredQuestions.length);
+        return filteredQuestions[index];
     }
 
-    const setAPhonemeInMotion = (phoneme: Phoneme, pace: number, callback_function: (phoneme: Phoneme, intervalId?: number | NodeJS.Timeout) => void, index?: number) => {
+    const setAPhonemeInMotion = (phoneme: PhoneticSymbol, pace: number, callback_function: (phoneme: PhoneticSymbol, intervalId?: number | NodeJS.Timeout) => void, index?: number) => {
         const interval = setInterval(function(){
             callback_function(phoneme, interval);
         }, pace);
@@ -260,7 +257,7 @@ export const Board = (props: BoardProps) => {
         }
     }
 
-    const movePhoneme = (phoneme: Phoneme, intervalId?: number | NodeJS.Timeout) => {
+    const movePhoneme = (phoneme: PhoneticSymbol, intervalId?: number | NodeJS.Timeout) => {
         const index: number = phonemesOnTheBoardRef.current.findIndex(x => x.sampa === phoneme.sampa);
         if (index === -1) {
             clearInterval(intervalId);

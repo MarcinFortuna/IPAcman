@@ -13,11 +13,14 @@ import {
   TableContainer,
 } from '@chakra-ui/react';
 import {parseDBResultsResponse} from "../../helperFunctions";
+import {useGetRandomPhonemeAndAnswers} from "../../helperQuestionFunctions";
 
 
 export const Leaderboard = () => {
 
     const leaderboardQuery = query(databaseLeaderboard, orderByChild('score'), limitToLast(10));
+
+    const {getCorrectAnswers} = useGetRandomPhonemeAndAnswers();
 
     const [results, setResults] = useState<LeaderboardItem[]>([]);
 
@@ -28,7 +31,7 @@ export const Leaderboard = () => {
             get(leaderboardQuery)
                 .then(async (snapshot) => {
                     const dataFromDB = await snapshot.val();
-                    const parsed_results: LeaderboardItem[] = parseDBResultsResponse(dataFromDB, "L") as LeaderboardItem[];
+                    const parsed_results: LeaderboardItem[] = parseDBResultsResponse(dataFromDB, "L", getCorrectAnswers) as LeaderboardItem[];
                     setResults(parsed_results);
                     sessionStorage.setItem("results", JSON.stringify(parsed_results));
                 })

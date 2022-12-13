@@ -1,5 +1,4 @@
 import {LeaderboardItem, MistakeType, ResultsDBResponse, SingleDBResponse} from "./types/types";
-import {consonants, phonemes, vowels} from "./data/RP_segments";
 
 export const movement = (direction: string, oldCoords: number[]) => {
 
@@ -40,44 +39,15 @@ export const generateRandomPosition = () => [Math.floor(Math.random() * 18), Mat
 
 export const checkDistance = (phonemeCoords: number[], pacmanCoords: number[]) => (Math.abs(phonemeCoords[0] - pacmanCoords[0]) < 3 || Math.abs(phonemeCoords[1] - pacmanCoords[1]) < 3);
 
-export const getRandomPhoneme = (category: string) => {
-    if (category === "C") {
-        return consonants[Math.floor(Math.random() * consonants.length)];
-    } else if (category === "V") {
-        return vowels[Math.floor(Math.random() * vowels.length)];
-    } else {
-        return phonemes[Math.floor(Math.random() * phonemes.length)];
-    }
-}
-
-export const getCorrectAnswers = (mistakes_arr: MistakeType[]) => {
-  const mistakes: string[][] = [];
-  for (let i = 0; i < mistakes_arr.length; i++) {
-    const mistake: string[] = [];
-    mistake.push(mistakes_arr[i]["guessedQuestion"]["question"]);
-    mistake.push(mistakes_arr[i]["guessedPhoneme"]["ipa"]);
-    const correct_answers: string[] = []
-    for (let j = 0; j < phonemes.length; j++) {
-      for (const prop in phonemes[j]) {
-        if (mistakes_arr[i]["guessedQuestion"]["classes"].includes(phonemes[j][prop])) {
-          correct_answers.push(phonemes[j]["ipa"]);
-        }
-      }
-    }
-    const correct_answers_str: string = [...new Set(correct_answers)].sort().join(", ");
-    mistake.push(correct_answers_str);
-    mistakes.push(mistake);
-  }
-  return mistakes;
-}
-
 const timestampToHumanDate = (timestamp: string) => {
     const datetime: Date = new Date(Math.floor(Number(timestamp) / 1000) * 1000);
     const datetime_human: string = datetime.toLocaleString("en-GB");
     return datetime_human.substring(0, datetime_human.length - 3);
 }
 
-export const parseDBResultsResponse = (data: ResultsDBResponse, output: "L"|"P") => {
+// INFO: getCorrectAnswers cannot be extracted and referred to in a helper function since it's provided by
+// a hook which can be referenced only in a functional React component (hence the solution a with callback)
+export const parseDBResultsResponse = (data: ResultsDBResponse, output: "L"|"P", callback?: (mistakes: MistakeType[]) => string[][]) => {
 
     const all_results: SingleDBResponse[] = Object.values(data);
 
@@ -98,7 +68,7 @@ export const parseDBResultsResponse = (data: ResultsDBResponse, output: "L"|"P")
         return all_results.map((result: SingleDBResponse) => {
             return {
                 datetime: timestampToHumanDate(result.timestamp),
-                results: result.mistakes ? getCorrectAnswers(result.mistakes) : [],
+                results: (result.mistakes && callback) ? callback(result.mistakes) : [],
                 score: result.score
             }
         });

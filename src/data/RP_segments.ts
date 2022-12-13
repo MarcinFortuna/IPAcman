@@ -1,6 +1,6 @@
-import { ConsonantPhoneme, VowelPhoneme } from "../types/types";
+import { ConsonantPhonemeRP, VowelPhonemeRP } from "../types/types";
 
-export const consonants: ConsonantPhoneme[] = [
+export const consonants: ConsonantPhonemeRP[] = [
 
     {
         sampa: "m",
@@ -219,8 +219,7 @@ export const consonants: ConsonantPhoneme[] = [
     }
 ];
 
-
-export const vowels: VowelPhoneme[] = [
+export const vowels: VowelPhonemeRP[] = [
 
     {
         sampa: "I",
@@ -270,7 +269,6 @@ export const vowels: VowelPhoneme[] = [
         length: "short",
         tenseness: "lax",
         roundedness: "unrounded"
-
     },
 
     {
@@ -281,7 +279,6 @@ export const vowels: VowelPhoneme[] = [
         length: "short",
         tenseness: "lax",
         roundedness: "rounded"
-
     },
 
     {
@@ -292,7 +289,6 @@ export const vowels: VowelPhoneme[] = [
         length: "short",
         tenseness: "lax",
         roundedness: "rounded"
-
     },
 
     {
@@ -303,7 +299,6 @@ export const vowels: VowelPhoneme[] = [
         length: "long",
         tenseness: "tense",
         roundedness: "unrounded"
-
     },
 
     {
@@ -314,7 +309,6 @@ export const vowels: VowelPhoneme[] = [
         length: "long",
         tenseness: "tense",
         roundedness: "unrounded"
-
     },
 
     {
@@ -325,7 +319,6 @@ export const vowels: VowelPhoneme[] = [
         length: "long",
         tenseness: "tense",
         roundedness: "rounded"
-
     },
 
     {
@@ -336,7 +329,6 @@ export const vowels: VowelPhoneme[] = [
         length: "long",
         tenseness: "tense",
         roundedness: "rounded"
-
     },
 
     {
@@ -347,7 +339,6 @@ export const vowels: VowelPhoneme[] = [
         length: "long",
         tenseness: "tense",
         roundedness: "unrounded"
-
     },
 
     {
@@ -406,5 +397,3 @@ export const vowels: VowelPhoneme[] = [
         length: "long"
     }
 ];
-
-export const phonemes: (ConsonantPhoneme | VowelPhoneme)[] = [...consonants, ...vowels];

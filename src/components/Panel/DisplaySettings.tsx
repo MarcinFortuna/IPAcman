@@ -8,10 +8,14 @@ const DisplaySettings = () => {
 
     const useIpa = useSelector((state: RootState) => state.ipacmanData.useIpa);
     const pace = useSelector((state: RootState) => state.ipacmanData.pace);
+    const symbolScope = useSelector((state: RootState) => state.ipacmanData.symbolScope);
 
     return(
         <Box sx={{
             padding: "2px",
+            '& td': {
+                minWidth: '95px'
+            },
             '& td:first-of-type': {
                 fontWeight: 'bold'
             },
@@ -27,11 +31,14 @@ const DisplaySettings = () => {
                     </tr>
                     <tr>
                         <td>Set:</td>
-                        <td>Conservative RP</td>
+                        <td>{symbolScope.selected === 'rp' ? 'Cons. RP' : 'Full Alphabet'}</td>
                     </tr>
                     <tr>
                         <td>Selection:</td>
-                        <td>Full</td>
+                        <td>{symbolScope.selected === 'rp'
+                            ? Object.values(symbolScope.rp).filter(val => val).length + "/2"
+                            : Object.values(symbolScope.fullIpa).filter(val => val).length + "/7"
+                        }</td>
                     </tr>
                     <tr>
                         <td>Pace:</td>
