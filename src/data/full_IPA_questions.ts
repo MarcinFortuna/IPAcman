@@ -297,7 +297,7 @@ export const full_ipa_questions: Question[] = [
 
     {
         question: "a voiced retroflex approximant",
-        classes: ['r\`']
+        classes: ['r\\`']
     },
 
     {

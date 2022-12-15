@@ -12,6 +12,7 @@ export interface IpacmanStore {
     mistakes: ParsedMistakeType[]
     pace: number
     symbolScope: SymbolScope
+    loginModalOpen: boolean
 }
 
 const initialState: IpacmanStore = {
@@ -37,7 +38,8 @@ const initialState: IpacmanStore = {
             full_suprasegmentals: false,
             full_tones_and_word_accents: false
         }
-    }
+    },
+    loginModalOpen: false
 }
 
 export const ipacmanSlice = createSlice({
@@ -79,6 +81,9 @@ export const ipacmanSlice = createSlice({
         },
         setSymbolScope: (state, action: PayloadAction<SymbolScope>) => {
             state.symbolScope = action.payload
+        },
+        toggleLoginModalOpen: (state, action: PayloadAction<boolean>) => {
+            state.loginModalOpen = action.payload
         }
     }
 });
@@ -95,7 +100,8 @@ export const {
     addMistake,
     resetMistakes,
     setPace,
-    setSymbolScope
+    setSymbolScope,
+    toggleLoginModalOpen
 } = ipacmanSlice.actions;
 
 export default ipacmanSlice.reducer;

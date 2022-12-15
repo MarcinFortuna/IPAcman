@@ -59,6 +59,9 @@ export const Board = (props: BoardProps) => {
     const symbolScope = useSelector((state: RootState) => state.ipacmanData.symbolScope);
     const symbolScopeRef = useRef(symbolScope);
 
+    const loginModalOpen = useSelector((state: RootState) => state.ipacmanData.loginModalOpen);
+    const loginModalOpenRef = useRef(loginModalOpen);
+
     useEffect(() => {
         symbolScopeRef.current = symbolScope;
     }, [symbolScope]);
@@ -70,6 +73,10 @@ export const Board = (props: BoardProps) => {
     useEffect(() => {
         if (life <= 0) stopGame();
     }, [life]);
+
+    useEffect(() => {
+        loginModalOpenRef.current = loginModalOpen;
+    }, [loginModalOpen]);
 
     const [board, setBoard, boardRef] = useState<BoardGrid>(JSON.parse(JSON.stringify(initialGrid)));
 
@@ -142,7 +149,7 @@ export const Board = (props: BoardProps) => {
     }
 
     const handleKeyDown = (e) => {
-        if (gameOnRef.current) {
+        if (gameOnRef.current && !loginModalOpenRef.current) {
             e.preventDefault();
             if (e.key === "a" || e.key === "h" || e.key === "ArrowLeft") movePacman("left");
             if (e.key === "d" || e.key === "l" || e.key === "ArrowRight") movePacman("right");

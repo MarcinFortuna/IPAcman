@@ -9,6 +9,7 @@ import {SettingsIcon} from "@chakra-ui/icons";
 import {Settings} from "../Panel/Settings";
 import {User} from "firebase/auth";
 import {UserData} from "../../types/types";
+import {toggleLoginModalOpen} from "../../ReduxStore/reducers/IpacmanReducer";
 
 interface StatusBarProps {
     user: User | null
@@ -41,7 +42,7 @@ const StatusBar = (props: StatusBarProps) => {
                     userData={props.userOtherData}/></ModalInstance> : null}
                 <ModalInstance buttonText={<SettingsIcon/>} modalTitle="Settings"><Settings/></ModalInstance>
             {!(props.user && props.user.email) ?
-                <ModalInstance buttonText="Log in" modalTitle={""} hideCloseButton={true}><FormContainer/></ModalInstance> :
+                <ModalInstance buttonText="Log in" modalTitle={""} hideCloseButton={true} callback={toggleLoginModalOpen}><FormContainer/></ModalInstance> :
                 <Button variant="outline" onClick={signOutOfApp}>Log out</Button>}
             </Box>
         </Box>);

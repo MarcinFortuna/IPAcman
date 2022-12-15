@@ -10,18 +10,33 @@ import {
     useDisclosure
 } from "@chakra-ui/react";
 import * as React from "react";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {AnyAction} from 'redux';
 
 interface ModalProps {
     buttonText: string | React.ReactNode
     modalTitle?: string
     hideCloseButton?: boolean
-    children: React.ReactNode
+    children: React.ReactNode,
+    callback?: (arg?) => AnyAction
 }
 
 export const ModalInstance = (props: ModalProps) => {
 
-    const {buttonText, modalTitle, children, hideCloseButton} = props;
+    const {buttonText, modalTitle, children, hideCloseButton, callback} = props;
     const {isOpen, onOpen, onClose} = useDisclosure();
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (callback && isOpen) {
+            dispatch(callback(true));
+            return () => {
+                dispatch(callback(false));
+            }
+        }
+    }, [isOpen]);
 
     return (
         <>
