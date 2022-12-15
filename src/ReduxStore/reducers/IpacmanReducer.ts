@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
 
-import {MistakeType, Question, SymbolScope} from "../../types/types";
+import {ParsedMistakeType, Question, SymbolScope} from "../../types/types";
 
 export interface IpacmanStore {
     gameOn: boolean
@@ -9,7 +9,7 @@ export interface IpacmanStore {
     currentlySearched: Question
     score: number
     life: number
-    mistakes: MistakeType[]
+    mistakes: ParsedMistakeType[]
     pace: number
     symbolScope: SymbolScope
 }
@@ -68,7 +68,7 @@ export const ipacmanSlice = createSlice({
         resetLife: (state) => {
             state.life = 3
         },
-        addMistake: (state, action: PayloadAction<MistakeType>) => {
+        addMistake: (state, action: PayloadAction<ParsedMistakeType>) => {
             state.mistakes.push(action.payload)
         },
         resetMistakes: (state) => {

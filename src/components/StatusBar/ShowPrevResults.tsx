@@ -3,17 +3,19 @@ import {useState, useEffect} from "react";
 import {database} from '../../api/Firebase';
 import {ref, query, orderByChild, get} from "firebase/database";
 import {parseDBResultsResponse} from '../../helperFunctions';
-import {PreviousResults, ResultsDBResponse, UserData} from "../../types/types";
+import {ParsedMistakeType, PhoneticSymbol, PreviousResults, ResultsDBResponse, UserData} from "../../types/types";
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    TableContainer,
+    Box,
 } from '@chakra-ui/react';
 import {useGetRandomPhonemeAndAnswers} from "../../helperQuestionFunctions";
+import GenerateLink from "../LinkToPhoneme";
 
 interface ShowPrevResultsProps {
     userData: UserData
@@ -22,7 +24,6 @@ interface ShowPrevResultsProps {
 export const ShowPrevResults = (props: ShowPrevResultsProps) => {
 
     const [attempts, setAttempts] = useState<PreviousResults[]>([]);
-
     const {getCorrectAnswers} = useGetRandomPhonemeAndAnswers();
 
     useEffect(() => {
@@ -43,15 +44,19 @@ export const ShowPrevResults = (props: ShowPrevResultsProps) => {
         }
     }, []);
 
-    const list_items = attempts.map((x: PreviousResults, idx: number) =>
+    const list_items = attempts.map((attempt: PreviousResults, idx: number) =>
         <Tbody key={idx}>
         <Tr>
-            <Td className="prevResultsTrHeader" colSpan={3}>{x.datetime} | Score: {x.score}</Td>
+            <Td className="prevResultsTrHeader" colSpan={3} sx={{fontWeight: "bold"}}>{attempt.datetime} | Score: {attempt.score} | Mode: {attempt.mode ? attempt.mode : "Cons. RP"}</Td>
         </Tr>
-        {x.results.map((y: string[], i: number) => <Tr key={i}>
-            <Td>{y[0]}</Td>
-            <Td>{y[1]}</Td>
-            <Td>{y[2]}</Td>
+        {attempt.results.map((mistake: ParsedMistakeType, i: number) => <Tr key={i}>
+            <Td>{mistake.guessedQuestion}</Td>
+            <Td>{<GenerateLink phoneticSymbol={mistake.guessedPhoneme}/>}</Td>
+            <Td>{<Box sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 2
+            }}>{mistake.correctAnswers.map((ph: PhoneticSymbol, j: number) => <GenerateLink phoneticSymbol={ph} key={j}/>)}</Box>}</Td>
         </Tr>)}
         </Tbody>
     );

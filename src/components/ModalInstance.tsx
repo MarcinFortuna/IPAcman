@@ -28,7 +28,7 @@ export const ModalInstance = (props: ModalProps) => {
             <Button variant="outline" onClick={onOpen}>
                 {buttonText}
             </Button>
-            <Modal isOpen={isOpen} onClose={onClose} isCentered size="3xl">
+            <Modal isOpen={isOpen} onClose={onClose} isCentered size="4xl">
                 <ModalOverlay/>
                 <ModalContent sx={{
                     backgroundColor: "var(--chakra-colors-mainYellow)",

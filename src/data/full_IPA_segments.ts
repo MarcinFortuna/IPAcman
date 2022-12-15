@@ -842,8 +842,8 @@ export const full_other_symbols: FullConsonant[] = [
         place: "epiglottal",
         manner: "fricative",
         voicing: "voiced",
-        url: "https://en.wikipedia.org/wiki/Voiceless_epiglottal_trill",
-        audio: "https://en.wikipedia.org/wiki/File:Voiceless_epiglottal_trill.ogg"
+        url: "https://en.wikipedia.org/wiki/Voiced_epiglottal_trill",
+        audio: "https://en.wikipedia.org/wiki/File:Voiced_epiglottal_trill_2.ogg"
     },
 
     {
@@ -909,7 +909,7 @@ export const full_vowels: FullVowel[] = [
         ipa: "i",
         sampa: "i",
         backness: "front",
-        height: "high",
+        height: "close",
         roundedness: "unrounded",
         url: "https://en.wikipedia.org/wiki/Close_front_unrounded_vowel",
         audio: "https://en.wikipedia.org/wiki/File:Close_front_unrounded_vowel.ogg"
@@ -919,7 +919,7 @@ export const full_vowels: FullVowel[] = [
         ipa: "y",
         sampa: "y",
         backness: "front",
-        height: "high",
+        height: "close",
         roundedness: "rounded",
         url: "https://en.wikipedia.org/wiki/Close_front_rounded_vowel",
         audio: "https://en.wikipedia.org/wiki/File:Close_front_rounded_vowel.ogg"
@@ -929,7 +929,7 @@ export const full_vowels: FullVowel[] = [
         ipa: "ɨ",
         sampa: "1",
         backness: "central",
-        height: "high",
+        height: "close",
         roundedness: "unrounded",
         url: "https://en.wikipedia.org/wiki/Close_central_unrounded_vowel",
         audio: "https://en.wikipedia.org/wiki/File:Close_central_unrounded_vowel.ogg"
@@ -939,7 +939,7 @@ export const full_vowels: FullVowel[] = [
         ipa: "ʉ",
         sampa: "}",
         backness: "central",
-        height: "high",
+        height: "close",
         roundedness: "rounded",
         url: "https://en.wikipedia.org/wiki/Close_central_rounded_vowel",
         audio: "https://en.wikipedia.org/wiki/File:Close_central_rounded_vowel.ogg"
@@ -949,7 +949,7 @@ export const full_vowels: FullVowel[] = [
         ipa: "ɯ",
         sampa: "M",
         backness: "back",
-        height: "high",
+        height: "close",
         roundedness: "unrounded",
         url: "https://en.wikipedia.org/wiki/Close_back_unrounded_vowel",
         audio: "https://en.wikipedia.org/wiki/File:Close_back_unrounded_vowel.ogg"
@@ -959,7 +959,7 @@ export const full_vowels: FullVowel[] = [
         ipa: "u",
         sampa: "u",
         backness: "back",
-        height: "high",
+        height: "close",
         roundedness: "rounded",
         url: "https://en.wikipedia.org/wiki/Close_back_rounded_vowel",
         audio: "https://en.wikipedia.org/wiki/File:Close_back_rounded_vowel.ogg"
@@ -1211,13 +1211,6 @@ export const full_diacritics: Diacritic[] = [
     },
 
     {
-        ipa: "◌ʰ",
-        sampa: "◌_h",
-        value: "aspiration (diacritic)",
-        url: "https://en.wikipedia.org/wiki/Aspirated_consonant"
-    },
-
-    {
         ipa: "◌̹",
         sampa: "◌_O",
         value: "more rounded (diacritic)",
@@ -1337,13 +1330,6 @@ export const full_diacritics: Diacritic[] = [
     },
 
     {
-        ipa: "◌̴",
-        sampa: "◌_e",
-        value: "velarized or pharyngealized (diacritic)",
-        url: "https://en.wikipedia.org/wiki/Velarization"
-    },
-
-    {
         ipa: "◌̝",
         sampa: "◌_r",
         value: "raised (diacritic)",
@@ -1383,13 +1369,6 @@ export const full_diacritics: Diacritic[] = [
         sampa: "◌_d",
         value: "dental (diacritic)",
         url: "https://en.wikipedia.org/wiki/Dental_consonant"
-    },
-
-    {
-        ipa: "◌̺",
-        sampa: "◌_a",
-        value: "apical (diacritic)",
-        url: "https://en.wikipedia.org/wiki/Apical_consonant"
     },
 
     {

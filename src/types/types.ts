@@ -19,13 +19,16 @@ export type DiphthongPhonemeRP = {
 
 export type VowelPhonemeRP = MonophthongPhonemeRP | DiphthongPhonemeRP
 
+// Old entries in Firebase use 'voice' instead of 'voicing'; hence both still need to be supported
+
 export type ConsonantPhonemeRP = {
     ipa: string
     sampa: string
     category: string
     manner: string
     place: string
-    voice: string
+    voicing?: string
+    voice?: string
 }
 
 // Full IPA Phoneme types
@@ -82,21 +85,30 @@ export type MistakeType = {
     guessedQuestion: Question
 }
 
+export type ParsedMistakeType = {
+    guessedPhoneme: PhoneticSymbol
+    guessedQuestion: string
+    correctAnswers: PhoneticSymbol[]
+    mode?: string
+}
+
 export type PreviousResults = {
     datetime: string
-    results: string[][]
+    results: ParsedMistakeType[]
     score: number
+    mode: string
 }
 
 export type SingleDBResponse = {
     affiliation: string
     displayName: string
-    mistakes: MistakeType[]
+    mistakes: MistakeType[] | ParsedMistakeType[]
     pace: number
     score: number
     timestamp: string
     uid: string
     username: string
+    mode?: string
 }
 
 export type ResultsDBResponse = {
@@ -117,17 +129,19 @@ export type LeaderboardItem = {
     pace: string
     score: number
     datetime: string
+    mode: string
 }
 
 export type ObjectToPushToFirebase = {
     score: number
     uid: string
     pace: number
-    mistakes: MistakeType[]
+    mistakes: ParsedMistakeType[]
     timestamp: string
     username: string
     displayName: string
     affiliation: string
+    mode?: string
 }
 
 export type GridElement = [

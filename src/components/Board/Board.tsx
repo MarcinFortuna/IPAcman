@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Square} from './Square';
-import {BoardGrid, GridElement, MistakeType, PhoneticSymbol, Question} from "../../types/types";
+import {BoardGrid, GridElement, MistakeType, ParsedMistakeType, PhoneticSymbol, Question} from "../../types/types";
 import {useEffect, useRef} from "react";
 import useState from 'react-usestateref';
 import {rp_questions} from '../../data/RP_questions';
@@ -40,7 +40,7 @@ export const Board = (props: BoardProps) => {
 
     const {stopGame, gameReset, pace} = props;
 
-    const {getRandomPhoneme} = useGetRandomPhonemeAndAnswers();
+    const {getRandomPhoneme, getCorrectAnswers} = useGetRandomPhonemeAndAnswers();
 
     const intervalsStateArray = useSelector((state: RootState) => state.intervals.intervals);
     const dispatch = useDispatch();
@@ -169,7 +169,8 @@ export const Board = (props: BoardProps) => {
         const result: boolean = currentlySearchedRef.current.classes.some(x => phonemeClasses.includes(x));
         if (!result) {
             const mistake: MistakeType = {guessedPhoneme: phoneme, guessedQuestion: currentlySearchedRef.current};
-            dispatch(addMistake(mistake));
+            const parsedMistake: ParsedMistakeType = getCorrectAnswers(mistake);
+            dispatch(addMistake(parsedMistake));
         }
         return result;
     }
@@ -307,7 +308,7 @@ export const Board = (props: BoardProps) => {
             <tr key={"row_" + i}>
                 {row.map((col: GridElement, j: number) =>
                     <Square classname={board[i][j][0]}
-                            ipa={(useIpa ? board[i][j][1]["ipa"] : board[i][j][1]["sampa"]) || board[i][j][1]}
+                            ipa={(useIpa ? (board[i][j][1]["ipa"] || board[i][j][1]["ipa_diacritic"] || board[i][j][1]["ipa_letter"]) : board[i][j][1]["sampa"]) || board[i][j][1]}
                             key={i + "_" + j}/>
                 )}
             </tr>)

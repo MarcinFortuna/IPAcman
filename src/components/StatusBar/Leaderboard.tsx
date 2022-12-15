@@ -51,6 +51,7 @@ export const Leaderboard = () => {
                 <Td>{parsed_result.affiliation}</Td>
                 <Td>{parsed_result.datetime}</Td>
                 <Td>{parsed_result.pace}</Td>
+                <Td>{parsed_result.mode}</Td>
                 <Td style={{textAlign: "right"}}>{parsed_result.score}</Td>
             </Tr>);
 
@@ -64,6 +65,7 @@ export const Leaderboard = () => {
                         <Th>Affiliation</Th>
                         <Th>Date</Th>
                         <Th>Pace</Th>
+                        <Th>Mode</Th>
                         <Th isNumeric>Score</Th>
                     </Tr>
                 </Thead>

@@ -93,11 +93,6 @@ export const rp_questions: Question[] = [
     },
 
     {
-        question: "a labiodental consonant",
-        classes: ["labiodental"]
-    },
-
-    {
         question: "a labiovelar consonant",
         classes: ["labiovelar"]
     },

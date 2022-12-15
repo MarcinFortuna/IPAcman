@@ -12,6 +12,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {toggleGameOn} from '../ReduxStore/reducers/IpacmanReducer';
 import {Container, Box, useDisclosure} from "@chakra-ui/react";
 import GameOverModal from "./GameOverModal";
+import useStateRef from "react-usestateref";
 
 interface MainProps {
     user: User | null
@@ -33,6 +34,14 @@ export const Main = (props: MainProps) => {
     const score = useSelector((state: RootState) => state.ipacmanData.score);
     const gameOn = useSelector((state: RootState) => state.ipacmanData.gameOn);
     const pace = useSelector((state: RootState) => state.ipacmanData.pace);
+    const symbolScope = useSelector((state: RootState) => state.ipacmanData.symbolScope);
+
+    const [currentMode, setCurrentMode, currentModeRef] = useStateRef<string>("");
+
+    useEffect(() => {
+        setCurrentMode(symbolScope.selected);
+    }, [symbolScope]);
+
 
     useEffect(() => {
         if (gameOn) setGameReset(false);
@@ -69,11 +78,12 @@ export const Main = (props: MainProps) => {
             timestamp: Date.now().toString(),
             username: userState.username,
             displayName: userState.displayName,
-            affiliation: userState.affiliation || ""
+            affiliation: userState.affiliation || "",
+            mode: currentModeRef.current ? currentModeRef.current : ""
         };
         const dbUserUrl: DatabaseReference = ref(database, 'Users/' + userState.userDbKey + '/attempts/');
         const newDbEntry: ThenableReference = push(dbUserUrl);
-        console.log(objectToPush);
+        // console.log(objectToPush);
         await set(newDbEntry, objectToPush);
         const newLeaderboardEntry: ThenableReference = push(databaseLeaderboard);
         await set(newLeaderboardEntry, objectToPush);

@@ -8,7 +8,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "bilabial",
         manner: "nasal",
         category: "sonorant",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -17,7 +17,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "bilabial",
         manner: "plosive",
         category: "obstruent",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -26,7 +26,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "bilabial",
         manner: "plosive",
         category: "obstruent",
-        voice: "voiceless"
+        voicing: "voiceless"
     },
 
     {
@@ -35,7 +35,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "labiodental",
         manner: "fricative",
         category: "obstruent",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -44,7 +44,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "labiodental",
         manner: "fricative",
         category: "obstruent",
-        voice: "voiceless"
+        voicing: "voiceless"
     },
 
     {
@@ -53,7 +53,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "dental",
         manner: "fricative",
         category: "obstruent",
-        voice: "voiceless"
+        voicing: "voiceless"
     },
 
     {
@@ -62,7 +62,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "dental",
         manner: "fricative",
         category: "obstruent",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -71,7 +71,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "alveolar",
         manner: "nasal",
         category: "sonorant",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -80,7 +80,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "alveolar",
         manner: "plosive",
         category: "obstruent",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -89,7 +89,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "alveolar",
         manner: "plosive",
         category: "obstruent",
-        voice: "voiceless"
+        voicing: "voiceless"
     },
 
     {
@@ -98,7 +98,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "alveolar",
         manner: "fricative",
         category: "obstruent",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -107,7 +107,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "alveolar",
         manner: "fricative",
         category: "obstruent",
-        voice: "voiceless"
+        voicing: "voiceless"
     },
 
     {
@@ -116,7 +116,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "alveolar",
         manner: "approximant",
         category: "sonorant",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -125,7 +125,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "postalveolar",
         manner: "approximant",
         category: "sonorant",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -134,7 +134,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "palato-alveolar",
         manner: "affricate",
         category: "obstruent",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -143,7 +143,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "palato-alveolar",
         manner: "affricate",
         category: "obstruent",
-        voice: "voiceless"
+        voicing: "voiceless"
     },
 
     {
@@ -152,7 +152,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "palato-alveolar",
         manner: "fricative",
         category: "obstruent",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -161,7 +161,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "palato-alveolar",
         manner: "fricative",
         category: "obstruent",
-        voice: "voiceless"
+        voicing: "voiceless"
     },
 
     {
@@ -170,7 +170,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "palatal",
         manner: "approximant",
         category: "sonorant",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -179,7 +179,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "velar",
         manner: "nasal",
         category: "sonorant",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -188,7 +188,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "velar",
         manner: "plosive",
         category: "obstruent",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -197,7 +197,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "velar",
         manner: "plosive",
         category: "obstruent",
-        voice: "voiceless"
+        voicing: "voiceless"
     },
 
     {
@@ -206,7 +206,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "labiovelar",
         manner: "approximant",
         category: "sonorant",
-        voice: "voiced"
+        voicing: "voiced"
     },
 
     {
@@ -215,7 +215,7 @@ export const consonants: ConsonantPhonemeRP[] = [
         place: "glottal",
         manner: "fricative",
         category: "obstruent",
-        voice: "voiceless"
+        voicing: "voiceless"
     }
 ];
 

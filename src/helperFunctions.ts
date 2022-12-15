@@ -1,4 +1,12 @@
-import {LeaderboardItem, MistakeType, ResultsDBResponse, SingleDBResponse} from "./types/types";
+import {
+    ConsonantPhonemeRP,
+    LeaderboardItem,
+    MistakeType,
+    ParsedMistakeType,
+    PhoneticSymbol,
+    ResultsDBResponse,
+    SingleDBResponse
+} from "./types/types";
 
 export const movement = (direction: string, oldCoords: number[]) => {
 
@@ -45,9 +53,14 @@ const timestampToHumanDate = (timestamp: string) => {
     return datetime_human.substring(0, datetime_human.length - 3);
 }
 
+const modeMapping = {
+    'rp': "Cons. RP",
+    'fullIpa': "Full IPA"
+}
+
 // INFO: getCorrectAnswers cannot be extracted and referred to in a helper function since it's provided by
 // a hook which can be referenced only in a functional React component (hence the solution a with callback)
-export const parseDBResultsResponse = (data: ResultsDBResponse, output: "L"|"P", callback?: (mistakes: MistakeType[]) => string[][]) => {
+export const parseDBResultsResponse = (data: ResultsDBResponse, output: "L" | "P", callback?: (mistake: MistakeType, historicalMode?: string) => ParsedMistakeType) => {
 
     const all_results: SingleDBResponse[] = Object.values(data);
 
@@ -60,20 +73,42 @@ export const parseDBResultsResponse = (data: ResultsDBResponse, output: "L"|"P",
                     affiliation: result.affiliation,
                     score: result.score,
                     datetime: timestampToHumanDate(result.timestamp),
+                    mode: result.mode ? modeMapping[result.mode] : "Cons. RP",
                     pace: result.pace === 0 ? 'Still' : result.pace === 800 ? 'Slow' : result.pace === 400 ? 'Medium' : 'Fast'
                 }
             })
             .sort((a: LeaderboardItem, b: LeaderboardItem) => a.score > b.score ? -1 : 1);
     } else if (output === "P") {
         return all_results.map((result: SingleDBResponse) => {
+            const mode: string = result.mode ? modeMapping[result.mode] : "Cons. RP";
+            const results: ParsedMistakeType[]|MistakeType[] = result.mistakes && 'correctAnswers' in result.mistakes[0]
+                ? result.mistakes
+                : (result.mistakes && callback)
+                    ? result.mistakes.map(el => callback(el, result.mode ? result.mode : "rp"))
+                    : []
             return {
                 datetime: timestampToHumanDate(result.timestamp),
-                results: (result.mistakes && callback) ? callback(result.mistakes) : [],
-                score: result.score
+                results: results,
+                score: result.score,
+                mode: mode
             }
         });
     } else {
         console.error("Output type invalid!");
+    }
+}
+
+export const calculateLabel = (symbol: PhoneticSymbol) => {
+    if ('value' in symbol) {
+        return symbol.value;
+    } else if ('type' in symbol) {
+        return `${symbol.type} diphthong`;
+    } else if ('place' in symbol && 'manner' in symbol && ('voicing' in symbol || 'voice' in symbol)) {
+        return `${symbol.voicing ? symbol.voicing : (symbol as ConsonantPhonemeRP).voice} ${symbol.place} ${symbol.manner}`;
+    } else if ('backness' in symbol && 'height' in symbol && 'roundedness' in symbol) {
+        return `${symbol.height} ${symbol.backness} ${symbol.roundedness} vowel`
+    } else {
+        console.error("Impossible to calculate label!", symbol);
     }
 }
 
