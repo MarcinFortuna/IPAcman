@@ -1,5 +1,6 @@
 import * as React from 'react';
 import '../../App.css';
+import {Tooltip} from "@chakra-ui/react";
 
 interface SquareProps {
     classname: string
@@ -12,6 +13,8 @@ export const Square = (props: SquareProps) => {
 
     const square_content: string = ipa ? ipa : "";
     return (
-        <td className={classname}>{square_content}</td>
+        <td className={classname}>
+            <Tooltip label={square_content} fontSize="2xl">{square_content}</Tooltip>
+        </td>
     );
 }

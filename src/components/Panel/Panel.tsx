@@ -28,6 +28,9 @@ export const Panel = (props: PanelProps) => {
                 },
                 '& h4': {
                     fontSize: isLargerThan1040 ? 'sm' : 'xs'
+                },
+                '& .chakra-card': {
+                    backgroundColor: "inherit"
                 }
             }}
         >
