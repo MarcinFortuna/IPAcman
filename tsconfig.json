@@ -25,7 +25,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "downlevelIteration": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "ignoreDeprecations": "5.0"
   },
   "include": [
     "./src/"

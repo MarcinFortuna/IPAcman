@@ -22,9 +22,9 @@ const StatusBar = (props: StatusBarProps) => {
 
     if (props.user !== null && props.user.email) {
         const name: string = props.userOtherData.displayName ? props.userOtherData.displayName : (props.userOtherData.username ? props.userOtherData.username : props.user.email);
-        greeting = `Hi ${name}! Welcome to IPAcman!`;
+        greeting = `Hi ${name}!`;
     } else {
-        greeting = "Hi stranger! Welcome to IPAcman! Sign in to save your results to the database and view the leaderboard!";
+        greeting = "Hi stranger! Sign in to save your results to the database and view the leaderboard!";
     }
 
     return (

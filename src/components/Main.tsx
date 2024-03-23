@@ -13,6 +13,14 @@ import {toggleGameOn} from '../ReduxStore/reducers/IpacmanReducer';
 import {Container, Box, useDisclosure} from "@chakra-ui/react";
 import GameOverModal from "./GameOverModal";
 import useStateRef from "react-usestateref";
+import {
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+    Link
+  } from '@chakra-ui/react';
 
 interface MainProps {
     user: User | null
@@ -103,8 +111,48 @@ export const Main = (props: MainProps) => {
         setGameReset(true);
     }
 
+    function sleep(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }      
+
+    const [index, setIndex] = useState<number[]>([1]);
+
+    function toggleAccordion() {
+        if (index[0] === 1) {
+            setIndex([0]);
+        } else {
+            setIndex([1]);
+        }
+    }
+
+    useEffect(() => {
+        const firstLoad = sessionStorage.getItem("loaded");
+        if (!firstLoad) {
+            sleep(1000).then(() => {
+                setIndex([0]);
+                sessionStorage.setItem("loaded", "true");    
+            })
+        }
+    }, []);
+
     return (
         <Container width="fit-content" maxWidth="fit-content" height="100%" sx={{margin: "5px auto"}}>
+        <Accordion allowMultiple index={index}>
+            <AccordionItem>
+                <h2>
+                    <AccordionButton onClick={toggleAccordion}>
+                        <Box as="span" flex='1' textAlign='center' fontSize="20px">
+                        Welcome to IPAcman!
+                        </Box>
+                        <AccordionIcon />
+                    </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4} maxWidth="1000px">
+                <p>IPAcman is an educational game for students of linguistics and phonetics. It helps you acquire knowledge of the <Link href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet" isExternal>International Phonetic Alphabet (IPA)</Link> by matching individual phonetic symbols with their descriptions in a fun game modeled on an 80s classic: <Link href="https://en.wikipedia.org/wiki/Pac-Man" isExternal>Pac-Man</Link>. You may choose to learn only British English (i.e. conservative <Link href="https://en.wikipedia.org/wiki/Received_Pronunciation" isExternal>RP</Link>) sounds, or the whole of IPA. You also have a chance of practicing <Link href="https://en.wikipedia.org/wiki/X-SAMPA" isExternal>X-SAMPA</Link>, which is a viable ASCII-only alternative for IPA!</p>
+                <p>Have fun!</p>
+                </AccordionPanel>
+            </AccordionItem>
+            </Accordion>
             <StatusBar user={props.user} userOtherData={userState}/>
             <Box display="flex">
                 <Board stopGame={stopGame} gameReset={gameReset} pace={pace}/>
